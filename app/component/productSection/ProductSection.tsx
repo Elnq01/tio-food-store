@@ -1,46 +1,31 @@
 "use client"
 
-import Carousel from 'react-bootstrap/Carousel';
-import ProductCarouselItem from './ProductSectionItem';
-import { Col, Container, Row } from 'react-bootstrap';
 import ProductSectionStyle from "./ProductSection.module.css";
+import Carousel from 'react-bootstrap/Carousel';
+import ProductSectionItem from "./ProductSectionItem";
+import {Primary} from '../../../public/colors/colos'
 
 
-function ProductSection() {
+export default function ProductSection({title}) {
   return (
-    <Container className={ProductSectionStyle.container} fluid>
-        <div className={ProductSectionStyle.heading}>
-            <h1>Hot's Products</h1>
+    <Carousel className={ProductSectionStyle.container}>
+        <div style={{background:Primary}} className={ProductSectionStyle.heading}>
+            <h4>{title}</h4>
             <button>See More</button>
         </div>
-        <Carousel>
-        <Carousel.Item>
-            <ProductCarouselItem />
-            <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-        </Carousel.Item>
-            <ProductCarouselItem />
-            <Carousel.Item>
-            <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>        
-            <ProductCarouselItem />
-
-            <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        </Carousel>
-    </Container>
+      <Carousel.Item>
+        {/* <ExampleCarouselImage text="First slide" /> */}
+        <ProductSectionItem />
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductSectionItem />
+        {/* <ExampleCarouselImage text="Second slide" /> */}
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductSectionItem />
+        {/* <ExampleCarouselImage text="Third slide" /> */}
+      </Carousel.Item>
+    </Carousel>
   );
 }
 
-export default ProductSection;

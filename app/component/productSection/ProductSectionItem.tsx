@@ -5,7 +5,7 @@ import ProductCard from '../ProductCard/ProductCard';
 
 function ProductSectionItem() {
   return (
-    <Container style={{background:'blue'}} className='p-0' fluid>
+    <Container className='p-0' fluid>
       <Row>
         <ProductCard />
         <ProductCard />

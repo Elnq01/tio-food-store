@@ -1,8 +1,9 @@
 import { Row } from "react-bootstrap";
+import AboutUsStyle from './AboutUs.module.css';
 
 export default function AboutUs(){
     return (
-        <Row>
+        <Row className={AboutUsStyle.container}>
             <h1>About Us</h1>
             <p>Tio Food Store - Nigeria's Leading Online Food & Grocery Store Tio Food Store is your go-to 
                 destination for everything food in Nigeria. From everyday pantry essentials to premium grocery 

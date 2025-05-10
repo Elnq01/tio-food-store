@@ -5,10 +5,13 @@ export  const Secondary = "#FFB74D"; //Warm Peach/Coral  Friendly and feminine
 
 export const Accent = "#F8BBD0"; //Light Rose Pink: Soft and approachable
 
-export const Background = "#FFF8E1"; //Cream White: Cozy and clean
+export const BackgroundLight = "#FFF8E1"; //Cream White: Cozy and clean
+export const TextLight = "#FFF8E1"; //Cream White: Cozy and clean
 
-export const Text = "#333333"; // Dark Charcoal: Professional and readable
+export const TextDark = "#333333"; // Dark Charcoal: Professional and readable
+export const BackgroundDark = "#333333"; // Dark Charcoal: Professional and readable
 
+export const DarkColor = '#b5b5b5';
 
 
 /*

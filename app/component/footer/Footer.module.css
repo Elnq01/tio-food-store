@@ -1,0 +1,15 @@
+.container{
+    padding: 30px 20px;
+    color: #FFF8E1;
+}
+
+.containerLower{
+    padding: 10px 20px;
+    color: #FFF8E1;
+    text-align:center;
+    background:#2c2c2c;
+}
+
+.containerLower p{
+    margin: 0px;
+}

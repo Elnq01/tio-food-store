@@ -6,9 +6,24 @@ import GuranteesStyle from './Gurantees.module.css';
 export default function Guarantees(){
     return (
         <Row className={GuranteesStyle.container}>
-            <Col style={{background:'red'}}><FaBus />Delivery</Col>
-            <Col>Online Shop <FaPhone /></Col>
-            <Col>Top Discounts <FaTag /></Col>
+            <Col className="d-flex justify-content-center align-items-center">
+                <div className={GuranteesStyle.containerIcon}>
+                    <FaBus size={40} />  
+                    <p>Delivery</p>
+                </div>
+            </Col>
+            <Col className="d-flex justify-content-center align-items-center">
+                <div className={GuranteesStyle.containerIcon}>
+                    <FaPhone size={40} />  
+                    <p>Online Shop</p>
+                </div>
+            </Col>
+            <Col className="d-flex justify-content-center align-items-center">
+                <div className={GuranteesStyle.containerIcon}>
+                    <FaTag size={40} />  
+                    <p>Top Discounts</p>
+                </div>
+            </Col>
         </Row>
     )
 }
