@@ -1,6 +1,10 @@
 .container{
-    padding: 50px 20px;
+    margin: 30px 40px;
+    padding: 20px 20px;
     text-align: justify;
+    background-color: #FEFEFC;
+    /* background-color: #FAFAF9; */
+    /* background-color: #F5F5F5; */
 }
 
 .container h1{

@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 import Navigation from "./component/navigation/navigation";
 
 const myFont = localFont({
-  src:'./../public/Satoshi-Variableitalic.ttf'
+  src:'./../public/fonts/Jost-Regular.ttf'
 })
 
 export const metadata: Metadata = {

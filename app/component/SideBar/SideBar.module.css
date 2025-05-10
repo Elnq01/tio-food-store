@@ -1,0 +1,14 @@
+.container{
+    background-color: #fefefc;
+}
+
+
+.containerLink{
+    display:flex; 
+    flex-direction:row; 
+    /* justifyContent:'', */
+    align-items:center;
+    text-align:center;
+    column-gap:5px;
+    position: relative;
+}

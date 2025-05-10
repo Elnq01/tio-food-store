@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import { FaBus, FaPhone, FaTag } from "react-icons/fa";
+import { FaBus, FaPhone, FaTag, FaCreditCard } from "react-icons/fa";
 import GuranteesStyle from './Gurantees.module.css';
 
 
@@ -10,6 +10,12 @@ export default function Guarantees(){
                 <div className={GuranteesStyle.containerIcon}>
                     <FaBus size={40} />  
                     <p>Delivery</p>
+                </div>
+            </Col>
+            <Col className="d-flex justify-content-center align-items-center">
+                <div className={GuranteesStyle.containerIcon}>
+                    <FaCreditCard size={40} />  
+                    <p>Secure Shopping</p>
                 </div>
             </Col>
             <Col className="d-flex justify-content-center align-items-center">

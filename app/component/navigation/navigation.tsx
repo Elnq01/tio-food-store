@@ -10,7 +10,7 @@ import {Primary, Secondary, BackgroundDark, BackgroundLight} from '../../../publ
 function Navigation() {
   return (
     <>
-      <Navbar style={{background:BackgroundLight}}>
+      <Navbar sticky='top' style={{background:BackgroundLight}}>
         <Container>
           <Navbar.Brand href="#">Tio Food Store</Navbar.Brand>
         </Container>
@@ -20,7 +20,7 @@ function Navigation() {
             <Nav.Link href="/profile"><FaUser /></Nav.Link>
         </Nav>
       </Navbar>
-      <Navbar sticky='top' style={{background:Primary}} >
+      <Navbar  style={{background:Primary}} >
             <Nav className={`ms-auto d-flex align-items-center gap-3 ${navigationStyle.navContainer}`}>
                 <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#features">Products</Nav.Link>

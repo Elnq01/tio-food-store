@@ -12,3 +12,7 @@ body {
   padding: 0px;
   box-sizing: border-box;
 }
+
+p{
+  margin-bottom: 0px;
+}
