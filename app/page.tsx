@@ -9,6 +9,7 @@ import Footer from "./component/footer/footer";
 import { Row } from "react-bootstrap";
 import Advert from "./component/UI/Advert";
 import SiderBar from "./component/SideBar/SideBar";
+import CategorySection from "./component/CategorySection/CategorySection";
 
 export default async function Home() {
   // const data = await fetch('https://fakestoreapi.com/products/0')
@@ -29,7 +30,7 @@ export default async function Home() {
       </Row>
       <ProductSection title="Hot's Product" />
       <ProductSection title="New Product" />
-      <ProductSection title="Categories" />
+      <CategorySection title="Categories" />
       <Guarantees />
       <AboutUs />
       <ReachUs />
