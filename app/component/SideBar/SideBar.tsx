@@ -1,6 +1,6 @@
 "use client"
 
-import { FaBowlRice, FaOilCan, FaSpaghettiMonsterFlying, FaGreaterThan } from "react-icons/fa6";
+import { FaBowlRice, FaOilCan, FaSpaghettiMonsterFlying, FaAnglesRight } from "react-icons/fa6";
 import Nav from 'react-bootstrap/Nav';
 import { Col } from "react-bootstrap";
 import SideBarStyle from './SideBar.module.css';
@@ -42,7 +42,7 @@ export default function SideBar() {
         {SideBarLinks.map(link => <Nav.Link key={link.id} className={SideBarStyle.containerLink} eventKey="link-1" >
             <FaBowlRice />
             <p>{link.link}</p>
-            <FaGreaterThan 
+            <FaAnglesRight
                 style={{
                     position:'absolute',
                     right:'0px'

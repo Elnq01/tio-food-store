@@ -31,7 +31,7 @@ function CategoryCard({source}) {
               </Card.Subtitle>
               <CustomButton />
           </Card.Body>
-          <Card.Text>Grains</Card.Text>
+          {/* <Card.Text>Grains</Card.Text> */}
           {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
         </Card.ImgOverlay>
         </Card>

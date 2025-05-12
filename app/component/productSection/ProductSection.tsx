@@ -1,34 +1,47 @@
 "use client"
 
 import ProductSectionStyle from "./ProductSection.module.css";
-import Carousel from 'react-bootstrap/Carousel';
-import ProductSectionItem from "./ProductSectionItem";
-import {Primary, Secondary, Accent} from '../../../public/colors/colos'
+// import ProductSectionItem from "./ProductSectionItem";
+import {Primary} from '../../../public/colors/colos'
 import { Container, Row } from "react-bootstrap";
+import ProductCard from "../ProductCard/ProductCard";
+import Carousel from 'better-react-carousel';
 
 
-export default function ProductSection({title}) {
-  return (
-    <div className={ProductSectionStyle.container}>
+export default function CardCarousel({title}) {
+  return (<div className={ProductSectionStyle.container}> 
         <div className={ProductSectionStyle.heading}>
             <h4 className={ProductSectionStyle.headingH1}>{title}</h4>
             <button>See More</button>
         </div>
-        <Carousel>
-        <Carousel.Item>
-            {/* <ExampleCarouselImage text="First slide" /> */}
-            <ProductSectionItem />
-        </Carousel.Item>
-        <Carousel.Item>
-            <ProductSectionItem />
-            {/* <ExampleCarouselImage text="Second slide" /> */}
-        </Carousel.Item>
-        <Carousel.Item>
-            <ProductSectionItem />
-            {/* <ExampleCarouselImage text="Third slide" /> */}
-        </Carousel.Item>
-        </Carousel>
+    <Carousel cols={4} rows={1} gap={10} loop={false} showDots>  
+      <Carousel.Item style={{border:"2px solid red", background:'red'}}>
+            <ProductCard />
+      </Carousel.Item>
+      <Carousel.Item>            
+        <ProductCard />
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductCard />
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductCard />
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductCard />
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductCard />
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductCard />
+      </Carousel.Item>
+      <Carousel.Item>
+        <ProductCard />
+      </Carousel.Item>
+    </Carousel>
     </div>
   );
 }
+
 

@@ -1,5 +1,6 @@
 "use client"
 
+import { Seconadry } from '@/public/colors/colos';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -10,7 +11,7 @@ export default function NewsLetter() {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button style={{background:Seconadry, border:'0px'}} type="submit">
         Submit
       </Button>
     </Form>

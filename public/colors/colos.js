@@ -1,17 +1,35 @@
 
 export const Primary = "#66BB6A"; //Soft Green: Fresh and inviting
 
-export  const Secondary = "#FFB74D"; //Warm Peach/Coral  Friendly and feminine
+export const Seconadry = "#ffb74d";
 
-export const Accent = "#F8BBD0"; //Light Rose Pink: Soft and approachable
+export const CharcoalBlack = "#212121";
 
-export const BackgroundLight = "#FFF8E1"; //Cream White: Cozy and clean
-export const TextLight = "#FFF8E1"; //Cream White: Cozy and clean
+export const Graphite = "#333333";
 
-export const TextDark = "#333333"; // Dark Charcoal: Professional and readable
-export const BackgroundDark = "#333333"; // Dark Charcoal: Professional and readable
+export const WarmCream = "#fff8e1";
 
-export const DarkColor = '#b5b5b5';
+export const OffWhite = "#fefefc"
+
+
+
+
+
+
+
+
+
+// export  const Secondary = "#FFB74D"; //Warm Peach/Coral  Friendly and feminine
+
+// export const Accent = "#F8BBD0"; //Light Rose Pink: Soft and approachable
+
+// export const BackgroundLight = "#FFF8E1"; //Cream White: Cozy and clean
+// export const TextLight = "#FFF8E1"; //Cream White: Cozy and clean
+
+// export const TextDark = "#333333"; // Dark Charcoal: Professional and readable
+// export const BackgroundDark = "#333333"; // Dark Charcoal: Professional and readable
+
+// export const DarkColor = '#b5b5b5';
 
 
 /*

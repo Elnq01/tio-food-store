@@ -9,7 +9,8 @@ export default function CarouselItem(){
             alt="carousel Image" 
             style={{
                 height:'100%',
-                width:"100%"
+                width:"100%",
+                borderRadius:'10px'
                 }} />
     </div>
 }

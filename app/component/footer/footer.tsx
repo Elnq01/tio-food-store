@@ -1,5 +1,5 @@
 import { Row, Col} from "react-bootstrap";
-import {BackgroundDark, TextLight} from '../../../public/colors/colos';
+import {CharcoalBlack} from '../../../public/colors/colos';
 import { FaFacebook, FaTwitter, FaInstagram, FaSnapchat } from "react-icons/fa";
 import FooterStyle from './Footer.module.css';
 import Image from "next/image";
@@ -9,7 +9,7 @@ import CreditCards from "../../../public/carousel 2.jpg"
 
 export default function Footer(){
     return (<>
-        <Row className={FooterStyle.container} style={{background:BackgroundDark}}>
+        <Row className={FooterStyle.container} style={{background:CharcoalBlack}}>
             <Col md={4}>
                 <p style={{marginBottom:'20px'}}> Terms & conditions </p>
                 <Image src={CreditCards} alt="credit cards" />

@@ -3,7 +3,7 @@
 
 import { Button} from 'react-bootstrap';
 import { FaGreaterThan } from 'react-icons/fa';
-import { Accent, BackgroundLight, Primary, Secondary } from '@/public/colors/colos';
+import { Primary, OffWhite } from '@/public/colors/colos';
 
 
 export default function customButton(){
@@ -14,7 +14,7 @@ export default function customButton(){
       alignItems:'center', 
       textAlign:'center',
       columnGap:'10px',
-      color:BackgroundLight,
+      color:OffWhite,
       background:Primary,
       marginTop:'20px',
       marginBottom:'20px',

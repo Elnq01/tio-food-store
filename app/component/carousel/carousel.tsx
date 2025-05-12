@@ -3,7 +3,7 @@
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselImage from './CarouselItem';
 import { Col } from 'react-bootstrap';
-import { Primary, TextDark } from '@/public/colors/colos';
+import { Primary, Graphite } from '@/public/colors/colos';
 import CustomButton from "../UI/CustomButton";
 
 const carouselItemSeed = [
@@ -22,17 +22,17 @@ const carouselItemSeed = [
 ]
 
 export default function CarouselSection() {
-    return <Col md={6}>
-    <Carousel>
+    return <Col md={6} >
+    <Carousel interval={undefined}>
       
   {carouselItemSeed.map(item => {
-      return <Carousel.Item key={item.id} interval={1000}>
+      return <Carousel.Item style={{borderRadius:'20px'}} key={item.id}>
         <CarouselImage  />
         <Carousel.Caption 
             style={{
               position:'absolute',  
               left:'0px',
-              color:TextDark, 
+              color:Graphite, 
               // background:'blue', 
               textAlign:'left',
               marginBottom:'20px',

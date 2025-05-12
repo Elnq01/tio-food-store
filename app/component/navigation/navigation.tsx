@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import navigationStyle from './navigation.module.css';
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
-import {Primary, Secondary, BackgroundDark, BackgroundLight} from '../../../public/colors/colos'
+import {OffWhite, Primary, WarmCream} from '../../../public/colors/colos'
 import Navigationform from './navigationForm';
 import { Col } from 'react-bootstrap';
 import Image from 'next/image';
@@ -13,32 +13,45 @@ import Avatar from '../../../public/avatar.jpg';
 function Navigation() {
   return (
     <>
-      <Navbar sticky='top' className={navigationStyle.container}>
+      <Navbar
+        style={{
+              background:OffWhite
+              }} 
+        sticky='top' 
+        className={`shadow-sm ${navigationStyle.container}`}>
           <div 
             style={{
               display:'flex',
               flexDirection:'row',
               width:'100%', 
-              justifyContent:'space-evenly'
+              justifyContent:'space-evenly',
               }}> 
-              <Col md={2} style={{paddingLeft:"20px", textAlign:'center'}}>  
+              <Col md={2} className='d-flex align-items-center gap-3 pl-7'>  
                 <Navbar.Brand href="#">Tio Food Store</Navbar.Brand>
               </Col>
-              <Col md={9}>
+              <Col md={9} className='d-flex align-items-center gap-3'>
                 <Navigationform />
               </Col>
               <Col md={1} className=" d-flex align-items-center gap-3" >
                   <Nav.Link 
                     style={{
                       background:"rgb(214, 243, 216)",
-                      padding:'10px',
+                      padding:'8px',
                       borderRadius:'50%'
                       }} href="/cart">
-                      <FaShoppingCart style={{color:Primary}} />
+                      <FaShoppingCart size={18} style={{color:Primary}} />
                     </Nav.Link>
-                  <Nav.Link href="/profile">
+                  <Nav.Link
+                  style={{
+                      // background:"rgb(214, 243, 216)",
+                      // height:'20px',
+                      // width:'20px',
+                      padding:'10px',
+                      borderRadius:'50%'
+                      }}
+                   href="/profile">
                     {/* <FaUser style={{color:Primary}}  /> */}
-                      <Image src={Avatar} alt='avatar' />
+                      <Image src={Avatar} height={30} width={30} alt='avatar' />
                   </Nav.Link>
               </Col>
           </div>
