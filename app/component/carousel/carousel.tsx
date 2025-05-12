@@ -1,37 +1,50 @@
 "use client"
 
 import Carousel from 'react-bootstrap/Carousel';
-import ExampleCarouselImage from './CarouselItem';
+import CarouselImage from './CarouselItem';
 import { Col } from 'react-bootstrap';
-// import ExampleCarouselImage from '../../favicon.ico';
+import { Primary, TextDark } from '@/public/colors/colos';
+import CustomButton from "../UI/CustomButton";
+
+const carouselItemSeed = [
+  {
+    id:0,
+    desc:"Fresh and healthy",
+    category:"FRUITS AND VEGETABLE",
+    price:200
+  },
+  {
+    id:1,
+    desc:"Fresh and healthy",
+    category:"FRUITS AND VEGETABLE",
+    price:200
+  }
+]
 
 export default function CarouselSection() {
-  return (<Col md={6}>
-        <Carousel>
-          <Carousel.Item interval={1000}>
-            <ExampleCarouselImage  />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item interval={500}>
-            <ExampleCarouselImage  />
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <ExampleCarouselImage  />
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-  </Col>
-  );
+    return <Col md={6}>
+    <Carousel>
+      
+  {carouselItemSeed.map(item => {
+      return <Carousel.Item key={item.id} interval={1000}>
+        <CarouselImage  />
+        <Carousel.Caption 
+            style={{
+              position:'absolute',  
+              left:'0px',
+              color:TextDark, 
+              // background:'blue', 
+              textAlign:'left',
+              marginBottom:'20px',
+              paddingLeft:'20px'
+              }}>
+          <p>{item.desc}</p>
+          <h5 style={{color:Primary}}>{item.category}</h5>
+          <p>starting at ${item.price}</p>
+          <CustomButton />
+        </Carousel.Caption>
+      </Carousel.Item>
+  })}
+    </Carousel>
+</Col>
 }

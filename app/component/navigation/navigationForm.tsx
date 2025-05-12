@@ -14,7 +14,7 @@ export default function Navigationform() {
         className="me-2"
         aria-label="Search"
       />
-      <Button variant="outline-light">Search</Button>
+      <Button>Search</Button>
     </Form>
   );
 }

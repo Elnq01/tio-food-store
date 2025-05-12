@@ -1,14 +1,19 @@
 import { Row, Col} from "react-bootstrap";
 import {BackgroundDark, TextLight} from '../../../public/colors/colos';
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaInstagram, FaSnapchat } from "react-icons/fa";
 import FooterStyle from './Footer.module.css';
+import Image from "next/image";
+import CreditCards from "../../../public/carousel 2.jpg"
 
 
 
 export default function Footer(){
     return (<>
         <Row className={FooterStyle.container} style={{background:BackgroundDark}}>
-            <Col md={4}> Terms & conditions </Col>
+            <Col md={4}>
+                <p style={{marginBottom:'20px'}}> Terms & conditions </p>
+                <Image src={CreditCards} alt="credit cards" />
+            </Col>
             <Col md={4}> 
                 <h5>Help Center</h5>
                 <p>Chat with us</p>
@@ -19,6 +24,7 @@ export default function Footer(){
                     <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
                         <FaFacebook size={30} />
                         <FaTwitter size={30} />
+                        <FaSnapchat size={30} />
                         <FaInstagram size={30} />
                     </div>
              </Col>

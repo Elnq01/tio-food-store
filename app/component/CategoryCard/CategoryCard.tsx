@@ -3,8 +3,7 @@
 import Card from 'react-bootstrap/Card';
 import { Button, CardImgOverlay, Col } from 'react-bootstrap';
 import CategoryCardStyle from './CategoryCard.module.css';
-import { FaCartPlus, FaGreaterThan } from 'react-icons/fa';
-import { Accent, BackgroundLight, Primary, Secondary } from '@/public/colors/colos';
+import CustomButton from '../UI/CustomButton';
 
 function CategoryCard({source}) {
   return (
@@ -30,22 +29,7 @@ function CategoryCard({source}) {
                   }}>
                     Grains
               </Card.Subtitle>
-              <Button 
-                style={{
-                  display:'flex', 
-                  flexDirection:'row', 
-                  alignItems:'center', 
-                  textAlign:'center',
-                  columnGap:'10px',
-                  color:BackgroundLight,
-                  background:Primary,
-                  marginTop:'20px',
-                  marginBottom:'20px',
-                  border:'none'
-                  }}>
-                  <p>Shop Now</p>
-                  <FaGreaterThan size={10} /> 
-              </Button>
+              <CustomButton />
           </Card.Body>
           <Card.Text>Grains</Card.Text>
           {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
