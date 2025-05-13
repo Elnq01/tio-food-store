@@ -6,7 +6,7 @@ import { FaGreaterThan } from 'react-icons/fa';
 import { Primary, OffWhite } from '@/public/colors/colos';
 
 
-export default function customButton(){
+export default function customButton({titled = "Shop Now"}){
     return <Button 
     style={{
       display:'flex', 
@@ -20,7 +20,7 @@ export default function customButton(){
       marginBottom:'20px',
       border:'none'
       }}>
-      <p>Shop Now</p>
+      <p>{titled}</p>
       <FaGreaterThan size={10} /> 
   </Button>
 }

@@ -10,6 +10,7 @@ export default function Advert(){
                 color:OffWhite,
                 textAlign:'center',
                 display:'flex',
+                flexDirection:'column',
                 justifyContent:'center',
                 alignItems:'center'
                 }}>
