@@ -16,6 +16,7 @@ export default function Sidebar() {
         <Nav defaultActiveKey="/" className="flex-column">
         <Link style={{color:OffWhite}} href="/admin">Dashboard</Link>
         <Link style={{color:OffWhite}} href="/admin/products?page=1">Products</Link>
+        {/* <Link style={{color:OffWhite}} href="/admin/category">Categories</Link> */}
         {/* <Nav.Link eventKey="link-2">Link</Nav.Link>
         <Nav.Link eventKey="disabled" disabled>
             Disabled

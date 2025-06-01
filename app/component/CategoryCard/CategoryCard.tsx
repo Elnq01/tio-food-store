@@ -5,10 +5,10 @@ import { Button, CardImgOverlay, Col } from 'react-bootstrap';
 import CategoryCardStyle from './CategoryCard.module.css';
 import CustomButton from '../UI/CustomButton';
 
-function CategoryCard({source}) {
+function CategoryCard({source, admin}) {
   return (
     // background-color: #FEFEFC;
-    <Col className={CategoryCardStyle.container} md={4}>
+    <Col className={CategoryCardStyle.container} md={4} style={{width:'100%'}}>
         <Card style={{borderRadius:'0px', border:'0px', height:'250px'}}>
         {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
         {/* <Card.Header as="h5">Featured</Card.Header> */}
@@ -29,7 +29,7 @@ function CategoryCard({source}) {
                   }}>
                     Grains
               </Card.Subtitle>
-              <CustomButton />
+              {admin?null:<CustomButton />}
           </Card.Body>
           {/* <Card.Text>Grains</Card.Text> */}
           {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}

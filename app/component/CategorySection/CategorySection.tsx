@@ -8,6 +8,7 @@ import CategoryImage1 from '../../../public/indomie.webp';
 import CategoryImage2 from '../../../public/indomie 1.avif';
 import CategoryImage3 from '../../../public/indomie 2.avif';
 import CustomButton from "../UI/CustomButton";
+import Link from "next/link";
 
 
 export default function CategorySection({title}) {
@@ -16,7 +17,9 @@ export default function CategorySection({title}) {
         <div className={CategorySectionStyle.heading}>
             <h4 className={CategorySectionStyle.headingH1}>{title}</h4>
             {/* <button>See More</button> */}
-            <CustomButton titled="See More" />
+            <Link href='/category'>
+              <CustomButton titled="See More" />
+              </Link>
         </div>
         <Col className={CategorySectionStyle.body}>
             <CategoryCard source={CategoryImage1.src} />

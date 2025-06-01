@@ -17,8 +17,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
         <Row style={{margin:'0px', padding:'0px'}}>
             <Sidebar />
             <Col md={9} lg={9} style={{padding:'30px', marginLeft:'25%'}}>
@@ -26,8 +24,5 @@ export default function RootLayout({
                     {children}
                 </div>
             </Col>
-        </Row>
-      </body>
-    </html>
-  );
+        </Row>);
 }

@@ -6,8 +6,9 @@ import { Button, CardImgOverlay, Col } from 'react-bootstrap';
 import ProductCardStyle from './ProductCard.module.css';
 import { FaCartPlus } from 'react-icons/fa';
 import { OffWhite, Primary, WarmCream } from '@/public/colors/colos';
+import CustomButton from '../UI/CustomButton';
 
-function ProductCard() {
+function ProductCard({admin}) {
   return (
     // background-color: #FEFEFC;
     <Col className={ProductCardStyle.container} md={3}>
@@ -42,7 +43,7 @@ function ProductCard() {
                   <span style={{color:Primary}}>₦200</span>    <s className="mb-2 text-muted">₦300</s>
                 </p>
               </Card.Subtitle>
-              <Button 
+              {admin?null:<Button 
                 style={{
                   display:'flex', 
                   flexDirection:'row', 
@@ -55,7 +56,9 @@ function ProductCard() {
                   }}>
                   <FaCartPlus size={20} /> 
                   <p>Add to Cart</p>
-              </Button>
+              </Button>}
+              {admin?<CustomButton titled='Update Product'  />:null}
+              {admin?<CustomButton titled='Delete Product' color="rgb(247, 108, 108)"/>:null}
           </Card.Body>
           {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
         {/* </Card.ImgOverlay> */}

@@ -1,6 +1,7 @@
 .container{
     /* height:250px; */
     /* /* margin: 50px 20px; */
+    padding-top: 20px;
     padding-left:40px;
     padding-right:40px;
     /* margin-top: 30px; */ 
@@ -13,7 +14,7 @@
     justify-content:space-between;
     align-items: center;
     /* padding: 5px; */
-    margin-top: 60px;
+    margin-top: 30px;
     padding-left: 10px;
     padding-right: 10px;
 
@@ -26,253 +27,12 @@
 
 
 .body{
-    display:flex;
-    flex-direction:row ;
+    /* display:-ms-inline-grid; */
+    /* flex-direction:row ; */
     /* justify-content:space-between; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* width: 100%; */
     padding: 5px;
     column-gap: 10px;
-    height:250px;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
