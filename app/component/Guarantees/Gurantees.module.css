@@ -1,13 +1,15 @@
 .container{
     margin-top: 100px;
-    height:300px;
+    min-height:350px;
     /* text-align:center; */
     background-image: url('../../../public/images\ \(2\).jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-attachment: fixed;
+    position: relative;
+    /* background-attachment: fixed; */
     /* color: aliceblue; */
+    /* color: white; */
 }
 
 .containerIcon{
@@ -16,5 +18,15 @@
     column-gap:10px;
     padding: 20px 15px;
     border-radius: 10px;
+    z-index: 10;
+    background-color: #ffb74d;
+    /* background-color:#66BB6A; */
     /* color:rgb(184, 184, 43); */
+}
+
+.overlay{
+    width:100%;
+    height: 100%;
+    background-color: rgba(102, 187,106, 0.3);
+    position: absolute;
 }

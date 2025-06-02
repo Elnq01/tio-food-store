@@ -6,8 +6,9 @@ import { FaGreaterThan } from 'react-icons/fa';
 import { Primary, OffWhite } from '@/public/colors/colos';
 
 
-export default function customButton({titled = "Shop Now", color = Primary}){
+export default function customButton({titled = "Shop Now", color = Primary, onClick}:any){
     return <Button 
+    onClick={onClick}
     style={{
       display:'flex', 
       flexDirection:'row', 

@@ -10,16 +10,18 @@ import CreditCards from "../../../public/carousel 2.jpg"
 export default function Footer(){
     return (<>
         <Row className={FooterStyle.container} style={{background:CharcoalBlack}}>
-            <Col md={4}>
+            <Col md={3}>
                 <p style={{marginBottom:'20px'}}> Terms & conditions </p>
                 <Image src={CreditCards} alt="credit cards" />
             </Col>
-            <Col md={4}> 
+            <Col md={3}> 
                 <h5>Help Center</h5>
                 <p>Chat with us</p>
             </Col>
-            {/* <Col md={3}></Col> */}
-            <Col md={4}> 
+            <Col md={3}>
+            
+            </Col>
+            <Col md={3}> 
                 <h5>Connect with us on:</h5>
                     <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
                         <FaFacebook size={30} />
@@ -30,7 +32,7 @@ export default function Footer(){
              </Col>
         </Row>
         <Row className={FooterStyle.containerLower}>
-            <p>copyright 2025. All right reserved.</p>
+            <p>copyright &copy; 2025. All right reserved.</p>
         </Row>
         </>
     )

@@ -6,11 +6,12 @@
 
 
 body {
-  background-color: #Fefefc;
+  /* background-color: #Fefefc; */
   color: #333333;
   margin:0px;
   padding: 0px;
   box-sizing: border-box;
+  /* background-image: url("../public/"); */
 }
 
 p{

@@ -8,10 +8,10 @@ import { FaCartPlus } from 'react-icons/fa';
 import { OffWhite, Primary, WarmCream } from '@/public/colors/colos';
 import CustomButton from '../UI/CustomButton';
 
-function ProductCard({admin}) {
+function ProductCard({admin, onClick}:any) {
   return (
     // background-color: #FEFEFC;
-    <Col className={ProductCardStyle.container} md={3}>
+    <Col className={ProductCardStyle.container} md={3} onClick={onClick}>
         <Card style={{
           borderRadius:'20px',
           paddingLeft:'2px',
