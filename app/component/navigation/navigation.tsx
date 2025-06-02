@@ -9,6 +9,7 @@ import Navigationform from './navigationForm';
 import { Col } from 'react-bootstrap';
 import Image from 'next/image';
 import Avatar from '../../../public/avatar.jpg';
+import Logo from '../UI/logo';
 
 function Navigation() {
   return (
@@ -27,7 +28,7 @@ function Navigation() {
               justifyContent:'space-evenly',
               }}> 
               <Col md={2} className='d-flex align-items-center gap-3 pl-7'>  
-                <Navbar.Brand href="#">Tio Food Store</Navbar.Brand>
+                <Navbar.Brand href="#"><Logo /></Navbar.Brand>
               </Col>
               <Col md={9} className='d-flex align-items-center gap-3'>
                 <Navigationform />
