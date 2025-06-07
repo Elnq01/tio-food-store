@@ -8,11 +8,11 @@ export default function NewsLetter() {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        {/* <Form.Label>Password</Form.Label> */}
+        <Form.Control type="email" placeholder="Enter your email" />
       </Form.Group>
       <Button style={{background:Seconadry, border:'0px'}} type="submit">
-        Submit
+        Subscribe
       </Button>
     </Form>
   );

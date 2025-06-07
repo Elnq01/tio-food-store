@@ -2,10 +2,10 @@
 
 import Card from 'react-bootstrap/Card';
 import ProductImage from '../../../public/king-500x500.jpg';
-import { Button, CardImgOverlay, Col } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import ProductCardStyle from './ProductCard.module.css';
 import { FaCartPlus } from 'react-icons/fa';
-import { OffWhite, Primary, WarmCream } from '@/public/colors/colos';
+import { Primary, WarmCream } from '@/public/colors/colos';
 import CustomButton from '../UI/CustomButton';
 
 function ProductCard({admin, onClick}:any) {
@@ -13,12 +13,13 @@ function ProductCard({admin, onClick}:any) {
     // background-color: #FEFEFC;
     <Col className={ProductCardStyle.container} md={3} onClick={onClick}>
         <Card style={{
-          borderRadius:'20px',
+          borderRadius:'10px',
           paddingLeft:'2px',
           paddingRight:'2px',
           paddingTop:'2px', 
           border:'0px', 
-          background:WarmCream,
+          background:"white",
+          // background:WarmCream,
           // borderRadius:"20px"
           }}
           className='shadow-sm'

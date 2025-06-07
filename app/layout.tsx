@@ -4,6 +4,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { Metadata } from 'next';
 import Navigation from "./component/navigation/navigation";
+// import ParticlesBackground from "./../app/component/UI/particle";
 
 const myFont = localFont({
   src:'./../public/fonts/Jost-Regular.ttf'
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={myFont.className}>
         <Navigation />
+        {/* <ParticlesBackground /> */}
         {children}
       </body>
     </html>

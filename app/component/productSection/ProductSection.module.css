@@ -1,10 +1,13 @@
 .container{
     /* height:250px; */
-    margin: 50px 20px;
+    margin: 120px 20px;
     padding: 0px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     /* margin: 30px auto; */
     position: relative;
+    background-color: #fff8e1;
+    border-radius: 10px;
+    /* background-color: "#fff8e1"; */
 }
 
 .heading{
@@ -13,7 +16,7 @@
     justify-content:space-between;
     align-items: center;
     /* padding: 5px; */
-    margin-top: 60px;
+    /* margin-top: 60px; */
     padding-left: 40px;
     padding-right: 40px;
     /* color:rgb(247, 108, 108) */

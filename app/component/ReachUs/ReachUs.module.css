@@ -1,8 +1,13 @@
 .container{
-    height: 250px;
+    min-height: 250px;
     /* text-align: center; */
-    padding: 50px 50px;
+    /* padding: 90px 50px; */
+    padding-top: 90px;
+    padding-bottom:90px;
     /* background-color: red; */
     background-color: #66BB6A;
+    /* background-color: #212122; */
     text-align: justify;
+    /* color:white; */
+    color: #212121;
 }

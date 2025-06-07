@@ -8,6 +8,7 @@ export default function Guarantees(){
     return (
         <Row className={GuranteesStyle.container}>
             <div className={GuranteesStyle.overlay}></div>
+            <div className={GuranteesStyle.overlayColor}></div>
             <Col className="d-flex justify-content-center align-items-center">
                 <div 
                 // style={{background:"rgb(214, 243, 216)", color:Primary}} 

@@ -9,30 +9,24 @@ import CreditCards from "../../../public/carousel 2.jpg"
 
 export default function Footer(){
     return (<>
-        <Row className={FooterStyle.container} style={{background:CharcoalBlack}}>
-            <Col md={3}>
+        {/* <Row className={FooterStyle.container} style={{background:CharcoalBlack}}>
+            <Col md={6}>
                 <p style={{marginBottom:'20px'}}> Terms & conditions </p>
                 <Image src={CreditCards} alt="credit cards" />
             </Col>
-            <Col md={3}> 
+            <Col md={6}> 
                 <h5>Help Center</h5>
                 <p>Chat with us</p>
             </Col>
-            <Col md={3}>
-            
-            </Col>
-            <Col md={3}> 
-                <h5>Connect with us on:</h5>
-                    <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
-                        <FaFacebook size={30} />
-                        <FaTwitter size={30} />
-                        <FaSnapchat size={30} />
-                        <FaInstagram size={30} />
-                    </div>
-             </Col>
-        </Row>
+        </Row> */}
         <Row className={FooterStyle.containerLower}>
-            <p>copyright &copy; 2025. All right reserved.</p>
+            <Col md={6} style={{textAlign:'left', display:'flex', alignItems:'center'}}>
+                <p>copyright &copy; 2025. All right reserved.</p>
+            </Col>
+            <Col md={6} style={{display:'flex', alignItems:'center', flexDirection:'row', justifyContent:'flex-end'}}>
+                {/* <p style={{marginBottom:'20px'}}> Terms & conditions </p> */}
+                <Image src={CreditCards} alt="credit cards" />
+            </Col>
         </Row>
         </>
     )

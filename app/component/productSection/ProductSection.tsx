@@ -2,12 +2,22 @@
 
 import ProductSectionStyle from "./ProductSection.module.css";
 // import ProductSectionItem from "./ProductSectionItem";
-import { Row } from "react-bootstrap";
 import ProductCard from "../ProductCard/ProductCard";
-import Carousel from 'better-react-carousel';
 import CustomButton from "../UI/CustomButton";
 import { useRouter } from "next/navigation";
 import Overlay from "../UI/overlay";
+import { Col, Row } from 'react-bootstrap';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Autoplay, Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+
 
 
 const fetchDataDB = [
@@ -51,14 +61,52 @@ export default function CardCarousel({title}:any) {
         onClick={() => {navigate.push(`/products`)}} 
         />
     </div>
-    <Carousel cols={4} rows={1} gap={10} loop={false} showDots>  
-      {fetchDataDB.map(item => <Carousel.Item key={item.id} style={{border:"2px solid red", background:'red'}}>
+
+
+      <Swiper
+
+        style={{marginBottom:'70px'}}
+
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        cssMode={true}
+        // navigation={true}
+        slidesPerView={4}
+        // spaceBetween={30}
+        pagination={true}
+        breakpoints={{
+            1000:{
+                slidesPerView:4
+            },
+            800:{
+                slidesPerView:3
+            },
+
+            500:{
+                slidesPerView:2
+            },
+
+            100:{
+                slidesPerView:1
+            }
+        }}
+        modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
+        
+      >
+      {fetchDataDB.map(item => <SwiperSlide key={item.id}>
               <ProductCard 
                 onClick={() => {navigate.push(`/products/${item.id}`)}} 
               />
-        </Carousel.Item>)}
-    </Carousel>
+        </SwiperSlide>)}
+    </Swiper>
   </Row>);
 }
+
+
+
+
+
 
 

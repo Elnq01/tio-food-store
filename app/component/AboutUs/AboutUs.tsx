@@ -5,7 +5,7 @@ export default function AboutUs(){
     return (
         <Row className={AboutUsStyle.container}>
             <h1>About Us</h1>
-            <p>Tio Food Store - Nigeria's Leading Online Food & Grocery Store Tio Food Store is your go-to 
+            <p style={{color:"rgb(80, 80, 80)"}}>Tio Food Store - Nigeria's Leading Online Food & Grocery Store Tio Food Store is your go-to 
                 destination for everything food in Nigeria. From everyday pantry essentials to premium grocery 
                 items, we offer an unbeatable selection of high-quality products at the best prices. Whether 
                 you're shopping for fresh produce, beverages, snacks, cooking ingredients, or household staples, 
