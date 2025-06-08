@@ -2,11 +2,14 @@
 
 import { Col, Container, Row } from "react-bootstrap";
 import CustomButton from "../component/UI/CustomButton";
+import { useRouter } from "next/navigation";
 
 export default function Admin(){
+    const navigate = useRouter();
+
     return (<Container fluid>
         <div>
-            <CustomButton titled="Add Product" />
+            <CustomButton titled="Add Product" onClick={()=> {navigate.push("/admin/addProduct")}} />
         </div>
         <Row>
             <Col md={6}>
