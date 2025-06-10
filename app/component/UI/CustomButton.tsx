@@ -1,12 +1,12 @@
 "use client"
 
 
-import { Button} from 'react-bootstrap';
-import { FaGreaterThan } from 'react-icons/fa';
+import { Button, Spinner} from 'react-bootstrap';
 import { Primary, OffWhite } from '@/public/colors/colos';
+import { PiCaretRight } from 'react-icons/pi';
 
 
-export default function customButton({titled = "Shop Now", color = Primary, onClick}:any){
+export default function customButton({titled = "Shop Now", color = Primary, isLoading=false, onClick}:any){
     return <Button 
     onClick={onClick}
     style={{
@@ -14,14 +14,17 @@ export default function customButton({titled = "Shop Now", color = Primary, onCl
       flexDirection:'row', 
       alignItems:'center', 
       textAlign:'center',
-      columnGap:'10px',
+      columnGap:'12px',
       color:OffWhite,
       background:color,
       marginTop:'20px',
       marginBottom:'20px',
       border:'none'
       }}>
-      <p>{titled}</p>
-      <FaGreaterThan size={10} /> 
+      {isLoading?<Spinner animation="border" variant="light" size="sm" />:
+      <>
+        <p>{titled}</p>
+        <PiCaretRight size={15} /> 
+      </>}
   </Button>
 }

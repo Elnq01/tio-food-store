@@ -8,9 +8,8 @@ import { FaCartPlus } from 'react-icons/fa';
 import { Primary, WarmCream } from '@/public/colors/colos';
 import CustomButton from '../UI/CustomButton';
 
-function ProductCard({admin, onClick}:any) {
+function ProductCard({admin, price, productName, productImages, onClick}:any) {
   return (
-    // background-color: #FEFEFC;
     <Col className={ProductCardStyle.container} md={3} onClick={onClick}>
         <Card style={{
           borderRadius:'10px',
@@ -18,22 +17,18 @@ function ProductCard({admin, onClick}:any) {
           paddingRight:'2px',
           paddingTop:'2px', 
           border:'0px', 
-          background:"white",
-          // background:WarmCream,
-          // borderRadius:"20px"
+          background:"white"
           }}
           className='shadow-sm'
           >
-        {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-        {/* <Card.Header as="h5">Featured</Card.Header> */}
         <Card.Img src={ProductImage.src} />
+        {/* <Card.Img src={productImages[0]} /> */}
         
-      {/* <Card.ImgOverlay> */}
           <Card.Body>
               <Card.Text style={{color:Primary}}>
                 In stock
               </Card.Text>
-              <Card.Title>King's Oil 1 Liter</Card.Title>
+              <Card.Title>{productName}</Card.Title>
               <Card.Subtitle 
                 style={{
                   marginTop:'15px',
@@ -41,7 +36,7 @@ function ProductCard({admin, onClick}:any) {
                   }}>
                 <p>
                   <strong>Price: </strong>
-                  <span style={{color:Primary}}>₦200</span>    <s className="mb-2 text-muted">₦300</s>
+                  <span style={{color:Primary}}>₦{price}</span>    <s className="mb-2 text-muted">₦300</s>
                 </p>
               </Card.Subtitle>
               {admin?null:<Button 
@@ -61,8 +56,6 @@ function ProductCard({admin, onClick}:any) {
               {admin?<CustomButton titled='Update Product'  />:null}
               {admin?<CustomButton titled='Delete Product' color="rgb(247, 108, 108)"/>:null}
           </Card.Body>
-          {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
-        {/* </Card.ImgOverlay> */}
         </Card>
     </Col>
   );

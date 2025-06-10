@@ -1,11 +1,11 @@
 "use client"
 
-import FormControlElement from "./FormControl";
+import FormControlElement from "../../addProduct/FormControl";
 import { Alert, Container, Form,  Row } from "react-bootstrap";
 import CustomButton from "@/app/component/UI/CustomButton";
 import { useRef, useState } from "react";
-import { createProduct } from "@/app/actions/actionServer";
-import { redirect, useRouter } from "next/navigation";
+import { updateProduct } from "@/app/actions/actionServer";
+import { useRouter, useParams } from "next/navigation";
 
 
 const formControls = [
@@ -42,10 +42,14 @@ const formControls = [
 
 
 
-export default function AddProduct(){
+export default async function updateProduct(){
+    // get the id of the product to fectch
+    // its data
+    const params = useParams();
+    const productData = await updateProduct(params);
 
     const formRef = useRef(null);
-    const navigate = useRouter();
+    // const navigate = useRouter();
 
     const [formState, setFormState] = useState({
         productName: "",
@@ -55,10 +59,10 @@ export default function AddProduct(){
         description: ""
     });
 
-    const [cloudinaryErr, setCloudinaryErr] = useState("");
-    const [cloudinaryLoader, setCloudinaryLoader] = useState(false);
-    const [cloudinarySuccess, setCloudinarySuccess] = useState(false);
-    const [formSubmitLoader, setFormSubmitLoader] = useState(false);
+    // const [cloudinaryErr, setCloudinaryErr] = useState("");
+    // const [cloudinaryLoader, setCloudinaryLoader] = useState(false);
+    // const [cloudinarySuccess, setCloudinarySuccess] = useState(false);
+    // const [formSubmitLoader, setFormSubmitLoader] = useState(false);
 
 
     function onChangeHandler(e){
@@ -106,39 +110,39 @@ export default function AddProduct(){
         }
 
         // Upload images to Cloudinary
-        const uploadedImageUrls = [];
-            for (let file of formState.productImages) {
-                const url = await uploadToCloudinary(file);
-                // console.log("let me see 2: ", url);
-                uploadedImageUrls.push(url);
-        }
+        // const uploadedImageUrls = [];
+        //     for (let file of formState.productImages) {
+        //         const url = await uploadToCloudinary(file);
+        //         // console.log("let me see 2: ", url);
+        //         uploadedImageUrls.push(url);
+        // }
 
         // Now build the form payload to submit
-        const productData = {
-            ...formState,
-            productImages: uploadedImageUrls
-        };
+        // const productData = {
+        //     ...formState,
+        //     productImages: uploadedImageUrls
+        // };
                 
-        // submitting the form
-        setFormSubmitLoader(true);
+        // // submitting the form
+        // setFormSubmitLoader(true);
 
-        try{
-            await createProduct(productData);
-            setFormSubmitLoader(false);
-            setFormState({
-                productName: "",
-                productImages: [],
-                price: "",
-                productCategory: "",
-                description: ""
-            })
+        // try{
+        //     await createProduct(productData);
+        //     setFormSubmitLoader(false);
+        //     setFormState({
+        //         productName: "",
+        //         productImages: [],
+        //         price: "",
+        //         productCategory: "",
+        //         description: ""
+        //     })
 
-            // redirecting to the dashboad
-            navigate.push("/admin/products");
+        //     // redirecting to the dashboad
+        //     navigate.push("/admin/products");
 
-        }catch(err){
-            console.log("Err Sumitting the Form: ", err)
-        }
+        // }catch(err){
+        //     console.log("Err Sumitting the Form: ", err)
+        // }
     
 }
 
@@ -147,7 +151,7 @@ export default function AddProduct(){
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "products"); // from Cloudinary settings
-        setCloudinaryLoader(true);
+        // setCloudinaryLoader(true);
 
         try{
             const response = await fetch("https://api.cloudinary.com/v1_1/djn9lztmo/image/upload", {
@@ -155,17 +159,13 @@ export default function AddProduct(){
                 body: formData
             });
             const data = await response.json()
-            setCloudinaryLoader(false);
-            setCloudinarySuccess(true);
-
-            // console.log("let see: ", data);
-
+            // setCloudinaryLoader(false);
+            // setCloudinarySuccess(true);
             return data.secure_url;
-
 
         }catch(err){
             // console.log("My err: ", typeof err, err.message, err);
-            setCloudinaryErr(err.message);
+            // setCloudinaryErr(err.message);
         }
 
     }
@@ -180,24 +180,19 @@ export default function AddProduct(){
                 paddingBottom:'70px'
                 }}>
             <Row>
-                <Form ref={formRef}
-                    // name="what"
-                    // action={createProduct}
-                    // onSubmit={onSubmitHandler}
-                    >
-                        
-                    {cloudinaryErr?<Alert variant="danger">{cloudinaryErr}</Alert>:null}
+                <Form ref={formRef}>    
+                    {/* {cloudinaryErr?<Alert variant="danger">{cloudinaryErr}</Alert>:null} */}
                     {formControls.map(formcontrol =>{
                         return <FormControlElement 
                         value={formState[formcontrol.name]}
-                        isLoading={cloudinaryLoader}
-                        success={cloudinarySuccess}
+                        // isLoading={cloudinaryLoader}
+                        // success={cloudinarySuccess}
                         onChange={onChangeHandler}
                         {...formcontrol} 
                         key={formcontrol.id} />
                     })}
                     <CustomButton titled="submit" 
-                    isLoading={formSubmitLoader}
+                    // isLoading={formSubmitLoader}
                     onClick={onSubmitHandler}
                      />
                 </Form>

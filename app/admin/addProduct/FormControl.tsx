@@ -1,5 +1,9 @@
 
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
+import UploadCloudinary from "./uploadCloudinaryComponent";
+import { FaMarkdown } from "react-icons/fa";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { Primary } from "@/public/colors/colos";
 
 export default function FormControlElement(props){
 
@@ -17,10 +21,16 @@ export default function FormControlElement(props){
 
         case "Product Images":
             return <Form.Group controlId="formFileMultiple" className="mb-3">
-                    <Form.Label>{props.label}</Form.Label>
+                    <Form.Label 
+                    style={{display:'flex', flexDirection:'row', alignItems:'center', columnGap:'5px'}}>
+                        <span>{props.label}</span>
+                        {props.isLoading?<Spinner animation="border" variant="success" size="sm" />:null}
+                        {props.success?<IoIosCheckmarkCircle color={Primary} />:null}
+                    </Form.Label>
                     <Form.Control 
-                        value={props.value} 
+                        // value={props.value} 
                         name={props.name} 
+                        accept="image/*"
                         onChange={props.onChange} type="file" multiple />
                     <Form.Text>{props.placeholder}</Form.Text>
                 </Form.Group>
