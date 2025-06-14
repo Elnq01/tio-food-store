@@ -6,47 +6,16 @@ import CustomButton from "@/app/component/UI/CustomButton";
 import { useRef, useState } from "react";
 import { createProduct } from "@/app/actions/actionServer";
 import { redirect, useRouter } from "next/navigation";
-
-
-const formControls = [
-    {
-        id:0,
-        label:"Product Name",
-        placeholder:'Enter product name',
-        name:"productName"
-    },
-    {
-        id:1,
-        label:"Product Images",
-        placeholder:'You can upload more than one images',
-        name:'productImages'
-    },
-    {
-        id:2,
-        label:"Price",
-        placeholder:'Price',
-        name:'price'
-    },
-    {
-        id:3,
-        label:"Product Category",
-        name:'productCategory'
-    },
-    {
-        id:4,
-        label:"Description",
-        placeholder:"Description",
-        name:'description'
-    }
-]
-
+import { formControls } from "./formControls";
+// import { updateImgCloudinary } from "@/app/actions/cloudinaryActionServer";
 
 
 export default function AddProduct(){
-
+    // other hooks
     const formRef = useRef(null);
     const navigate = useRouter();
 
+    // the states
     const [formState, setFormState] = useState({
         productName: "",
         productImages: [],
@@ -54,7 +23,6 @@ export default function AddProduct(){
         productCategory: "",
         description: ""
     });
-
     const [cloudinaryErr, setCloudinaryErr] = useState("");
     const [cloudinaryLoader, setCloudinaryLoader] = useState(false);
     const [cloudinarySuccess, setCloudinarySuccess] = useState(false);
@@ -69,7 +37,6 @@ export default function AddProduct(){
             ...prevState,
             [name]:inputValue
         }));
-
     }
 
 
@@ -109,66 +76,71 @@ export default function AddProduct(){
         const uploadedImageUrls = [];
             for (let file of formState.productImages) {
                 const url = await uploadToCloudinary(file);
-                // console.log("let me see 2: ", url);
                 uploadedImageUrls.push(url);
         }
+        //  const public_url = await updateImgCloudinary(formState.productImages)
 
         // Now build the form payload to submit
         const productData = {
             ...formState,
             productImages: uploadedImageUrls
         };
-                
-        // submitting the form
-        setFormSubmitLoader(true);
+
 
         try{
-            await createProduct(productData);
-            setFormSubmitLoader(false);
-            setFormState({
-                productName: "",
-                productImages: [],
-                price: "",
-                productCategory: "",
-                description: ""
-            })
+            if(uploadedImageUrls.length !== 0){       
+                // submitting the form
+                setFormSubmitLoader(true);
+                await createProduct(productData);
+                setFormSubmitLoader(false);
+                setFormState({
+                    productName: "",
+                    productImages: [],
+                    price: "",
+                    productCategory: "",
+                    description: ""
+                })
 
-            // redirecting to the dashboad
-            navigate.push("/admin/products");
+                // redirecting to the dashboad
+                navigate.push("/admin/products");
+            } else {
+                throw new Error("Image not uploaded!")
+            }
 
         }catch(err){
             console.log("Err Sumitting the Form: ", err)
-        }
-    
+        } 
 }
 
 
-    async function uploadToCloudinary(file) {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", "products"); // from Cloudinary settings
-        setCloudinaryLoader(true);
+async function uploadToCloudinary(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "products"); // from Cloudinary settings
+    setCloudinaryLoader(true);
 
-        try{
-            const response = await fetch("https://api.cloudinary.com/v1_1/djn9lztmo/image/upload", {
-                method: "POST",
-                body: formData
-            });
-            const data = await response.json()
-            setCloudinaryLoader(false);
-            setCloudinarySuccess(true);
+    try{
+        const response = await fetch("https://api.cloudinary.com/v1_1/djn9lztmo/image/upload", {
+            method: "POST",
+            body: formData
+        });
+        
+        const data = await response.json()
+        setCloudinaryLoader(false);
+        setCloudinarySuccess(true);
+        console.log("CCloudinary upload: ", data)
 
-            // console.log("let see: ", data);
+        return {
+            secure_url:data.secure_url,
+            public_id:data.public_id
+        };
 
-            return data.secure_url;
 
-
-        }catch(err){
-            // console.log("My err: ", typeof err, err.message, err);
-            setCloudinaryErr(err.message);
-        }
-
+    }catch(err){
+        // console.log("My err: ", typeof err, err.message, err);
+        setCloudinaryErr(err.message);
     }
+}
 
 
 
@@ -180,12 +152,7 @@ export default function AddProduct(){
                 paddingBottom:'70px'
                 }}>
             <Row>
-                <Form ref={formRef}
-                    // name="what"
-                    // action={createProduct}
-                    // onSubmit={onSubmitHandler}
-                    >
-                        
+                <Form ref={formRef}>
                     {cloudinaryErr?<Alert variant="danger">{cloudinaryErr}</Alert>:null}
                     {formControls.map(formcontrol =>{
                         return <FormControlElement 
@@ -193,6 +160,7 @@ export default function AddProduct(){
                         isLoading={cloudinaryLoader}
                         success={cloudinarySuccess}
                         onChange={onChangeHandler}
+                        disabled={false}
                         {...formcontrol} 
                         key={formcontrol.id} />
                     })}

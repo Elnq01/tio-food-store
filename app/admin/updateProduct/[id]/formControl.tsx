@@ -8,10 +8,6 @@ import { deleteImgCloudinary } from "@/app/actions/cloudinaryActionServer";
 
 export default function FormControlElement({label, disabled=true, value, name, placeholder, isLoading, success, onChange, isUpdate, productImages}){
 
-    // async function onDeleteImgHandler(id){
-    //    await deleteImgCloudinary(id) ;
-    // }
-
     switch(label){
         case "Product Name":
             return <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -26,8 +22,7 @@ export default function FormControlElement({label, disabled=true, value, name, p
                 </Form.Group>
 
         case "Product Images":
-            return <> 
-            <Form.Group controlId="formFileMultiple" className="mb-3">
+            return <Form.Group controlId="formFileMultiple" className="mb-3">
                     <Form.Label 
                     style={{display:'flex', flexDirection:'row', alignItems:'center', columnGap:'5px'}}>
                         <span>{label}</span>
@@ -42,16 +37,6 @@ export default function FormControlElement({label, disabled=true, value, name, p
                         onChange={onChange} type="file" multiple />
                     <Form.Text>{placeholder}</Form.Text>
                 </Form.Group>
-                {/* {isUpdate? <div style={{display:'flex', flexDirection:'row', columnGap:'10px'}}>
-                    {productImages.map((image, index) => (
-                        <div key={index} style={{position:'relative'}}>
-                            <FaMarkdown 
-                            onClick={() => {onDeleteImgHandler(image.public_id)}}
-                            style={{cursor:'pointer', position:'absolute', right:'0px', top:'0px'}} />
-                            <Image alt="preview" src={image} width={200} height={200}/>
-                        </div>))}
-                </div>:null} */}
-                </>
 
         case "Price":
             return <Form.Group className="mb-3" controlId="formBasicPassword">

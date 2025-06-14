@@ -5,7 +5,7 @@ const config: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
+        hostname: 'res.cloudinary.com',
         port: '',
         pathname: '/**',
         search: '',

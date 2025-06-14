@@ -7,8 +7,19 @@ import ProductCardStyle from './ProductCard.module.css';
 import { FaCartPlus } from 'react-icons/fa';
 import { Primary, WarmCream } from '@/public/colors/colos';
 import CustomButton from '../UI/CustomButton';
+import { deleteProduct } from '@/app/actions/actionServer';
+import { useRouter } from 'next/navigation';
 
-function ProductCard({admin, price, productName, productImages, onClick}:any) {
+function ProductCard({admin, price, productName, _id, productImages, onClick}:any) {
+
+  // navigate to the update form
+  const navigate = useRouter();
+
+  // delete a product
+  async function onDeleteProductHandler(id){
+    await deleteProduct(id)
+  }
+
   return (
     <Col className={ProductCardStyle.container} md={3} onClick={onClick}>
         <Card style={{
@@ -53,8 +64,12 @@ function ProductCard({admin, price, productName, productImages, onClick}:any) {
                   <FaCartPlus size={20} /> 
                   <p>Add to Cart</p>
               </Button>}
-              {admin?<CustomButton titled='Update Product'  />:null}
-              {admin?<CustomButton titled='Delete Product' color="rgb(247, 108, 108)"/>:null}
+              {admin?<CustomButton titled='Update Product' 
+                onClick={() => {navigate.push(`/admin/updateProduct/${_id}`)}}  />
+                :null}
+              {admin?<CustomButton titled='Delete Product' 
+                onClick={()=>{onDeleteProductHandler(_id)}} 
+                color="rgb(247, 108, 108)"/>:null}
           </Card.Body>
         </Card>
     </Col>
