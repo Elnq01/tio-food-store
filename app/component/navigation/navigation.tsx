@@ -10,8 +10,10 @@ import { Col } from 'react-bootstrap';
 import Image from 'next/image';
 import Avatar from '../../../public/avatar.jpg';
 import Logo from '../UI/logo';
+import { useRouter } from 'next/navigation';
 
 function Navigation() {
+  const navigate = useRouter();
   return (
     <>
       <Navbar
@@ -58,9 +60,9 @@ function Navigation() {
           </div>
         <Nav className={`${navigationStyle.navContainer}`}>
             <div  className='ms-auto d-flex align-items-center gap-3'>
-              <Nav.Link className={navigationStyle.navLink} href="#home">Home</Nav.Link>
-              <Nav.Link className={navigationStyle.navLink} href="#features">Products</Nav.Link>
-              <Nav.Link className={navigationStyle.navLink} href="#pricing">About</Nav.Link>
+              <Nav.Link className={navigationStyle.navLink} onClick={() => navigate.push('/')} href="#home">Home</Nav.Link>
+              <Nav.Link className={navigationStyle.navLink} onClick={() => navigate.push('/category')} href="#features">Products</Nav.Link>
+              <Nav.Link className={navigationStyle.navLink} onClick={() => navigate.push('#about')} href="#pricing">About</Nav.Link>
             </div>
         </Nav>
       </Navbar>

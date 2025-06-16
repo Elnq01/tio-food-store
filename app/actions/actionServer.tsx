@@ -34,7 +34,7 @@ export async function createProduct(formData) {
   }
 }
 
-
+// for admin
 export async function getProductPaginated(page, limit){
   try{
     await connect();
@@ -107,6 +107,77 @@ export async function retrieveAProduct(id) {
     }catch(err){
       console.log("Update Product! ", err)
     }
+}
+
+
+// Home Page Retrieve of Product
+export async function getProduct(params){
+  try{
+    await connect();
+
+    let ProductItem;
+
+    if(params == "Hot's Product"){
+
+      ProductItem = await Product.find({}).limit(8).lean();
+
+    } else if(params == "New Product"){
+
+      ProductItem = await Product.find({}).limit(8).lean();
+
+    } else {
+
+      ProductItem = await Product.find({}).limit(8).lean();
+
+    }
+
+      const ProductItemModify = ProductItem.map(product => {
+        return {...product, _id:product._id.toString()}
+      })
+
+    return ProductItemModify;
+
+  }catch(err){
+        console.error("Error fetching paginated products:", err);
+  }
+}
+
+
+// getting paginated product for the regular app
+export async function getProductPaginatedApp(page, limit, params){
+  console.log("BAbA : ", params);
+  try{    
+    await connect();
+    const skip = (page - 1) * limit;
+
+    let ProductItem;
+
+    if(params == "Hot's Product"){
+
+      ProductItem = await Product.find({}).skip(skip).limit(limit).lean();;
+
+    } else if(params == "New Product"){
+
+      ProductItem =  await Product.find({}).skip(skip).limit(limit).lean();;
+
+    } else {
+
+      ProductItem = await Product.find({productCategory:params}).skip(skip).limit(limit).lean();
+
+    }
+
+    const total = await Product.countDocuments(); // Get total count for pagination
+    const ProductItemModify = ProductItem.map(product => {
+      return {...product, _id:product._id.toString()}
+    })
+
+    return {
+            products:ProductItemModify, 
+            total,
+        };
+  }catch(err){
+        console.error("Error fetching paginated products:", err);
+  }
 }
 
 

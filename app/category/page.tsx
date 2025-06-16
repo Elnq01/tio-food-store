@@ -11,6 +11,40 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 // import CustomButton from "../UI/CustomButton";
 
+const categoryData = [
+  {
+    id:0,
+    category:"Grains",
+    description:"Everyday Fresh & Clean with Our Products"
+  },
+  {
+    id:1,
+    category:"Cooking Oils",
+    description:"Everyday Fresh & Clean with Our Products"
+  },
+  {
+    id:2,
+    category:"Processed Foods",
+    description:"Everyday Fresh & Clean with Our Products"
+  },
+  {
+    id:3,
+    category:"Grains",
+    description:"Everyday Fresh & Clean with Our Products"
+  },
+  {
+    id:4,
+    category:"Cooking Oils",
+    description:"Everyday Fresh & Clean with Our Products"
+  },
+  {
+    id:5,
+    category:"Processed Foods",
+    description:"Everyday Fresh & Clean with Our Products"
+  }
+]
+
+
 
 export default function Category() {
     
@@ -33,15 +67,17 @@ export default function Category() {
             {/* <button>See More</button> */}
             {/* <CustomButton titled="See More" /> */}
         </div>
-        <Col className={CategorySectionStyle.body}>
-            <CategoryCard  source={CategoryImage1.src} admin={true} />
-            <CategoryCard source={CategoryImage2.src} admin={true} />
-            <CategoryCard source={CategoryImage3.src} admin={true} />
-            
-            <CategoryCard source={CategoryImage1.src} admin={true} />
-            <CategoryCard source={CategoryImage2.src} admin={true} />
-            <CategoryCard source={CategoryImage3.src} admin={true} />
-        </Col> 
+        <Row className={CategorySectionStyle.body}>
+            {categoryData.map(category => {
+                if(category.category == "Grains"){
+                    return <CategoryCard key={category.id} {...category} source={CategoryImage3.src} />
+                } else if(category.category == "Cooking Oils"){
+                    return <CategoryCard key={category.id} {...category} source={CategoryImage2.src} />
+                }else{
+                    return <CategoryCard key={category.id} {...category} source={CategoryImage1.src} />
+                }
+            })}
+        </Row> 
     </div>
   );
 }

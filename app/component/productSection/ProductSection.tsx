@@ -17,48 +17,35 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Autoplay, Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { getProduct } from "@/app/actions/actionServer";
+import { Suspense, useEffect, useState } from "react";
 
-
-
-const fetchDataDB = [
-  {
-    id:0,
-  },
-  {
-    id:1
-  },
-  {
-    id:2
-  },
-  {
-    id:3
-  },
-  {
-    id:4
-  },
-  {
-    id:5
-  },
-  {
-    id:6
-  },
-  {
-    id:7
-  }
-]
 
 
 export default function CardCarousel({title}:any) {
-  const navigate = useRouter()
+  const navigate = useRouter();
 
-  return (
+  const [productFetched, setProductFetched] = useState([])
+
+  useEffect(()=>{
+    async function fetchProduct(){
+      const fetchedProduct = await getProduct(title) ;
+      // console.log("what are u returning: ", fetchedProduct)
+      setProductFetched(fetchedProduct);
+    }
+
+    fetchProduct();
+  }, [])
+
+
+  return (<Suspense fallback={<p>Loading...</p>}>
   <Row className={ProductSectionStyle.container}> 
     {/* <Overlay /> */}
     <div className={ProductSectionStyle.heading}>
       <h4 className={ProductSectionStyle.headingH1}>{title}</h4>
       <CustomButton 
         titled="See More" 
-        onClick={() => {navigate.push(`/products`)}} 
+        onClick={() => {navigate.push(`/products/${title}`)}} 
         />
     </div>
 
@@ -95,13 +82,14 @@ export default function CardCarousel({title}:any) {
         modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
         
       >
-      {fetchDataDB.map(item => <SwiperSlide key={item.id}>
+      {productFetched.map(item => <SwiperSlide key={item.id}>
               <ProductCard 
-                onClick={() => {navigate.push(`/products/${item.id}`)}} 
+                onClick={() => {navigate.push(`/products/single/${item.id}`)}} 
               />
         </SwiperSlide>)}
     </Swiper>
-  </Row>);
+  </Row>
+  </Suspense>);
 }
 
 

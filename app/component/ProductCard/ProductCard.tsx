@@ -21,7 +21,7 @@ function ProductCard({admin, price, productName, _id, productImages, onClick}:an
   }
 
   return (
-    <Col className={ProductCardStyle.container} md={3} onClick={onClick}>
+    <Col className={ProductCardStyle.container} md={3}>
         <Card style={{
           borderRadius:'10px',
           paddingLeft:'2px',
@@ -51,6 +51,7 @@ function ProductCard({admin, price, productName, _id, productImages, onClick}:an
                 </p>
               </Card.Subtitle>
               {admin?null:<Button 
+               onClick={onClick}
                 style={{
                   display:'flex', 
                   flexDirection:'row', 
@@ -62,7 +63,7 @@ function ProductCard({admin, price, productName, _id, productImages, onClick}:an
                   border:'none'
                   }}>
                   <FaCartPlus size={20} /> 
-                  <p>Add to Cart</p>
+                  <p>View Product</p>
               </Button>}
               {admin?<CustomButton titled='Update Product' 
                 onClick={() => {navigate.push(`/admin/updateProduct/${_id}`)}}  />
