@@ -6,7 +6,7 @@ import { Primary, OffWhite } from '@/public/colors/colos';
 import { PiCaretRight } from 'react-icons/pi';
 
 
-export default function customButton({titled = "Shop Now", color = Primary, isLoading=false, onClick}:any){
+export default function CustomButton({titled = "Shop Now", color = Primary, isLoading=false, onClick}:any){
     return <Button 
     onClick={onClick}
     style={{

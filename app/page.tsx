@@ -34,7 +34,6 @@ export default async function Home() {
       <Guarantees />
       <AboutUs />
       <ReachUs />
-      <Footer />
 
       {/* <p>{Product.description}</p> */}
     </div>

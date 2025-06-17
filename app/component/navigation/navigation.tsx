@@ -41,7 +41,7 @@ function Navigation() {
                       background:"rgb(214, 243, 216)",
                       padding:'8px',
                       borderRadius:'50%'
-                      }} href="/cart">
+                      }} href="/Cart">
                       <FaShoppingCart size={18} style={{color:Primary}} />
                     </Nav.Link>
                   <Nav.Link
