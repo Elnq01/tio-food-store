@@ -30,7 +30,7 @@ export default function CardCarousel({title}:any) {
   useEffect(()=>{
     async function fetchProduct(){
       const fetchedProduct = await getProduct(title) ;
-      // console.log("what are u returning: ", fetchedProduct)
+      console.log("what are u returning: ", fetchedProduct)
       setProductFetched(fetchedProduct);
     }
 
@@ -82,9 +82,10 @@ export default function CardCarousel({title}:any) {
         modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
         
       >
-      {productFetched.map(item => <SwiperSlide key={item.id}>
-              <ProductCard 
-                onClick={() => {navigate.push(`/products/single/${item.id}`)}} 
+      {productFetched.map(item => <SwiperSlide key={item._id}>
+              <ProductCard {...item}
+                style={{width:'100%'}}
+                onClick={() => {navigate.push(`/products/single/${item._id}`)}} 
               />
         </SwiperSlide>)}
     </Swiper>

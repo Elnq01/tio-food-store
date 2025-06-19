@@ -10,7 +10,7 @@ import CustomButton from '../UI/CustomButton';
 import { deleteProduct } from '@/app/actions/actionServer';
 import { useRouter } from 'next/navigation';
 
-function ProductCard({admin, price, productName, _id, productImages, onClick}:any) {
+function ProductCard({admin, price, productName, _id, style, onClick}:any) {
 
   // navigate to the update form
   const navigate = useRouter();
@@ -21,7 +21,7 @@ function ProductCard({admin, price, productName, _id, productImages, onClick}:an
   }
 
   return (
-    <Col className={ProductCardStyle.container} md={3}>
+    <Col className={ProductCardStyle.container} style={style} md={3}>
         <Card style={{
           borderRadius:'10px',
           paddingLeft:'2px',

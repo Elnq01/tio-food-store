@@ -6,14 +6,19 @@ import navigationStyle from './navigation.module.css';
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
 import {OffWhite, Primary, WarmCream} from '../../../public/colors/colos'
 import Navigationform from './navigationForm';
-import { Col } from 'react-bootstrap';
+import { Badge, Col } from 'react-bootstrap';
 import Image from 'next/image';
 import Avatar from '../../../public/avatar.jpg';
 import Logo from '../UI/logo';
 import { useRouter } from 'next/navigation';
+import { useStore } from '@/app/store/cart';
 
 function Navigation() {
   const navigate = useRouter();
+
+  const cartStatus = useStore((state) => state.cart);
+
+
   return (
     <>
       <Navbar
@@ -40,8 +45,14 @@ function Navigation() {
                     style={{
                       background:"rgb(214, 243, 216)",
                       padding:'8px',
-                      borderRadius:'50%'
+                      borderRadius:'50%',
+                      position:'relative'
                       }} href="/Cart">
+                        <h6 style={{position:'absolute', 
+                            fontSize:'12px',
+                            top:'-9px', right:'-7px'}}>
+                          <Badge bg={cartStatus == 0?"secondary":"danger"}>{cartStatus.length}</Badge>
+                        </h6>
                       <FaShoppingCart size={18} style={{color:Primary}} />
                     </Nav.Link>
                   <Nav.Link

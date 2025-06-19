@@ -3,17 +3,13 @@
 import { Primary, Seconadry } from "@/public/colors/colos";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import { useStore } from "../store/cart";
 
-export default function SpinnerBtn(){
-    const [value, SetValue] = useState(0);
+export default function SpinnerBtn({id, quantity}){
 
-    function onIncreasehandler(){
-        SetValue(prevState => prevState + 1);
-    }
-
-    function onDecreasehandler(){
-        SetValue(prevState => prevState - 1);
-    }
+    // getting slice of the state
+    const increasProductQty = useStore((state) => state.increaseItemQuantity);
+    const decreasProductQty = useStore((state) => state.decreaseItemQuantity);
 
     return <div style={{
         display:'flex', flexDirection:'row', 
@@ -21,14 +17,18 @@ export default function SpinnerBtn(){
     <Button 
         style={{background:"#313133", width:'35px', 
             height:'35px', borderRadius:'50%', border:'0px'}}
-        onClick={onDecreasehandler}
-        disabled={value == 0}
+        onClick={() => {
+            decreasProductQty(id)
+        }}
+        disabled={quantity == 0}
         >-</Button>
-    <span>{value}</span>
+    <span>{quantity}</span>
     <Button 
         style={{background:Seconadry, width:'35px', 
             height:'35px', borderRadius:'50%', border:'0px'}}
-        onClick={onIncreasehandler}
+        onClick={() => {
+            increasProductQty(id)
+        }}
         // disabled={value == 0}
         >+</Button>
     </div>

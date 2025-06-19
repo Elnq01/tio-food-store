@@ -6,6 +6,7 @@ import DeliveryLocationFormControl from './DeliveryLocationFormControl';
 import CustomButton from '@/app/component/UI/CustomButton';
 import { getAddressCodeForTioFoodStore, getPriceRates } from '@/app/actions/deliveryActionServer';
 import { Primary } from '@/public/colors/colos';
+import { useStore } from '@/app/store/cart';
 
 const formSeed = [
   {
@@ -31,7 +32,12 @@ export default function DeliveryLocation() {
     LGA:'',
     address:''
   });
-  const [courierPrice, SetCourierPrice] = useState(0);
+  
+  // getting a slice of the store
+  const deliveryPrice = useStore((state) => state.deliveryPrice)
+  const setDeliveryPrice = useStore((state) => state.addDeliveryPrice)
+
+  // const [courierPrice, SetCourierPrice] = useState(0);
 
   function onChangeHandler(e){
         const {name, value} = e.target;
@@ -67,7 +73,8 @@ export default function DeliveryLocation() {
     // submitting the address
     try{
       const couriers = await getPriceRates(formState);
-      SetCourierPrice(couriers)
+      // SetCourierPrice(couriers)
+      setDeliveryPrice(couriers);
       // await getAddressCodeForTioFoodStore();
     }catch(err){
       console.log("Error: ", err);
@@ -81,10 +88,10 @@ export default function DeliveryLocation() {
           onChange={onChangeHandler}
           {...formcontrol}  />)}
           <CustomButton titled="Submit" onClick={onSubmitHandler} />
-          {courierPrice?<div 
+          {deliveryPrice?<div 
           style={{background:"rgb(214, 243, 216)",borderRadius:'10px',
            display:'flex', flexDirection:'column', padding:'10px', marginBottom:'10px'}}>
-            <p>The Delivery is estimated as: ₦{courierPrice}</p>
+            <p>The Delivery is estimated as: ₦{deliveryPrice}</p>
           </div>:null}
     </Form>
   );

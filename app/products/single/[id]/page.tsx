@@ -16,15 +16,33 @@ import TabbedNav from "./Tabbed";
 import Rating from "./Rating";
 import DeliveryLocation from "./DeliveryLocation";
 import ProductCard from "@/app/component/ProductCard/ProductCard";
+import { useEffect, useState } from "react";
+import { retrieveAProduct } from "@/app/actions/actionServer";
+import { useStore } from "@/app/store/cart";
 
 
 
-export default function Category() {
-    
-  const router = useRouter();
-//   const params = useParams()
+export default function SingleProduct() {
+    const router = useRouter();
+    const params = useParams();
+    const [singleProductDetails, setsingleProductDetails] = useState({});
+
+    // getting the slice of the state
+    const addProductToCart = useStore((state) => state.addItemToCart)
+
+    useEffect(()=> {
+        async function getSingleProductDetails(param){
+            const productDetails = await retrieveAProduct(param);
+            // console.log("The singel product: ", productDetails);
+            setsingleProductDetails(productDetails)
+        }
+        getSingleProductDetails(params.id);
+    },[])
+
+
   return (
-    <div className={SingleStyle.container}>     
+    <div className={SingleStyle.container}>
+        {singleProductDetails.productName?<>     
         <Breadcrumb>
             <Breadcrumb.Item 
                 style={{color:Primary}}
@@ -42,11 +60,14 @@ export default function Category() {
             </Breadcrumb.Item>
             <Breadcrumb.Item
                 style={{color:Primary}}
+                onClick={() => {
+                    router.push(`/products/${singleProductDetails.productCategory}`);
+                }}
             >
-                Category
+                {singleProductDetails.productCategory}
             </Breadcrumb.Item>
             <Breadcrumb.Item active>
-                Mama Gold Rice
+                {singleProductDetails.productName}
             </Breadcrumb.Item>
         </Breadcrumb>
         <Row className={SingleStyle.body}>
@@ -63,12 +84,14 @@ export default function Category() {
                     }}>
                 <SingleCarousel />
                 <div style={{padding:'20px'}}>
-                    <h3 style={{fontWeight:'bolder'}}>Mama's Pride Rice</h3>
+                    <h3 style={{fontWeight:'bolder'}}>{singleProductDetails.productName}</h3>
                     <h6>Brand: Mama Pride</h6>
                     <Rating value={3} />
-                    <h4 style={{fontWeight:'bolder'}}>price: <span>₦20,000</span> </h4>
+                    <h4 style={{fontWeight:'bolder'}}>price: <span>{singleProductDetails.price}</span> </h4>
                     <h6><span style={{textDecoration:'line-through', color:'#75757a'}}>₦30,000</span></h6>
-                    <CustomButton titled="Add to Cart" />
+                    <CustomButton titled="Add to Cart" onClick={() => {
+                        addProductToCart(singleProductDetails);
+                    }} />
                     <div>
                         <h5>SHARE THIS PRODUCT</h5>
                         <div style={{display:'flex', flexDirection:'row', columnGap:'15px'}}>
@@ -90,7 +113,7 @@ export default function Category() {
 
         </Row> 
         <div style={{padding:'20px', marginTop:'30px', background:WarmCream}}>
-            <TabbedNav />
+            <TabbedNav description={singleProductDetails.description} />
         </div>
         <div style={{padding:'20px', marginTop:'30px', background:WarmCream}}>
             <h4>Related Products</h4>
@@ -99,7 +122,7 @@ export default function Category() {
                 <ProductCard />
                 <ProductCard />
             </Row>
-        </div>
+        </div></>:<p>Loading</p>}
     </div>
   );
 }

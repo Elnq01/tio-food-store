@@ -105,7 +105,7 @@ export async function retrieveAProduct(id) {
     return productRetrieved;
 
     }catch(err){
-      console.log("Update Product! ", err)
+      console.log("Retrieved Single Product Err! ", err)
     }
 }
 

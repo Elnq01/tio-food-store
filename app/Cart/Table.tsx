@@ -4,8 +4,16 @@ import Image from 'next/image';
 import CustomButton from '../component/UI/CustomButton';
 import TableButton from './TableButton';
 import SpinnerBtn from './SpinnerBtn';
+import { useStore } from '../store/cart';
 
 export default function BasicTable() {
+
+  // getting slice of the state
+  const cartItems = useStore((state) => state.cart);
+  const removeProductFromCart = useStore((state) => state.removeItemFromCart)
+  console.log("The store: ", cartItems);
+  console.log("Remove Item from the store: ", removeProductFromCart);
+
   return (
     <Table striped hover responsive className='text-center align-middle'>
       <thead>
@@ -19,30 +27,19 @@ export default function BasicTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
+      {cartItems.map((item, index) => {
+        return <tr key={item._id}>
+          <td>{index + 1}</td>
           <td><Image src={ImgSrc} alt='product' height={80} width={80} /></td>
-          <td>Mama Pride Rice</td>
-          <td><SpinnerBtn /></td>
-          <td>₦2,000</td>
-          <td><TableButton titled="Remove Product" /></td>
+          <td>{item.productName}</td>
+          <td><SpinnerBtn id={item._id} quantity={item.quantity} /></td>
+          <td>₦{item.price}</td>
+          <td><TableButton titled="Remove Product" onClick={() => {
+            console.log("No Diddy!")
+            removeProductFromCart(item._id)
+          }} /></td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td><Image src={ImgSrc} alt='product' height={80} width={80} /></td>
-          <td>Mama Pride Rice</td>
-          <td><SpinnerBtn /></td>
-          <td>₦2,000</td>
-          <td><TableButton titled="Remove Product" /></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td><Image src={ImgSrc} alt='product' height={80} width={80} /></td>
-          <td>Mama Pride Rice</td>
-          <td><SpinnerBtn /></td>
-          <td>₦2,000</td>
-          <td><TableButton titled="Remove Product" /></td>
-        </tr>
+      })}
         </tbody>
     </Table>
   );
