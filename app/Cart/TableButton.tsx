@@ -1,5 +1,6 @@
 import { Primary } from "@/public/colors/colos";
 import { Button } from "react-bootstrap";
+import { FaTrash } from "react-icons/fa";
 
 export default function TableButton({titled, onClick}){
     return <Button 
@@ -14,7 +15,7 @@ export default function TableButton({titled, onClick}){
                   background:"rgb(214, 243, 216)",
                   border:'none'
                   }}>
-                  {/* <FaCartP size={20} />  */}
+                  <FaTrash size={20} /> 
                   <p>{titled}</p>
               </Button>
 }

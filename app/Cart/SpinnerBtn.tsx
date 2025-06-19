@@ -1,5 +1,6 @@
 "use client"
 
+import { Primary, Seconadry } from "@/public/colors/colos";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
@@ -18,15 +19,15 @@ export default function SpinnerBtn(){
         display:'flex', flexDirection:'row', 
         columnGap:'10px', justifyContent:'center', alignItems:'center'}}>
     <Button 
-        style={{width:'40px', 
-            height:'40px', borderRadius:'50%', border:'0px'}}
+        style={{background:"#313133", width:'35px', 
+            height:'35px', borderRadius:'50%', border:'0px'}}
         onClick={onDecreasehandler}
         disabled={value == 0}
         >-</Button>
     <span>{value}</span>
     <Button 
-        style={{background:'red', width:'40px', 
-            height:'40px', borderRadius:'50%', border:'0px'}}
+        style={{background:Seconadry, width:'35px', 
+            height:'35px', borderRadius:'50%', border:'0px'}}
         onClick={onIncreasehandler}
         // disabled={value == 0}
         >+</Button>
