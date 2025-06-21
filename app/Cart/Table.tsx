@@ -1,7 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import ImgSrc from "../../public/indomie 2.avif";
 import Image from 'next/image';
-import CustomButton from '../component/UI/CustomButton';
 import TableButton from './TableButton';
 import SpinnerBtn from './SpinnerBtn';
 import { useStore } from '../store/cart';
@@ -27,11 +26,11 @@ export default function BasicTable() {
         </tr>
       </thead>
       <tbody>
-      {cartItems.map((item, index) => {
+      {cartItems.map((item, index:number) => {
         return <tr key={item._id}>
           <td>{index + 1}</td>
           <td><Image src={ImgSrc} alt='product' height={80} width={80} /></td>
-          <td>{item.productName}</td>
+          <td>{item?.productName}</td>
           <td><SpinnerBtn id={item._id} quantity={item.quantity} /></td>
           <td>₦{item.price}</td>
           <td><TableButton titled="Remove Product" onClick={() => {

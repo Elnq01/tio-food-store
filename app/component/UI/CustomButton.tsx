@@ -5,8 +5,15 @@ import { Button, Spinner} from 'react-bootstrap';
 import { Primary, OffWhite } from '@/public/colors/colos';
 import { PiCaretRight } from 'react-icons/pi';
 
+type CustomDataType = {
+  titled?:string,
+  disable?:boolean,
+  color?:string,
+  isLoading?:boolean,
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
 
-export default function CustomButton({titled = "Shop Now", disable, color = Primary, isLoading=false, onClick}:any){
+export default function CustomButton({titled = "Shop Now", disable, color = Primary, isLoading=false, onClick}:CustomDataType){
     return <Button 
     disabled={disable}
     onClick={onClick}

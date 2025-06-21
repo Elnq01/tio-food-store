@@ -3,8 +3,8 @@
 import { Col, Row } from "react-bootstrap";
 import ReachUsStyle from './ReachUs.module.css';
 import NewsLetter from "../UI/NewsLetter";
-import { FaFacebook, FaInstagram, FaMailBulk, FaMapMarker, FaPhone, FaSnapchat, FaTwitter } from "react-icons/fa";
-import { Primary, Seconadry } from "@/public/colors/colos";
+import {FaMailBulk, FaMapMarker, FaPhone} from "react-icons/fa";
+import { Seconadry } from "@/public/colors/colos";
 import FaceBookSrc from "../../../public/facebook.png";
 import TwitterSrc from "../../../public/twitter.png";
 import InstagramSrc from "../../../public/instagram.png";

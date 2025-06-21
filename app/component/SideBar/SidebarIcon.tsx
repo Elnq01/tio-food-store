@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { FaOilCan } from "react-icons/fa";
-import { FaBowlFood, FaBowlRice } from "react-icons/fa6";
 import OilsImag from "../../../public/oil.png";
 import GrainsImag from "../../../public/wheat-sack.png";
 import PastaImag from "../../../public/pasta.png";

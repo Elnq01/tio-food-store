@@ -1,12 +1,12 @@
 "use client"
 
 import Card from 'react-bootstrap/Card';
-import { Button, CardImgOverlay, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import CategoryCardStyle from './CategoryCard.module.css';
 import CustomButton from '../UI/CustomButton';
 import { useRouter } from 'next/navigation';
 
-function CategoryCard({source, admin, category, description}:any) {
+function CategoryCard({source, admin, category, description}:{source:string, admin:boolean, category:string, description:string}) {
   const navigate = useRouter();
 
   return (

@@ -9,7 +9,7 @@ export default function Admin(){
 
     return (<Container fluid>
         <div>
-            <CustomButton titled="Add Product" onClick={()=> {navigate.push("/admin/addProduct")}} />
+            <CustomButton disable={false} isLoading={false} color="" titled="Add Product" onClick={()=> {navigate.push("/admin/addProduct")}} />
         </div>
         <Row>
             <Col md={6}>

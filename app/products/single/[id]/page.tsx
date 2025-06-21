@@ -1,9 +1,7 @@
 "use client"
 
 import SingleStyle from "./single.module.css";
-// import {Primary, Secondary, Accent} from '../../../public/colors/colos'
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
-import Link from "next/link";
+import { Breadcrumb, Col, Row } from "react-bootstrap";
 import { useParams, useRouter } from "next/navigation";
 import SingleCarousel from "./carousel";
 import { Primary, WarmCream } from "@/public/colors/colos";
@@ -31,12 +29,16 @@ export default function SingleProduct() {
     const addProductToCart = useStore((state) => state.addItemToCart)
 
     useEffect(()=> {
-        async function getSingleProductDetails(param){
-            const productDetails = await retrieveAProduct(param);
-            // console.log("The singel product: ", productDetails);
-            setsingleProductDetails(productDetails)
+        try{
+            async function getSingleProductDetails(param:string){
+                const productDetails = await retrieveAProduct(param);
+                console.log("The singel product: ", productDetails);
+                setsingleProductDetails(productDetails)
+            }
+            getSingleProductDetails(params.id);
+        }catch(err){
+            console.log("What is the err: ", err)
         }
-        getSingleProductDetails(params.id);
     },[])
 
 

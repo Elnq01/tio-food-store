@@ -5,14 +5,13 @@ import { Alert, Container, Form,  Row } from "react-bootstrap";
 import CustomButton from "@/app/component/UI/CustomButton";
 import { useRef, useState } from "react";
 import { createProduct } from "@/app/actions/actionServer";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { formControls } from "./formControls";
-// import { updateImgCloudinary } from "@/app/actions/cloudinaryActionServer";
 
 
 export default function AddProduct(){
     // other hooks
-    const formRef = useRef(null);
+    const formRef = useRef<HTMLFormElement>(null);
     const navigate = useRouter();
 
     // the states
@@ -29,9 +28,9 @@ export default function AddProduct(){
     const [formSubmitLoader, setFormSubmitLoader] = useState(false);
 
 
-    function onChangeHandler(e){
-        const {name, value, files} = e.target;
-        let inputValue = (name === "productImages" ? [...files] : value);
+    function onChangeHandler(e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>){
+        const {name, value, files} = e.target  as HTMLInputElement;
+        let inputValue = (name === "productImages" ? [...(files || [])] : value);
 
         setFormState(prevState => ({
             ...prevState,
@@ -40,33 +39,33 @@ export default function AddProduct(){
     }
 
 
-    async function onSubmitHandler(e){
+    async function onSubmitHandler(e: React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
 
         // do the validation of the inputs here
         if(formState.productName == ""){
-            const productName = formRef.current["productName"];
+            const productName = formRef.current?.["productName"];
             productName.setCustomValidity("Empty")
             productName.reportValidity(); 
             return
         } else if(formState.productImages.length == 0){
-            const productImage = formRef.current["productImages"];
+            const productImage = formRef.current?.["productImages"];
             productImage.setCustomValidity("Empty")
             productImage.reportValidity(); 
             return
         } else if(formState.price == ""){
-            const productPrice = formRef.current["price"];
+            const productPrice = formRef.current?.["price"];
             productPrice.setCustomValidity("Empty")
             productPrice.reportValidity(); 
             return
         } else if(formState.productCategory == ""){
-            const productCategory = formRef.current["productCategory"];
+            const productCategory = formRef.current?.["productCategory"];
             // console.log("hjfh: ", productCategory)
             productCategory.setCustomValidity("Empty")
             productCategory.reportValidity();
             return
         } else if(formState.description == ""){
-            const productDescription = formRef.current["description"];
+            const productDescription = formRef.current?.["description"];
             productDescription.setCustomValidity("Empty")
             productDescription.reportValidity(); 
             return
@@ -113,7 +112,7 @@ export default function AddProduct(){
 }
 
 
-async function uploadToCloudinary(file) {
+async function uploadToCloudinary(file:File) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "products"); // from Cloudinary settings
@@ -138,7 +137,11 @@ async function uploadToCloudinary(file) {
 
     }catch(err){
         // console.log("My err: ", typeof err, err.message, err);
-        setCloudinaryErr(err.message);
+        if(err instanceof Error){
+            setCloudinaryErr(err.message);
+        }else{
+            console.log("Error: ", err);
+        }
     }
 }
 

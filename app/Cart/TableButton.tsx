@@ -2,7 +2,7 @@ import { Primary } from "@/public/colors/colos";
 import { Button } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 
-export default function TableButton({titled, onClick}){
+export default function TableButton({titled, onClick}:{titled:string, onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;}){
     return <Button 
                onClick={onClick}
                 style={{

@@ -38,7 +38,7 @@ export default function SummaryCard(){
         <h5 style={{fontWeight:'bolder', marginBottom:'10px', display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
             <span>Total:</span> <span>₦{totalPrice + deliveryPrice}</span>
         </h5>
-        <CustomButton titled="Continue To Checkout" onClick={handlePay} disable={deliveryPrice == 0} />
+        <CustomButton isLoading={false} color="" titled="Continue To Checkout" onClick={handlePay} disable={deliveryPrice == 0} />
 
     </>
 }

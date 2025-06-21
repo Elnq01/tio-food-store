@@ -3,8 +3,8 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import navigationStyle from './navigation.module.css';
-import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
-import {OffWhite, Primary, WarmCream} from '../../../public/colors/colos'
+import { FaShoppingCart } from "react-icons/fa";
+import {OffWhite, Primary } from '../../../public/colors/colos'
 import Navigationform from './navigationForm';
 import { Badge, Col } from 'react-bootstrap';
 import Image from 'next/image';
@@ -51,20 +51,16 @@ function Navigation() {
                         <h6 style={{position:'absolute', 
                             fontSize:'12px',
                             top:'-9px', right:'-7px'}}>
-                          <Badge bg={cartStatus == 0?"secondary":"danger"}>{cartStatus.length}</Badge>
+                          <Badge bg={cartStatus.length == 0?"secondary":"danger"}>{cartStatus.length}</Badge>
                         </h6>
                       <FaShoppingCart size={18} style={{color:Primary}} />
                     </Nav.Link>
                   <Nav.Link
                   style={{
-                      // background:"rgb(214, 243, 216)",
-                      // height:'20px',
-                      // width:'20px',
                       padding:'10px',
                       borderRadius:'50%'
                       }}
                    href="/profile">
-                    {/* <FaUser style={{color:Primary}}  /> */}
                       <Image src={Avatar} height={30} width={30} alt='avatar' />
                   </Nav.Link>
               </Col>

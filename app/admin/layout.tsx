@@ -1,5 +1,5 @@
 
-import Link from 'next/link'
+// import Link from 'next/link'
 import Sidebar from './sideBar/SideBar';
 import { Col, Row } from 'react-bootstrap';
 // import "./globals.css";

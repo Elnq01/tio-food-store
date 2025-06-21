@@ -1,11 +1,11 @@
-import Image from "next/image";
-import { notFound } from "next/navigation";
+// import Image from "next/image";
+// import { notFound } from "next/navigation";
 import CarouselContainer from "./component/carousel/carousel";
 import ProductSection from "./component/productSection/ProductSection";
 import Guarantees from "./component/Guarantees/Guarantees";
 import AboutUs from "./component/AboutUs/AboutUs";
 import ReachUs from "./component/ReachUs/ReachUs";
-import Footer from "./component/footer/footer";
+// import Footer from "./component/footer/footer";
 import { Row } from "react-bootstrap";
 import Advert from "./component/UI/Advert";
 import SiderBar from "./component/SideBar/SideBar";

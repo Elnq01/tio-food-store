@@ -5,8 +5,8 @@ import ProductSectionStyle from "./ProductSection.module.css";
 import ProductCard from "../ProductCard/ProductCard";
 import CustomButton from "../UI/CustomButton";
 import { useRouter } from "next/navigation";
-import Overlay from "../UI/overlay";
-import { Col, Row } from 'react-bootstrap';
+// import Overlay from "../UI/overlay";
+import { Row } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles

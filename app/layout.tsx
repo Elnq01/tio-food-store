@@ -1,5 +1,4 @@
 
-import Link from 'next/link'
 import "./globals.css";
 import localFont from "next/font/local";
 import { Metadata } from 'next';

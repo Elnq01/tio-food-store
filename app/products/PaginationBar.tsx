@@ -3,7 +3,6 @@
 import { Pagination } from 'react-bootstrap';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Primary } from '@/public/colors/colos';
 
 export default function PaginationBar({
   currentPage,

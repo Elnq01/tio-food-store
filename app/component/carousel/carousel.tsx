@@ -41,7 +41,7 @@ export default function CarouselSection() {
           <p>{item.desc}</p>
           <h5 style={{color:Primary}}>{item.category}</h5>
           <p>starting at ${item.price}</p>
-          <CustomButton />
+          <CustomButton disable={false} isLoading={false} onClick={() => {alert("hello world!")}}  />
         </Carousel.Caption>
       </Carousel.Item>
   })}

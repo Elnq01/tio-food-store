@@ -1,9 +1,9 @@
 
 'use server';
 import Shipbubble from 'shipbubble';
-import { TioFoodStoreAddressCode } from './TioFoodStoreAddressCode';
+// import { TioFoodStoreAddressCode } from './TioFoodStoreAddressCode';
 
-Shipbubble.init({ apiKey: process.env.SHIPBUBBLE_API_KEY });
+Shipbubble.init({ apiKey: process.env.SHIPBUBBLE_API_KEY??"" });
 
 // export async function getAddressCodeForTioFoodStore() {
 //     // const addresses = await Shipbubble.address.getAddresses();
@@ -27,7 +27,9 @@ Shipbubble.init({ apiKey: process.env.SHIPBUBBLE_API_KEY });
     
 // }
 
-export async function getPriceRates({state, LGA, address}) {
+
+
+export async function getPriceRates({state, LGA, address}:{state:string, LGA:string, address:string}) {
   try {
     // 1. Get all saved addresses
     const addresses = await Shipbubble.address.getValidatedAddresses({
@@ -36,16 +38,16 @@ export async function getPriceRates({state, LGA, address}) {
     });
 
 
-    const allExistingAddresses = addresses.toJSON();
-    const AddressData = [...allExistingAddresses.data?.results];
+    const allExistingAddresses = addresses?.toJSON?.();
+    const AddressData = [...(allExistingAddresses.data?.results?? [])];
 
     // console.log("What we have: ", AddressData);
     
     // 2. Try to find a matching address
     const existing = AddressData.find((addr) =>
-        addr.address_data.state.toLowerCase() === state.toLowerCase() && 
-        addr.address_data.street.toLowerCase() === address.toLowerCase() &&
-        addr.address_data.city.toLowerCase() === LGA.toLowerCase() 
+        addr.address_data?.state?.toLowerCase() === state.toLowerCase() && 
+        addr.address_data?.formatted_address?.toLowerCase() === address.toLowerCase() &&
+        addr.address_data?.city?.toLowerCase() === LGA.toLowerCase() 
     );
 
 
@@ -76,8 +78,8 @@ export async function getPriceRates({state, LGA, address}) {
 
     // // 5. Fetch delivery rates
     const rates = await Shipbubble.rates.requestShippingRates({
-        senderAddressCode:senderCode,
-        recieverAddressCode:receiverCode,
+        senderAddressCode:Number(senderCode),
+        recieverAddressCode:Number(receiverCode),
         categoryId:2178251,
         packageDimension:{
             height:10,
@@ -105,6 +107,10 @@ export async function getPriceRates({state, LGA, address}) {
 
   } catch (err) {
     console.error('Delivery Error:', err);
-    return { success: false, error: err.message };
+    // if(err instanceof Error){
+    //   return { success: false, error: err.message };
+    // }
+    
+    // return { success: false, error: err };
   }
 }

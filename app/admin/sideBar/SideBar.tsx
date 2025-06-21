@@ -1,7 +1,6 @@
 "use client"
 
 import { OffWhite, Primary } from '@/public/colors/colos';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Col } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';

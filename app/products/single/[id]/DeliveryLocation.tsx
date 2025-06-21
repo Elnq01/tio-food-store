@@ -4,8 +4,7 @@ import { useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import DeliveryLocationFormControl from './DeliveryLocationFormControl';
 import CustomButton from '@/app/component/UI/CustomButton';
-import { getAddressCodeForTioFoodStore, getPriceRates } from '@/app/actions/deliveryActionServer';
-import { Primary } from '@/public/colors/colos';
+import { getPriceRates } from '@/app/actions/deliveryActionServer';
 import { useStore } from '@/app/store/cart';
 
 const formSeed = [
@@ -25,7 +24,7 @@ const formSeed = [
 
 export default function DeliveryLocation() {
 
-  const deliveryFormRef = useRef(null);
+  const deliveryFormRef = useRef<HTMLFormElement>(null);
 
   const [formState, setFormState] = useState({
     state:'',
@@ -39,7 +38,7 @@ export default function DeliveryLocation() {
 
   // const [courierPrice, SetCourierPrice] = useState(0);
 
-  function onChangeHandler(e){
+  function onChangeHandler(e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>){
         const {name, value} = e.target;
 
         setFormState(prevState => ({
@@ -49,22 +48,22 @@ export default function DeliveryLocation() {
   }
 
 
-  async function onSubmitHandler(e){
+  async function onSubmitHandler(e:React.MouseEvent<HTMLButtonElement>){
     e.preventDefault();
 
     // do the validation of the inputs here
     if(formState.state == ""){
-        const state = deliveryFormRef.current["state"];
+        const state = deliveryFormRef.current?.["state"];
         state.setCustomValidity("Empty")
         state.reportValidity(); 
         return
     } else if(formState.LGA == ""){
-        const LGA = deliveryFormRef.current["LGA"];
+        const LGA = deliveryFormRef.current?.["LGA"];
         LGA.setCustomValidity("Empty")
         LGA.reportValidity(); 
         return
     } else if(formState.address == ""){
-        const address = deliveryFormRef.current["address"];
+        const address = deliveryFormRef.current?.["address"];
         address.setCustomValidity("Empty")
         address.reportValidity(); 
         return

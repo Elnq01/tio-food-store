@@ -4,8 +4,23 @@ import mongoose from "mongoose";
 import { connect } from "../db/db";
 import { revalidatePath } from "next/cache";
 
+// typed data
+export interface ProductImage {
+  secure_url: string;
+  public_id: string;
+}
+
+export interface ProductType {
+  _id?: string;
+  productName: string;
+  productImages: ProductImage[];
+  price: number;
+  productCategory: string;
+  description: string;
+}
+
 // Define schema & model
-const productSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema<ProductType>({
   productName: String,
   productImages: [{
     secure_url:{type:String, required:true}, 
@@ -18,11 +33,11 @@ const productSchema = new mongoose.Schema({
 });
 
 
-const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
+const Product = mongoose.models.Product || mongoose.model<ProductType>('Product', productSchema);
 
 
 
-export async function createProduct(formData) { 
+export async function createProduct(formData:object) { 
   console.log("Savi product: ", formData)   
   try{
     await connect();
@@ -35,11 +50,11 @@ export async function createProduct(formData) {
 }
 
 // for admin
-export async function getProductPaginated(page, limit){
+export async function getProductPaginated(page:number, limit:number){
   try{
     await connect();
     const skip = (page - 1) * limit;
-    const ProductItem = await Product.find({}).skip(skip).limit(limit).lean();
+    const ProductItem = await Product.find({}).skip(skip).limit(limit).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
     const total = await Product.countDocuments(); // Get total count for pagination
     const ProductItemModify = ProductItem.map(product => {
       return {...product, _id:product._id.toString()}
@@ -55,7 +70,7 @@ export async function getProductPaginated(page, limit){
 }
 
 
-export async function deleteProduct(id) {
+export async function deleteProduct(id:string) {
     try{      
       await connect();
       // console.log("Delete ID: ", typeof id );
@@ -69,7 +84,7 @@ export async function deleteProduct(id) {
 }
 
 
-export async function updateProduct(id, product) {    
+export async function updateProduct(id:string, product:object) {    
   try{      
       await connect();
       console.log("What is the ID: ", id);
@@ -94,24 +109,31 @@ export async function updateProduct(id, product) {
 
 
 // Retrieve a product
-export async function retrieveAProduct(id) {    
-  try{      
-      await connect();
-      // console.log("Update ID: ", id );
-      const productRetrieved = await Product.findById(id).lean()
-      .then(product => ({...product, _id:product._id.toString()}));
-      console.log("Retrieve a Single Status: ", productRetrieved);   
+export async function retrieveAProduct(id: string) {
+  try {
+    await connect();
+
+    const product = await Product.findById(id).lean<ProductType & { _id: mongoose.Types.ObjectId }>();
+    if (!product) return null;
+
+    const productRetrieved = {
+      ...product,
+      _id: product._id.toString()
+    };
+
+    console.log("Retrieve a Single Status: ", productRetrieved);
 
     return productRetrieved;
 
-    }catch(err){
-      console.log("Retrieved Single Product Err! ", err)
-    }
+  } catch (err) {
+    console.log("Retrieved Single Product Err! ", err);
+  }
 }
 
 
+
 // Home Page Retrieve of Product
-export async function getProduct(params){
+export async function getProduct(params:string){
   try{
     await connect();
 
@@ -119,15 +141,15 @@ export async function getProduct(params){
 
     if(params == "Hot's Product"){
 
-      ProductItem = await Product.find({}).limit(8).lean();
+      ProductItem = await Product.find({}).limit(8).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
 
     } else if(params == "New Product"){
 
-      ProductItem = await Product.find({}).limit(8).lean();
+      ProductItem = await Product.find({}).limit(8).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
 
     } else {
 
-      ProductItem = await Product.find({}).limit(8).lean();
+      ProductItem = await Product.find({}).limit(8).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
 
     }
 
@@ -144,7 +166,7 @@ export async function getProduct(params){
 
 
 // getting paginated product for the regular app
-export async function getProductPaginatedApp(page, limit, params){
+export async function getProductPaginatedApp(page:number, limit:number, params:string){
   console.log("BAbA : ", params);
   try{    
     await connect();
@@ -154,15 +176,15 @@ export async function getProductPaginatedApp(page, limit, params){
 
     if(params == "Hot's Product"){
 
-      ProductItem = await Product.find({}).skip(skip).limit(limit).lean();;
+      ProductItem = await Product.find({}).skip(skip).limit(limit).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();;
 
     } else if(params == "New Product"){
 
-      ProductItem =  await Product.find({}).skip(skip).limit(limit).lean();;
+      ProductItem =  await Product.find({}).skip(skip).limit(limit).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
 
     } else {
 
-      ProductItem = await Product.find({productCategory:params}).skip(skip).limit(limit).lean();
+      ProductItem = await Product.find({productCategory:params}).skip(skip).limit(limit).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
 
     }
 

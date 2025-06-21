@@ -5,7 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import ProductRating from './Rating';
 
-function TabbedNav({description}) {
+function TabbedNav({description}:{description:string}) {
   const [key, setKey] = useState('home');
 
   return (

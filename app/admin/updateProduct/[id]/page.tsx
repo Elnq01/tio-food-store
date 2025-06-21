@@ -11,6 +11,7 @@ import { deleteImgCloudinary } from "@/app/actions/cloudinaryActionServer";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
 import { Primary } from "@/public/colors/colos";
+import { string } from "zod";
 
 
 export default function updateProductComponent(){
@@ -29,24 +30,27 @@ export default function updateProductComponent(){
 
     // get the id of the product to fectch
     // its data
-    const params = useParams();
+    const paramet = useParams();
+    const params = paramet.id;
 
-    async function fetchASingleProduct(params:type) {
+    async function fetchASingleProduct(params:string) {
         try{
             const productData = await retrieveAProduct(params);
             setActivateForm(false);
-            console.log("Update retrieved: ", productData)
-            setFormState(productData);
+            console.log("Update retrieved: ", productData);
+            if(productData){
+                setFormState(productData);
+            }
         }catch(err){
             console.log("Fetch Err: ", err);
         }
     }
 
     useEffect(()=> {
-        fetchASingleProduct(params.id);
+        fetchASingleProduct(params);
 
         console.log("the product images src: ", formState);
-    },[params.id]);
+    },[params]);
 
 
 
@@ -56,12 +60,12 @@ export default function updateProductComponent(){
     const [formSubmitLoader, setFormSubmitLoader] = useState(false);
 
 
-    function onChangeHandler(e){
-        const {name, value, files} = e.target;
+    function onChangeHandler(e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>){
+        const {name, value, files} = e.target  as HTMLInputElement;
         let inputValue;
 
         if(name === "productImages"){
-            const convFilelistToArr = [...files];
+            const convFilelistToArr = [...(files || [])];
             const filesModified = convFilelistToArr.map(file => ({file, secure_url:URL.createObjectURL(file)}))
             inputValue = [...formState.productImages, ...filesModified];
 
@@ -78,35 +82,35 @@ export default function updateProductComponent(){
     }
 
 
-    async function onSubmitHandler(e){
+    async function onSubmitHandler(e:React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
 
         // console.log("The files in the input: ", formState)
 
         // do the validation of the inputs here
         if(formState.productName == ""){
-            const productName = formRef.current["productName"];
+            const productName = formRef.current?["productName"];
             productName.setCustomValidity("Empty")
             productName.reportValidity(); 
             return
         } else if(formState.productImages.length == 0 || formState.productImages.length > 3){
-            const productImage = formRef.current["productImages"];
+            const productImage = formRef.current?["productImages"];
             productImage.setCustomValidity("Empty")
             productImage.reportValidity(); 
             return
         } else if(formState.price == ""){
-            const productPrice = formRef.current["price"];
+            const productPrice = formRef.current?["price"];
             productPrice.setCustomValidity("Empty")
             productPrice.reportValidity(); 
             return
         } else if(formState.productCategory == ""){
-            const productCategory = formRef.current["productCategory"];
+            const productCategory = formRef.current?["productCategory"];
             // console.log("hjfh: ", productCategory)
             productCategory.setCustomValidity("Empty")
             productCategory.reportValidity();
             return
         } else if(formState.description == ""){
-            const productDescription = formRef.current["description"];
+            const productDescription = formRef.current?["description"];
             productDescription.setCustomValidity("Empty")
             productDescription.reportValidity(); 
             return
@@ -138,7 +142,7 @@ export default function updateProductComponent(){
         setFormSubmitLoader(true);
 
         try{
-            await updateProduct(params.id, productData);
+            await updateProduct(params, productData);
             // setFormSubmitLoader(false);
             setFormState({
                 productName: "",
@@ -158,7 +162,7 @@ export default function updateProductComponent(){
 }
 
 
-    async function uploadToCloudinary(file) {
+    async function uploadToCloudinary(file:File) {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "products"); // from Cloudinary settings
@@ -185,14 +189,14 @@ export default function updateProductComponent(){
 
 
         }catch(err){
-            console.log("My err: ", typeof err, err.message, err);
-            setCloudinaryErr(err.message);
+            console.log("My err: ", err);
+            // setCloudinaryErr(err?.message);
         }
 
     }
 
 
-    async function onDeleteImgHandler(id){
+    async function onDeleteImgHandler(id:string){
 
         const oldImagState = [...formState.productImages];
         let newimagState;

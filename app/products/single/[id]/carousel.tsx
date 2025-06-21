@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperClass} from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -31,7 +32,7 @@ const productImgs = [
 ]
 
 export default function SingleCarousel() {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null); 
 
   return (
     <div style={{width:'60%'}}>

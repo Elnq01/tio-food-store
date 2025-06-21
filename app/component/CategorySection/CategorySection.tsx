@@ -42,11 +42,11 @@ export default function CategorySection({title}:any) {
             <CategoryCard source={CategoryImage3.src} /> */}
             {categoryData.map(category => {
               if(category.category == "Grains"){
-                return <CategoryCard key={category.id} {...category} source={CategoryImage3.src} />
+                return <CategoryCard admin={false} key={category.id} {...category} source={CategoryImage3.src} />
               } else if(category.category == "Cooking Oils"){
-                return <CategoryCard key={category.id} {...category} source={CategoryImage2.src} />
+                return <CategoryCard admin={false} key={category.id} {...category} source={CategoryImage2.src} />
               }else{
-                return <CategoryCard key={category.id} {...category} source={CategoryImage1.src} />
+                return <CategoryCard admin={false} key={category.id} {...category} source={CategoryImage1.src} />
               }
               })}
         </Row> 

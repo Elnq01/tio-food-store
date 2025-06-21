@@ -6,11 +6,14 @@ import {getProductPaginated } from '@/app/actions/actionServer';
 
 
 
-export default async function Products({searchParams}) {
+export default async function Products({searchParams}: {
+  searchParams: { page?: string };
+}) {
 
   const page = parseInt(searchParams.page || '1');
   const limit = 6;
-  const { products, total, error } = await getProductPaginated(page, limit);
+  // const { products = [], total = 0, error } = await getProductPaginated(page, limit);
+  const { products = [], total = 0 } = (await getProductPaginated(page, limit)) || {};
   const totalPages = Math.ceil(total / limit);
 
   console.log("The products: ", products)

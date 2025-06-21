@@ -1,72 +1,72 @@
-import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-export const useStore = create()(
-    persist(
-        (set) => ({
-            cart: [],
-            deliveryPrice:0,
+type CartItem = {
+  _id: string;
+  ame: string;
+  price: number;
+  quantity: number;
+};
 
-        addItemToCart: (item) => set((state) => {
-            const existing = state.cart.find((i) => i._id === item._id);
-            if (existing) {
-                alert('Item already in cart');
-                return state; // return current state unchanged
-            }
-            return {cart:[...state.cart, {...item, quantity:1}]}
+type TioStore = {
+  cart: CartItem[];
+  deliveryPrice: number;
+  addItemToCart: (item: CartItem) => void;
+  removeItemFromCart: (id: string) => void;
+  increaseItemQuantity: (id: string) => void;
+  decreaseItemQuantity: (id: string) => void;
+  clearCart: () => void;
+  addDeliveryPrice: (price: number) => void;
+  clearDeliveryPrice: () => void;
+};
+
+export const useStore = create<TioStore>()(
+  persist(
+    (set) => ({
+      cart: [],
+      deliveryPrice: 0,
+
+      addItemToCart: (item) =>
+        set((state) => {
+          const existing = state.cart.find((i) => i._id === item._id);
+          if (existing) {
+            alert('Item already in cart');
+            return state;
+          }
+          return { cart: [...state.cart, { ...item, quantity: 1 }] };
         }),
 
-        removeItemFromCart: (id) => set((state) => {
-            // console.log("Am I here! ", id)
-            const oldCartState = [...state.cart];
-            console.log("Am I here! 1", oldCartState)
-
-            const newCartState = oldCartState.filter(item => item._id !== id);
-            
-            console.log("Am I here! ", newCartState)
-            return {cart:newCartState};
+      removeItemFromCart: (id) =>
+        set((state) => {
+          const newCartState = state.cart.filter((item) => item._id !== id);
+          return { cart: newCartState };
         }),
 
-        increaseItemQuantity:(id) => set((state) => {
-            const oldCart = [...state.cart];
-            const newCart = oldCart.map(item => {
-                if(item._id == id){
-                    return {...item, quantity: item.quantity + 1}
-                }
-
-                return item;
-            })
-            return {cart:newCart}
+      increaseItemQuantity: (id) =>
+        set((state) => {
+          const newCart = state.cart.map((item) =>
+            item._id === id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+          return { cart: newCart };
         }),
 
-        decreaseItemQuantity:(id) => set((state) => {
-            const oldCart = [...state.cart];
-            const newCart = oldCart.map(item => {
-                if(item._id == id){
-                    return {...item, quantity: item.quantity - 1}
-                }
-
-                return item;
-            })
-            return {cart:newCart}
-
+      decreaseItemQuantity: (id) =>
+        set((state) => {
+          const newCart = state.cart.map((item) =>
+            item._id === id ? { ...item, quantity: item.quantity - 1 } : item
+          );
+          return { cart: newCart };
         }),
 
-        clearCart:() => set(() => {
-            return {cart:[]}
-        }),
+      clearCart: () => set(() => ({ cart: [] })),
 
-        addDeliveryPrice:(price) => set(() => {
-            return {deliveryPrice:price}
-        }),
+      addDeliveryPrice: (price) => set(() => ({ deliveryPrice: price })),
 
-        clearDeliveryPrice:() => set(() => {
-            return {deliveryPrice:0}
-        })
+      clearDeliveryPrice: () => set(() => ({ deliveryPrice: 0 })),
     }),
     {
-        name: 'food-storage', // name of the item in the storage (must be unique)
+      name: 'food-storage',
       storage: createJSONStorage(() => localStorage),
     }
-)
-)
+  )
+);

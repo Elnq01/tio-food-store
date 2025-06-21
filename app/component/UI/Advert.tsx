@@ -1,4 +1,4 @@
-import { OffWhite, Primary, Seconadry } from "@/public/colors/colos";
+import { OffWhite, Seconadry } from "@/public/colors/colos";
 import { Col } from "react-bootstrap";
 
 export default function Advert(){

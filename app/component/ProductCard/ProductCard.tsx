@@ -5,18 +5,27 @@ import ProductImage from '../../../public/king-500x500.jpg';
 import { Button, Col } from 'react-bootstrap';
 import ProductCardStyle from './ProductCard.module.css';
 import { FaCartPlus } from 'react-icons/fa';
-import { Primary, WarmCream } from '@/public/colors/colos';
+import { Primary} from '@/public/colors/colos';
 import CustomButton from '../UI/CustomButton';
 import { deleteProduct } from '@/app/actions/actionServer';
 import { useRouter } from 'next/navigation';
 
-function ProductCard({admin, price, productName, _id, style, onClick}:any) {
+type ProductCardType = {
+  admin:boolean; 
+  price:string; 
+  productName:string; 
+  _id:string; 
+  style?: React.CSSProperties
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
+
+function ProductCard({admin, price, productName, _id, style, onClick}:ProductCardType) {
 
   // navigate to the update form
   const navigate = useRouter();
 
   // delete a product
-  async function onDeleteProductHandler(id){
+  async function onDeleteProductHandler(id:string){
     await deleteProduct(id)
   }
 

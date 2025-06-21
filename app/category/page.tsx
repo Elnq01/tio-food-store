@@ -1,15 +1,12 @@
 "use client"
 
 import CategorySectionStyle from "./category.module.css";
-// import {Primary, Secondary, Accent} from '../../../public/colors/colos'
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Row } from "react-bootstrap";
 import CategoryCard from "@/app/component/CategoryCard/CategoryCard";
 import CategoryImage1 from '../../public/indomie.webp';
 import CategoryImage2 from '../../public/indomie 1.avif';
 import CategoryImage3 from '../../public/indomie 2.avif';
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import CustomButton from "../UI/CustomButton";
 
 const categoryData = [
   {
@@ -70,11 +67,11 @@ export default function Category() {
         <Row className={CategorySectionStyle.body}>
             {categoryData.map(category => {
                 if(category.category == "Grains"){
-                    return <CategoryCard key={category.id} {...category} source={CategoryImage3.src} />
+                    return <CategoryCard admin={false} key={category.id} {...category} source={CategoryImage3.src} />
                 } else if(category.category == "Cooking Oils"){
-                    return <CategoryCard key={category.id} {...category} source={CategoryImage2.src} />
+                    return <CategoryCard admin={false} key={category.id} {...category} source={CategoryImage2.src} />
                 }else{
-                    return <CategoryCard key={category.id} {...category} source={CategoryImage1.src} />
+                    return <CategoryCard admin={false} key={category.id} {...category} source={CategoryImage1.src} />
                 }
             })}
         </Row> 

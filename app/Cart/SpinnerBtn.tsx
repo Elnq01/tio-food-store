@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useStore } from "../store/cart";
 
-export default function SpinnerBtn({id, quantity}){
+export default function SpinnerBtn({id, quantity}:{id:string, quantity:number}){
 
     // getting slice of the state
     const increasProductQty = useStore((state) => state.increaseItemQuantity);

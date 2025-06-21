@@ -5,8 +5,6 @@ import BasicTable from "./Table";
 import CartStyle from "./Cart.module.css";
 import DeliveryLocation from "../products/single/[id]/DeliveryLocation";
 import { WarmCream } from "@/public/colors/colos";
-import CustomButton from "../component/UI/CustomButton";
-import { initializePaystackPayment } from "../actions/paystackActionServer";
 import SummaryCard from "./SummaryCard";
 
 export default function Cart(){

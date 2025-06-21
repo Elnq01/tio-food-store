@@ -1,7 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import { FaBus, FaPhone, FaTag, FaCreditCard } from "react-icons/fa";
 import GuranteesStyle from './Gurantees.module.css';
-import { Primary } from "@/public/colors/colos";
 
 
 export default function Guarantees(){
