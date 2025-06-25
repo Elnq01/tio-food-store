@@ -1,11 +1,17 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb://localhost:27017/products'; // change this
+const uri =
+  process.env.NODE_ENV === 'development'
+    ? process.env.MONGODB_LOCAL_URI
+    : process.env.MONGODB_URI;
 
-// Simple connection function
-export async function connect() {
-  if (mongoose.connection.readyState === 1) return; // already connected
-  await mongoose.connect(MONGODB_URI);
-  // await mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-}
-
+export const connect = async () => {
+  try {
+    await mongoose.connect(uri as string, {
+      dbName: 'products', // optional if already in URI
+    });
+    console.log(' Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+  }
+};
