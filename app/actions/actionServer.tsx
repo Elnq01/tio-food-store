@@ -45,7 +45,7 @@ export async function createProduct(formData:object) {
     await product.save();
     console.log('Product saved:', product);
   }catch(err){
-    console.log("Creation Product!");
+    console.log("Creation Product!", err);
   }
 }
 
@@ -74,7 +74,8 @@ export async function deleteProduct(id:string) {
     try{      
       await connect();
       // console.log("Delete ID: ", typeof id );
-      const deleteStatus = await Product.findByIdAndDelete(id);
+      await Product.findByIdAndDelete(id);
+      // const deleteStatus = await Product.findByIdAndDelete(id);
       // console.log("Delete Status: ", deleteStatus);
       revalidatePath("/admin/products");
 

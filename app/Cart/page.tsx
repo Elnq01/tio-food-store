@@ -22,7 +22,7 @@ export default function Cart(){
                 <h4 style={{fontWeight:'bolder', marginBottom:'30px'}}>Delivery Settings: </h4>
                 <h6 style={{marginBottom:'20px'}}>Choose a delivery location</h6>
                 <DeliveryLocation />
-                <p style={{fontSize:'12px', color:'red'}}>For Accurate price rates, The format as to be "1 Example Street, Yaba/Alagomeji/Whatever"</p>
+                <p style={{fontSize:'12px', color:'red'}}>For Accurate price rates, The format as to be &quot;1 Example Street, Yaba/Alagomeji/Whatever&quot;</p>
                 <p style={{fontSize:'12px', color:'red'}}>No special characters</p>
                 <p style={{marginTop:'20px', color:'#75757a'}}>Vary based on your location</p>
             </div>

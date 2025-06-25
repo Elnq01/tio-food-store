@@ -13,7 +13,7 @@ import Image from "next/image";
 import { Primary } from "@/public/colors/colos";
 
 
-export default function updateProductComponent(){
+export default function UpdateProductComponent(){
     const formRef = useRef<HTMLFormElement>(null);   
     const navigate = useRouter(); 
     
@@ -48,15 +48,15 @@ export default function updateProductComponent(){
     useEffect(()=> {
         fetchASingleProduct(params);
 
-        console.log("the product images src: ", formState);
+        // console.log("the product images src: ", formState);
     },[params]);
 
 
 
-    const [cloudinaryErr, setCloudinaryErr] = useState("");
+    // const [cloudinaryErr, setCloudinaryErr] = useState("");
     const [cloudinaryLoader, setCloudinaryLoader] = useState(false);
     const [cloudinarySuccess, setCloudinarySuccess] = useState(false);
-    const [formSubmitLoader, setFormSubmitLoader] = useState(false);
+    // const [formSubmitLoader, setFormSubmitLoader] = useState(false);
 
 
     function onChangeHandler(e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>){
@@ -120,7 +120,7 @@ export default function updateProductComponent(){
         // Upload images to Cloudinary
         const uploadedImageUrls = [];
         
-        for (let file of formState.productImages) {
+        for (const file of formState.productImages) {
             if("public_id" in file){
                 uploadedImageUrls.push(file);
                 // console.log("The file to be uploaded 1: ", file);
@@ -138,7 +138,7 @@ export default function updateProductComponent(){
         };
                 
         // // submitting the form
-        setFormSubmitLoader(true);
+        // setFormSubmitLoader(true);
 
         try{
             await updateProduct(params, productData);
@@ -234,7 +234,7 @@ export default function updateProductComponent(){
             <Row>
                 <Form ref={formRef}>   
                     <h3>Update Form</h3> 
-                    {cloudinaryErr?<Alert variant="danger">{cloudinaryErr}</Alert>:null}
+                    {/* {cloudinaryErr?<Alert variant="danger">{cloudinaryErr}</Alert>:null} */}
                     {formControls.map(formcontrol =>{
                         return <FormControlElement 
                         value={formcontrol.name === "productImages" ? undefined : formState[formcontrol.name]}

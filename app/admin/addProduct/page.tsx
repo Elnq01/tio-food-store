@@ -30,7 +30,7 @@ export default function AddProduct(){
 
     function onChangeHandler(e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>){
         const {name, value, files} = e.target  as HTMLInputElement;
-        let inputValue = (name === "productImages" ? [...(files || [])] : value);
+        const inputValue = (name === "productImages" ? [...(files || [])] : value);
 
         setFormState(prevState => ({
             ...prevState,
@@ -73,7 +73,7 @@ export default function AddProduct(){
 
         // Upload images to Cloudinary
         const uploadedImageUrls = [];
-            for (let file of formState.productImages) {
+            for (const file of formState.productImages) {
                 const url = await uploadToCloudinary(file);
                 uploadedImageUrls.push(url);
         }

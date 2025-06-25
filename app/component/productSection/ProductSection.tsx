@@ -17,7 +17,7 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Autoplay, Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
-import { getProduct, ProductType } from "@/app/actions/actionServer";
+import { getProduct} from "@/app/actions/actionServer";
 import { Suspense, useEffect, useState } from "react";
 
 type PartialProduct = {
@@ -38,7 +38,7 @@ export default function CardCarousel({title}:{title:string}) {
     }
 
     fetchProduct();
-  }, [])
+  }, [title])
 
 
   return (<Suspense fallback={<p>Loading...</p>}>

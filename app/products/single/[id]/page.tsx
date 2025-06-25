@@ -15,7 +15,7 @@ import Rating from "./Rating";
 import DeliveryLocation from "./DeliveryLocation";
 import ProductCard from "@/app/component/ProductCard/ProductCard";
 import { useEffect, useState } from "react";
-import { ProductType, retrieveAProduct } from "@/app/actions/actionServer";
+import { retrieveAProduct } from "@/app/actions/actionServer";
 import { CartItem, useStore } from "@/app/store/cart";
 
 

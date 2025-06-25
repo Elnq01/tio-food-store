@@ -58,7 +58,7 @@ export async function handleSuccessfulPayment(reference: string) {
     html: `
       <h2>Thanks for your purchase!</h2>
       <p>Amount Paid: ₦${amount}</p>
-      <ul>${items.map((i: any) => `<li>${i.name} x ${i.qty}</li>`).join('')}</ul>
+      <ul>${items.map((i:{name:string, qty:string}) => `<li>${i.name} x ${i.qty}</li>`).join('')}</ul>
     `,
   });
 
@@ -70,7 +70,7 @@ export async function handleSuccessfulPayment(reference: string) {
     html: `
       <h3>New order from ${email}</h3>
       <p>Total: ₦${amount}</p>
-      <ul>${items.map((i: any) => `<li>${i.name} x ${i.qty}</li>`).join('')}</ul>
+      <ul>${items.map((i:{name:string, qty:string}) => `<li>${i.name} x ${i.qty}</li>`).join('')}</ul>
     `,
   });
 }
