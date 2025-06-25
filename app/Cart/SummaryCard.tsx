@@ -9,7 +9,7 @@ export default function SummaryCard(){
     // getting slice of the state
     const deliveryPrice = useStore((state) => state.deliveryPrice);
     const cartStore = useStore((state) => state.cart);
-    const totalPrice = cartStore.reduce((acc, item) => (acc + item.price * item.quantity),0);
+    const totalPrice = cartStore.reduce((acc, item) => (acc + Number(item.price) * item.quantity),0);
         
     const handlePay = async () => {
         const result = await initializePaystackPayment({email:"example@gmail.com", amount:totalPrice + deliveryPrice});
