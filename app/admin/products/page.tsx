@@ -5,14 +5,16 @@ import ProductInput from './ProductInput';
 import {getProductPaginated } from '@/app/actions/actionServer';
 
 
+ interface MyPageProps {
+      searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  }
+
 
 export default async function Products({
   searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-  
-}) {
-  const page = parseInt((searchParams?.page as string) || '1');
+}: MyPageProps) {
+  const searchParamWait = await searchParams;
+  const page = parseInt((searchParamWait?.page as string) || '1');
   const limit = 6;   
   // const { products = [], total = 0, error } = await getProductPaginated(page, limit);
   const { products, total = 0 } = (await getProductPaginated(page, limit)) || {};
