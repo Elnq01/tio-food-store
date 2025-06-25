@@ -6,9 +6,7 @@ import {getProductPaginated } from '@/app/actions/actionServer';
 
 
 
-export default async function Products({searchParams}: {
-  searchParams: { page?: string };
-}) {
+export default async function Products({searchParams}: {searchParams: { page: string }}) {
 
   const page = parseInt(searchParams.page || '1');
   const limit = 6;
