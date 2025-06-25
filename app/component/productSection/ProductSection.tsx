@@ -17,21 +17,24 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Autoplay, Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
-import { getProduct } from "@/app/actions/actionServer";
+import { getProduct, ProductType } from "@/app/actions/actionServer";
 import { Suspense, useEffect, useState } from "react";
 
+type PartialProduct = {
+  _id: string;
+  // add any other fields getProduct() returns
+};
 
-
-export default function CardCarousel({title}:any) {
+export default function CardCarousel({title}:{title:string}) {
   const navigate = useRouter();
 
-  const [productFetched, setProductFetched] = useState([])
+  const [productFetched, setProductFetched] = useState<PartialProduct[]>([])
 
   useEffect(()=>{
     async function fetchProduct(){
       const fetchedProduct = await getProduct(title) ;
       console.log("what are u returning: ", fetchedProduct)
-      setProductFetched(fetchedProduct);
+      setProductFetched(fetchedProduct ?? []);
     }
 
     fetchProduct();
@@ -84,6 +87,7 @@ export default function CardCarousel({title}:any) {
       >
       {productFetched.map(item => <SwiperSlide key={item._id}>
               <ProductCard {...item}
+                admin={false} price="2000" productName="Golden Penny"
                 style={{width:'100%'}}
                 onClick={() => {navigate.push(`/products/single/${item._id}`)}} 
               />

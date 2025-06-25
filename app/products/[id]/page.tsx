@@ -4,30 +4,37 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import PaginationBar from '../PaginationBar';
 import ProductCard from '@/app/component/ProductCard/ProductCard';
 import { Breadcrumb, Col } from 'react-bootstrap';
-import Link from 'next/link';
-import { getProductPaginatedApp } from '../../actions/actionServer';
+import { getProductPaginatedApp, ProductType } from '../../actions/actionServer';
 import { useEffect, useState } from 'react';
 
 
+type PartialProduct = {
+  _id: string;
+  // add any other fields getProduct() returns
+};
 
 export default function Products() {
   const navigate = useRouter();
   const searchParams = useSearchParams();
   const paramsId = useParams();
-  const params = decodeURIComponent(paramsId.id)
-  const [products, setProducts] = useState([]);
+  const id = paramsId.id as string;
+  const params = decodeURIComponent(id)
+  const [products, setProducts] = useState<PartialProduct[]>([]);
   const [totalPages, setTotalPages] = useState(0)
 
-  const page = parseInt(searchParams.page || '1');
+  const page = parseInt(searchParams.get("page") ?? '1');
   const limit = 6;
   // let totalPages;
 
   useEffect(() => {
       async function getTheProducts(){
-      const { products, total, error } = await getProductPaginatedApp(page, limit, params);
-      setProducts(products);
-      const totalPages = Math.ceil(total / limit);
-      setTotalPages(totalPages);
+      const productDetails = await getProductPaginatedApp(page, limit, params);
+      // const { products, total, error } = await getProductPaginatedApp(page, limit, params);
+      if(productDetails){
+        setProducts(productDetails.products);
+        const totalPages = Math.ceil(productDetails.total / limit);
+        setTotalPages(totalPages);
+      }
   }
 
   getTheProducts();
@@ -61,8 +68,8 @@ export default function Products() {
       <h2>{params}</h2>
       <ul style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr'}}> 
          {products.map((product) => (
-            <Col md={4} lg={4} key={product.id} style={{width:'100%'}}>
-                <ProductCard  admin={false}/>
+            <Col md={4} lg={4} key={product._id} style={{width:'100%'}}>
+                <ProductCard price="2000" productName="Mama Gold" _id="1" onClick={()=> alert("Hello World")}  admin={false}/>
             </Col>
         ))}
       </ul>

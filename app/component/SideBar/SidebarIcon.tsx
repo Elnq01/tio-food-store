@@ -4,7 +4,7 @@ import GrainsImag from "../../../public/wheat-sack.png";
 import PastaImag from "../../../public/pasta.png";
 
 
-export default function SideBarIcons({style, type}:any){
+export default function SideBarIcons({type}:{type:string}){
     switch(type){
         case "Grains":
             // return <FaBowlRice style={{...style}} />;

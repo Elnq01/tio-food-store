@@ -127,7 +127,7 @@ async function uploadToCloudinary(file:File) {
         const data = await response.json()
         setCloudinaryLoader(false);
         setCloudinarySuccess(true);
-        console.log("CCloudinary upload: ", data)
+        console.log("Cloudinary upload: ", data)
 
         return {
             secure_url:data.secure_url,

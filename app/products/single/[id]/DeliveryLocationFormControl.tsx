@@ -1,6 +1,16 @@
 import { Form } from "react-bootstrap";
 
-export default function DeliveryLocationFormControl({name, value, onChange}){
+type DeliveryCustomType = {
+    name:string,
+    value:string | [],
+    onChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => void;
+}
+
+export default function DeliveryLocationFormControl({name, value, onChange}:DeliveryCustomType){
     switch(name){
         case "state":
             return <Form.Select 

@@ -6,20 +6,19 @@ import CustomButton from "@/app/component/UI/CustomButton";
 import { useEffect, useRef, useState } from "react";
 import { retrieveAProduct, updateProduct } from "@/app/actions/actionServer";
 import { useParams, useRouter } from "next/navigation";
-import { formControls } from "./formControls";
+import { formControls, FormStateShape } from "./formControls";
 import { deleteImgCloudinary } from "@/app/actions/cloudinaryActionServer";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
 import { Primary } from "@/public/colors/colos";
-import { string } from "zod";
 
 
 export default function updateProductComponent(){
-    const formRef = useRef(null);   
+    const formRef = useRef<HTMLFormElement>(null);   
     const navigate = useRouter(); 
     
     // form state
-    const [formState, setFormState] = useState({
+    const [formState, setFormState] = useState<FormStateShape>({
         productName: "",
         productImages: [],
         price: "",
@@ -31,7 +30,7 @@ export default function updateProductComponent(){
     // get the id of the product to fectch
     // its data
     const paramet = useParams();
-    const params = paramet.id;
+    const params = paramet.id as string;
 
     async function fetchASingleProduct(params:string) {
         try{
@@ -89,28 +88,28 @@ export default function updateProductComponent(){
 
         // do the validation of the inputs here
         if(formState.productName == ""){
-            const productName = formRef.current?["productName"];
+            const productName = formRef.current?.["productName"];
             productName.setCustomValidity("Empty")
             productName.reportValidity(); 
             return
         } else if(formState.productImages.length == 0 || formState.productImages.length > 3){
-            const productImage = formRef.current?["productImages"];
+            const productImage = formRef.current?.["productImages"];
             productImage.setCustomValidity("Empty")
             productImage.reportValidity(); 
             return
         } else if(formState.price == ""){
-            const productPrice = formRef.current?["price"];
+            const productPrice = formRef.current?.["price"];
             productPrice.setCustomValidity("Empty")
             productPrice.reportValidity(); 
             return
         } else if(formState.productCategory == ""){
-            const productCategory = formRef.current?["productCategory"];
+            const productCategory = formRef.current?.["productCategory"];
             // console.log("hjfh: ", productCategory)
             productCategory.setCustomValidity("Empty")
             productCategory.reportValidity();
             return
         } else if(formState.description == ""){
-            const productDescription = formRef.current?["description"];
+            const productDescription = formRef.current?.["description"];
             productDescription.setCustomValidity("Empty")
             productDescription.reportValidity(); 
             return
@@ -122,7 +121,7 @@ export default function updateProductComponent(){
         const uploadedImageUrls = [];
         
         for (let file of formState.productImages) {
-            if(file.public_id){
+            if("public_id" in file){
                 uploadedImageUrls.push(file);
                 // console.log("The file to be uploaded 1: ", file);
             }else{
@@ -203,7 +202,15 @@ export default function updateProductComponent(){
 
         if(!id.includes("http")){
             await deleteImgCloudinary(id);
-            newimagState = oldImagState.filter(img => img.public_id != id);
+            newimagState = oldImagState.filter(img => {
+                  if ("public_id" in img) {
+                        return img.public_id !== id;
+                    } else {
+                        return img.secure_url !== id;
+                    }
+                }
+                // img?.public_id != id);
+            )
         }else{
             console.log("inside the delete block the id: ", id);
             newimagState = oldImagState.filter(img => img.secure_url != id);
@@ -212,6 +219,7 @@ export default function updateProductComponent(){
             
         const newState = {...formState, productImages:newimagState}
         setFormState(newState);
+
 
     }
 
@@ -229,12 +237,12 @@ export default function updateProductComponent(){
                     {cloudinaryErr?<Alert variant="danger">{cloudinaryErr}</Alert>:null}
                     {formControls.map(formcontrol =>{
                         return <FormControlElement 
-                        value={formState[formcontrol.name]}
+                        value={formcontrol.name === "productImages" ? undefined : formState[formcontrol.name]}
                         disabled={activateForm}
                         isLoading={cloudinaryLoader}
                         success={cloudinarySuccess}
                         // productImages={formState.productImages}
-                        isUpdate={true}
+                        // isUpdate={true}
                         onChange={onChangeHandler}
                         {...formcontrol} 
                         key={formcontrol.id} />
@@ -245,7 +253,7 @@ export default function updateProductComponent(){
                             <h4>Preview image {index+1}</h4>
                             <IoClose 
                                 size={24}
-                                onClick={() => {onDeleteImgHandler(image.public_id?image.public_id:image.secure_url)}}
+                                onClick={() => {onDeleteImgHandler("public_id" in image?image.public_id:image.secure_url)}}
                                 style={{
                                     cursor:'pointer', 
                                     position:'absolute', 
@@ -255,7 +263,7 @@ export default function updateProductComponent(){
                                     borderRadius:'50%',
                                     background:Primary
                                     }} />
-                            <Image alt="preview" src={image.secure_url?image.secure_url:null} width={200} height={200}/>
+                            <Image alt="preview" src={image.secure_url?image.secure_url:""} width={200} height={200}/>
                         </div>))}
                     </div>
                     <CustomButton titled="submit" 

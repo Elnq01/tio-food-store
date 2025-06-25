@@ -1,7 +1,6 @@
 "use client"
 
-import { Primary, Seconadry } from "@/public/colors/colos";
-import { useState } from "react";
+import { Seconadry } from "@/public/colors/colos";
 import { Button } from "react-bootstrap";
 import { useStore } from "../store/cart";
 

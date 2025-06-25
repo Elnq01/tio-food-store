@@ -15,15 +15,15 @@ import Rating from "./Rating";
 import DeliveryLocation from "./DeliveryLocation";
 import ProductCard from "@/app/component/ProductCard/ProductCard";
 import { useEffect, useState } from "react";
-import { retrieveAProduct } from "@/app/actions/actionServer";
-import { useStore } from "@/app/store/cart";
+import { ProductType, retrieveAProduct } from "@/app/actions/actionServer";
+import { CartItem, useStore } from "@/app/store/cart";
 
 
 
 export default function SingleProduct() {
     const router = useRouter();
     const params = useParams();
-    const [singleProductDetails, setsingleProductDetails] = useState({});
+    const [singleProductDetails, setsingleProductDetails] = useState<CartItem | null>(null);
 
     // getting the slice of the state
     const addProductToCart = useStore((state) => state.addItemToCart)
@@ -32,10 +32,17 @@ export default function SingleProduct() {
         try{
             async function getSingleProductDetails(param:string){
                 const productDetails = await retrieveAProduct(param);
-                console.log("The singel product: ", productDetails);
-                setsingleProductDetails(productDetails)
+                // // console.log("The singel product: ", productDetails);
+                // const modifiedProductDetails = {...productDetails, quantity:0}
+                if(productDetails){
+                    const modifiedProductDetails = { ...productDetails, quantity: 0 };
+                    setsingleProductDetails(modifiedProductDetails)
+                    // setsingleProductDetails(productDetails)
+                }
             }
-            getSingleProductDetails(params.id);
+            if(params.id === "string"){
+                getSingleProductDetails(params?.id);
+            }
         }catch(err){
             console.log("What is the err: ", err)
         }
@@ -44,7 +51,7 @@ export default function SingleProduct() {
 
   return (
     <div className={SingleStyle.container}>
-        {singleProductDetails.productName?<>     
+        {singleProductDetails?.productName?<>     
         <Breadcrumb>
             <Breadcrumb.Item 
                 style={{color:Primary}}
@@ -63,7 +70,7 @@ export default function SingleProduct() {
             <Breadcrumb.Item
                 style={{color:Primary}}
                 onClick={() => {
-                    router.push(`/products/${singleProductDetails.productCategory}`);
+                    router.push(`/products/${singleProductDetails?.productCategory}`);
                 }}
             >
                 {singleProductDetails.productCategory}
@@ -120,9 +127,9 @@ export default function SingleProduct() {
         <div style={{padding:'20px', marginTop:'30px', background:WarmCream}}>
             <h4>Related Products</h4>
             <Row>
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                <ProductCard admin={false} price="100" productName="King's Oil" _id="1" onClick={()=>alert("Hello World!")} />
+                <ProductCard admin={false} price="100" productName="King's Oil" _id="1" onClick={()=>alert("Hello World!")} />
+                <ProductCard admin={false} price="100" productName="King's Oil" _id="1" onClick={()=>alert("Hello World!")} />
             </Row>
         </div></>:<p>Loading</p>}
     </div>

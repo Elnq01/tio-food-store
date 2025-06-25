@@ -6,14 +6,14 @@ import Tabs from 'react-bootstrap/Tabs';
 import ProductRating from './Rating';
 
 function TabbedNav({description}:{description:string}) {
-  const [key, setKey] = useState('home');
+  const [key, setKey] = useState<string>('home');
 
   return (
     <Tabs
         variant='underline'
       id="controlled-tab-example"
       activeKey={key}
-      onSelect={(k) => setKey(k)}
+      onSelect={(k) => {if (k !== null) setKey(k)}}
       className="mb-3"
     >
       <Tab eventKey="home" title="Overview" style={{minHeight:'300px'}} >

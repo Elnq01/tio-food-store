@@ -7,7 +7,18 @@ import CustomButton from '@/app/component/UI/CustomButton';
 import { getPriceRates } from '@/app/actions/deliveryActionServer';
 import { useStore } from '@/app/store/cart';
 
-const formSeed = [
+type FormStateShape = {
+  state:string,
+  LGA:string,
+  address:string
+}
+
+
+type FormFieldKey = keyof FormStateShape;
+
+type FormControlConfig = { id: number; name:FormFieldKey }
+
+const formSeed:FormControlConfig[] = [
   {
     id:0,
     name:"state"
@@ -73,7 +84,9 @@ export default function DeliveryLocation() {
     try{
       const couriers = await getPriceRates(formState);
       // SetCourierPrice(couriers)
-      setDeliveryPrice(couriers);
+      if(couriers){
+        setDeliveryPrice(couriers);
+      }
       // await getAddressCodeForTioFoodStore();
     }catch(err){
       console.log("Error: ", err);

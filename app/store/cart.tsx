@@ -1,10 +1,9 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { ProductType } from '../actions/actionServer';
 
-type CartItem = {
-  _id: string;
-  ame: string;
-  price: number;
+
+export type CartItem = ProductType & {
   quantity: number;
 };
 

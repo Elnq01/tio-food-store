@@ -1,4 +1,31 @@
-export const formControls = [
+type productImagesType = {
+  public_id: string;
+  secure_url: string;
+};
+
+type rawProductImagesType = {
+    file:File,
+    secure_url:string
+}
+
+export type FormStateShape = {
+  productName: string;
+  productImages: (rawProductImagesType | productImagesType)[];
+  price: string;
+  productCategory: string;
+  description: string;
+};
+
+type FormFieldKey = keyof FormStateShape;
+
+type FormControlConfig = {
+  id: number;
+  label: string;
+  name: FormFieldKey;
+  placeholder?: string;
+};
+
+export const formControls: FormControlConfig[] = [
     {
         id:0,
         label:"Product Name",

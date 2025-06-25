@@ -11,10 +11,10 @@ export interface ProductImage {
 }
 
 export interface ProductType {
-  _id?: string;
+  _id: string;
   productName: string;
   productImages: ProductImage[];
-  price: number;
+  price: string;
   productCategory: string;
   description: string;
 }
@@ -166,8 +166,9 @@ export async function getProduct(params:string){
 
 
 // getting paginated product for the regular app
-export async function getProductPaginatedApp(page:number, limit:number, params:string){
-  console.log("BAbA : ", params);
+export async function getProductPaginatedApp(page: number, limit: number, 
+  params: string)
+{
   try{    
     await connect();
     const skip = (page - 1) * limit;
@@ -176,15 +177,15 @@ export async function getProductPaginatedApp(page:number, limit:number, params:s
 
     if(params == "Hot's Product"){
 
-      ProductItem = await Product.find({}).skip(skip).limit(limit).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();;
+      ProductItem = await Product.find({}).skip(skip).limit(limit).lean<Omit<ProductType, '_id'> & { _id: mongoose.Types.ObjectId }[]>();
 
     } else if(params == "New Product"){
 
-      ProductItem =  await Product.find({}).skip(skip).limit(limit).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
+      ProductItem =  await Product.find({}).skip(skip).limit(limit).lean<Omit<ProductType, '_id'> & { _id: mongoose.Types.ObjectId }[]>();
 
     } else {
 
-      ProductItem = await Product.find({productCategory:params}).skip(skip).limit(limit).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
+      ProductItem = await Product.find({productCategory:params}).skip(skip).limit(limit).lean<Omit<ProductType, '_id'> & { _id: mongoose.Types.ObjectId }[]>();
 
     }
 

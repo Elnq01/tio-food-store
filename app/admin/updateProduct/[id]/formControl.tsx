@@ -37,7 +37,7 @@ export default function FormControlElement({
             name={name}
             disabled={disabled}
             type={label === "Price" ? "number" : "text"}
-            value={value as string | number}
+            value={value as string }
             onChange={onChange}
             placeholder={placeholder}
           />

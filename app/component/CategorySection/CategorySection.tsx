@@ -1,7 +1,7 @@
 "use client"
 
 import CategorySectionStyle from "./CategorySection.module.css";
-import { Col, Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import CategoryCard from "../CategoryCard/CategoryCard";
 import CategoryImage1 from '../../../public/indomie.webp';
 import CategoryImage2 from '../../../public/indomie 1.avif';
@@ -27,7 +27,7 @@ const categoryData = [
   }
 ]
 
-export default function CategorySection({title}:any) {
+export default function CategorySection({title}:{title:string}) {
   const navigate = useRouter();
 
   return (
