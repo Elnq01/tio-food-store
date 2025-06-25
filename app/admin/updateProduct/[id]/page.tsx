@@ -1,7 +1,7 @@
 "use client"
 
 import FormControlElement from "./formControl";
-import { Alert, Container, Form,  Row } from "react-bootstrap";
+import { Container, Form,  Row } from "react-bootstrap";
 import CustomButton from "@/app/component/UI/CustomButton";
 import { useEffect, useRef, useState } from "react";
 import { retrieveAProduct, updateProduct } from "@/app/actions/actionServer";

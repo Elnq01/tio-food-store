@@ -4,7 +4,7 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import PaginationBar from '../PaginationBar';
 import ProductCard from '@/app/component/ProductCard/ProductCard';
 import { Breadcrumb, Col } from 'react-bootstrap';
-import { getProductPaginatedApp, ProductType } from '../../actions/actionServer';
+import { getProductPaginatedApp} from '../../actions/actionServer';
 import { useEffect, useState } from 'react';
 
 
