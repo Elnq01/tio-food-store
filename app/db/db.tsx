@@ -12,7 +12,7 @@ export const connect = async () => {
   try {
     // Prevent multiple connections in dev hot-reload
     if (mongoose.connection.readyState === 1) {
-      console.log("✅ Already connected to MongoDB");
+      console.log("✅ Already connected ieui to MongoDB");
       return;
     }
 
