@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import ImgSrc from "../../public/indomie 2.avif";
+// import ImgSrc from "../../public/indomie 2.avif";
 import Image from 'next/image';
 import TableButton from './TableButton';
 import SpinnerBtn from './SpinnerBtn';
