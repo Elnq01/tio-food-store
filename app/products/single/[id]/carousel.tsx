@@ -13,7 +13,7 @@ import 'swiper/css/thumbs';
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import ImgSrc from "../../../../public/king-500x500.jpg";
+// import ImgSrc from "../../../../public/king-500x500.jpg";
 import Image from 'next/image';
 import { ProductImage } from '@/app/component/ProductCard/ProductCard';
 
