@@ -23,7 +23,8 @@ function Navigation() {
     <>
       <Navbar
         style={{
-              background:OffWhite
+              background:OffWhite,
+              paddingBottom:'0px'
               }} 
         sticky='top' 
         className={`shadow-sm ${navigationStyle.container}`}>
