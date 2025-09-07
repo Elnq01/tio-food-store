@@ -15,23 +15,30 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import ImgSrc from "../../../../public/king-500x500.jpg";
 import Image from 'next/image';
+import { ProductImage } from '@/app/component/ProductCard/ProductCard';
 
-const productImgs = [
-    {
-        id:0
-    },
-    {
-        id:1
-    },
-    {
-        id:2
-    },
-    {
-        id:3
-    }
-]
+// const productImgs = [
+//     {
+//         id:0
+//     },
+//     {
+//         id:1
+//     },
+//     {
+//         id:2
+//     },
+//     {
+//         id:3
+//     }
+// ]
 
-export default function SingleCarousel() {
+
+type ProductImgs = {
+  productImgs:ProductImage[]    // optional alt text
+};
+
+
+export default function SingleCarousel({productImgs}:ProductImgs) {
 const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null); 
 
   return (
@@ -46,8 +53,9 @@ const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {productImgs.map(product => <SwiperSlide key={product.id}>
-          <Image src={ImgSrc} alt="img" />
+        {productImgs.map((product, i) => <SwiperSlide key={i}>
+        {/* <Card.Img src={productImages?.[0]?.secure_url} /> */}
+          <Image width={500} height={500} src={product.secure_url} style={{width:"100%", height:'auto'}} alt="img" />
         </SwiperSlide>)}
       </Swiper>
       <Swiper
@@ -59,8 +67,9 @@ const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {productImgs.map(product => <SwiperSlide key={product.id}>
-          <Image src={ImgSrc} alt="img" />
+        {productImgs.map((product, i) => <SwiperSlide key={i}>          
+          <Image width={500} height={500} src={product.secure_url} style={{width:"100%", height:'auto'}} alt="img" />
+
         </SwiperSlide>)}
       </Swiper>
     </div>

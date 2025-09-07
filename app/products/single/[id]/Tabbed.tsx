@@ -6,7 +6,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import ProductRating from './Rating';
 
 function TabbedNav({description}:{description:string}) {
-  const [key, setKey] = useState<string>('home');
+  const [key, setKey] = useState<string>('profile');
 
   return (
     <Tabs
@@ -16,10 +16,10 @@ function TabbedNav({description}:{description:string}) {
       onSelect={(k) => {if (k !== null) setKey(k)}}
       className="mb-3"
     >
-      <Tab eventKey="home" title="Overview" style={{minHeight:'300px'}} >
+      {/* <Tab eventKey="home" title="Overview" style={{minHeight:'300px'}} >
         Leaves your skin feeling hydrated Provides intense 48 hour moisture Reliable 72h anti-perspirant 
         protection that cares for your skin Dual Protect formula with two antibacterial actives and 0% alcohol
-      </Tab>
+      </Tab> */}
       <Tab eventKey="profile" title="Description" style={{minHeight:'300px'}}>
        {description}
       </Tab>

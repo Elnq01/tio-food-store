@@ -29,29 +29,32 @@ export default function SingleProduct() {
     const addProductToCart = useStore((state) => state.addItemToCart)
 
     useEffect(()=> {
+        // console.log("Wats ups")
         try{
             async function getSingleProductDetails(param:string){
                 const productDetails = await retrieveAProduct(param);
-                // // console.log("The singel product: ", productDetails);
+                console.log("The singel product: ", productDetails);
                 // const modifiedProductDetails = {...productDetails, quantity:0}
                 if(productDetails){
                     const modifiedProductDetails = { ...productDetails, quantity: 0 };
                     setsingleProductDetails(modifiedProductDetails)
                     // setsingleProductDetails(productDetails)
+
                 }
             }
-            if(params.id === "string"){
-                getSingleProductDetails(params?.id);
+            if (params?.id) {
+                getSingleProductDetails(params.id as string);
             }
         }catch(err){
             console.log("What is the err: ", err)
         }
-    },[])
+    },[params?.id])
 
 
   return (
     <div className={SingleStyle.container}>
-        {singleProductDetails?.productName?<>     
+        {singleProductDetails?.productName?
+        <>     
         <Breadcrumb>
             <Breadcrumb.Item 
                 style={{color:Primary}}
@@ -91,13 +94,13 @@ export default function SingleProduct() {
                     borderRadius:'15px',
                     padding:'10px'
                     }}>
-                <SingleCarousel />
+                <SingleCarousel productImgs={singleProductDetails.productImages} />
                 <div style={{padding:'20px'}}>
                     <h3 style={{fontWeight:'bolder'}}>{singleProductDetails.productName}</h3>
                     <h6>Brand: Mama Pride</h6>
                     <Rating value={3} />
                     <h4 style={{fontWeight:'bolder'}}>price: <span>{singleProductDetails.price}</span> </h4>
-                    <h6><span style={{textDecoration:'line-through', color:'#75757a'}}>₦30,000</span></h6>
+                    {/* <h6><span style={{textDecoration:'line-through', color:'#75757a'}}>₦30,000</span></h6> */}
                     <CustomButton titled="Add to Cart" onClick={() => {
                         addProductToCart(singleProductDetails);
                     }} />
@@ -125,13 +128,13 @@ export default function SingleProduct() {
             <TabbedNav description={singleProductDetails.description} />
         </div>
         <div style={{padding:'20px', marginTop:'30px', background:WarmCream}}>
-            <h4>Related Products</h4>
+            {/* <h4>Related Products</h4>
             <Row>
                 <ProductCard admin={false} price="100" productName="King's Oil" _id="1" onClick={()=>alert("Hello World!")} />
                 <ProductCard admin={false} price="100" productName="King's Oil" _id="1" onClick={()=>alert("Hello World!")} />
                 <ProductCard admin={false} price="100" productName="King's Oil" _id="1" onClick={()=>alert("Hello World!")} />
-            </Row>
-        </div></>:<p>Loading</p>}
+            </Row> */}
+        </div></>:<p style={{minHeight:'500px', textAlign:'center', width:'100%'}}>Loading</p>}
     </div>
   );
 }

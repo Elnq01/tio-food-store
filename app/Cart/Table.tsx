@@ -29,7 +29,7 @@ export default function BasicTable() {
       {cartItems.map((item, index:number) => {
         return <tr key={item._id}>
           <td>{index + 1}</td>
-          <td><Image src={ImgSrc} alt='product' height={80} width={80} /></td>
+          <td><Image src={item.productImages[0].secure_url} alt='product' height={80} width={80} /></td>
           <td>{item?.productName}</td>
           <td><SpinnerBtn id={item._id} quantity={item.quantity} /></td>
           <td>₦{item.price}</td>

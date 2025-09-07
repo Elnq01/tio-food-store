@@ -9,17 +9,24 @@ import { Primary} from '@/public/colors/colos';
 import CustomButton from '../UI/CustomButton';
 import { deleteProduct } from '@/app/actions/actionServer';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 type ProductCardType = {
   admin:boolean; 
-  price:string; 
-  productName:string; 
+  price?:string; 
+  productName?:string; 
+  productImages?:ProductImage[],
   _id:string; 
   style?: React.CSSProperties
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-function ProductCard({admin, price, productName, _id, style, onClick}:ProductCardType) {
+export type ProductImage = {
+  secure_url: string;      // image link (e.g., from Cloudinary)
+  public_id?: string;     // optional alt text
+};
+
+function ProductCard({admin, price, productName, productImages, _id, style, onClick}:ProductCardType) {
 
   // navigate to the update form
   const navigate = useRouter();
@@ -41,9 +48,17 @@ function ProductCard({admin, price, productName, _id, style, onClick}:ProductCar
           }}
           className='shadow-sm'
           >
-        <Card.Img src={ProductImage.src} />
-        {/* <Card.Img src={productImages[0]} /> */}
-        
+        {/* <Card.Img src={ProductImage.src} /> */}
+        <Card.Img src={productImages?.[0]?.secure_url} />
+      {productImages?.[0]?.secure_url && (
+          <Image
+            width={500}
+            height={500}
+            src={productImages[0].secure_url}
+            style={{ width: "100%", height: "auto" }}
+            alt="product image"
+          />
+        )}
           <Card.Body>
               <Card.Text style={{color:Primary}}>
                 In stock
@@ -56,7 +71,8 @@ function ProductCard({admin, price, productName, _id, style, onClick}:ProductCar
                   }}>
                 <p>
                   <strong>Price: </strong>
-                  <span style={{color:Primary}}>₦{price}</span>    <s className="mb-2 text-muted">₦300</s>
+                  <span style={{color:Primary}}>₦{price}</span>   
+                   {/* <s className="mb-2 text-muted">₦300</s> */}
                 </p>
               </Card.Subtitle>
               {admin?null:<Button 
