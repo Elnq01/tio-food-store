@@ -49,7 +49,7 @@ function ProductCard({admin, price, productName, productImages, _id, style, onCl
           className='shadow-sm'
           >
         {/* <Card.Img src={ProductImage.src} /> */}
-        <Card.Img src={productImages?.[0]?.secure_url} />
+        {/* <Card.Img src={productImages?.[0]?.secure_url} /> */}
       {productImages?.[0]?.secure_url && (
           <Image
             width={500}
