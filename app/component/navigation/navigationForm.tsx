@@ -11,7 +11,7 @@ export default function Navigationform() {
   const navigate = useRouter()
   const [search, setSearch] = useState('');
 
-  const handleSearch = (e) => {
+  const handleSearch = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
     // console.log("RESULT: ", e.target.value)
     setSearch(e.target?.value)
   }

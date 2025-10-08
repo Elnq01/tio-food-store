@@ -4,7 +4,7 @@ import SignInandSignUpcss from "./signinandsignup.module.css";
 // import {handleSignIn} from '../lib/auth';
 // import { redirect } from "next/dist/server/api-utils";
 import { signIn } from "next-auth/react";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import Logo from "../component/UI/logo";
 
