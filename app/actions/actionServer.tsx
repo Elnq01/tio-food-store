@@ -205,4 +205,22 @@ export async function getProductPaginatedApp(page: number, limit: number,
 }
 
 
+// the search query for products
+export async function searchProducts(query: string) {
+  try {
+    await connect();
+
+    const products = await Product.find({
+      productName: { $regex: query, $options: "i" } // case-insensitive
+    }).lean();
+
+    return JSON.parse(JSON.stringify(products)); // serialize for client
+  } catch (err) {
+    console.error("Search error:", err);
+    return [];
+  }
+}
+
+
+
 

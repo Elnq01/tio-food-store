@@ -1,0 +1,14 @@
+.cont{
+    height: 100vh;
+}
+
+.cont h2{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.not{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -3,20 +3,24 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import navigationStyle from './navigation.module.css';
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import {OffWhite, Primary } from '../../../public/colors/colos'
 import Navigationform from './navigationForm';
 import { Badge, Col } from 'react-bootstrap';
 import Image from 'next/image';
 import Avatar from '../../../public/avatar.jpg';
 import Logo from '../UI/logo';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useStore } from '@/app/store/cart';
+import { useSession } from 'next-auth/react';
+import {handleSignOut} from "../../lib/auth";
+import { FaPadlet } from 'react-icons/fa6';
 
 function Navigation() {
   const navigate = useRouter();
 
   const cartStatus = useStore((state) => state.cart);
+  const { data: session, status } = useSession();
 
 
   return (
@@ -38,10 +42,10 @@ function Navigation() {
               <Col md={2} className='d-flex align-items-center gap-3 pl-7'>  
                 <Navbar.Brand href="#"><Logo /></Navbar.Brand>
               </Col>
-              <Col md={9} className='d-flex align-items-center gap-3'>
+              <Col md={8} className='d-flex align-items-center gap-3'>
                 <Navigationform />
               </Col>
-              <Col md={1} className=" d-flex align-items-center gap-3" >
+              <Col md={2} className=" d-flex align-items-center gap-3" >
                   <Nav.Link 
                     style={{
                       background:"rgb(214, 243, 216)",
@@ -56,14 +60,38 @@ function Navigation() {
                         </h6>
                       <FaShoppingCart size={18} style={{color:Primary}} />
                     </Nav.Link>
+                    {session &&
+                    <Nav.Link
+                      style={{
+                          padding:'10px',
+                          borderRadius:'50%'
+                          }}
+                      href="/profile">
+                          <Image src={Avatar} height={30} width={30} alt='avatar' />
+                      </Nav.Link>}
+                  
+                  {session?<Nav.Link
+                  style={{
+                      // padding:'10px',
+                      // borderRadius:'50%'
+                      }}
+                      onClick={() => {
+                        handleSignOut()
+                        redirect('/')
+                      }}
+                      >
+                      {/* <FaPadlet size={18} style={{color:Primary}}/> */}
+                      SignOut
+                  </Nav.Link>:
                   <Nav.Link
                   style={{
-                      padding:'10px',
-                      borderRadius:'50%'
+                      // padding:'10px',
+                      // borderRadius:'50%'
                       }}
-                   href="/profile">
-                      <Image src={Avatar} height={30} width={30} alt='avatar' />
-                  </Nav.Link>
+                   href="/signinandsignup">
+                      {/* <FaSignInAlt size={18} style={{color:Primary}}/> */}
+                      SignIn/SignUp
+                  </Nav.Link>}
               </Col>
           </div>
         <Nav className={`${navigationStyle.navContainer}`}>

@@ -1,10 +1,14 @@
+import { redirect } from "next/navigation";
 import { initializePaystackPayment } from "../actions/paystackActionServer";
 import CustomButton from "../component/UI/CustomButton";
 import { useStore } from "../store/cart";
+import { useSession } from "next-auth/react";
 
 
 
 export default function SummaryCard(){
+
+    const { data: session, status } = useSession();
 
     // getting slice of the state
     const deliveryPrice = useStore((state) => state.deliveryPrice);
@@ -12,12 +16,17 @@ export default function SummaryCard(){
     const totalPrice = cartStore.reduce((acc, item) => (acc + Number(item.price) * item.quantity),0);
         
     const handlePay = async () => {
-        const result = await initializePaystackPayment({email:"example@gmail.com", amount:totalPrice + deliveryPrice});
+        if(!session){
+            redirect('/signinandsignup')
+        }else{
+            
+            const result = await initializePaystackPayment({email:"example@gmail.com", amount:totalPrice + deliveryPrice});
 
-        if (result.status && result.data.authorization_url) {
-         window.location.href = result.data.authorization_url;
-        } else {
-            alert("Payment failed to initialize");
+            if (result.status && result.data.authorization_url) {
+            window.location.href = result.data.authorization_url;
+            } else {
+                alert("Payment failed to initialize");
+            }
         }
     };
 
