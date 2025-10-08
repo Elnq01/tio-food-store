@@ -19,7 +19,7 @@ function Navigation() {
   const navigate = useRouter();
 
   const cartStatus = useStore((state) => state.cart);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
 
   return (

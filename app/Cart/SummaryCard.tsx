@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 
 export default function SummaryCard(){
 
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
 
     // getting slice of the state
     const deliveryPrice = useStore((state) => state.deliveryPrice);
