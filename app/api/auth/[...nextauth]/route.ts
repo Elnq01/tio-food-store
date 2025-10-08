@@ -83,9 +83,9 @@ import NextAuth, { AuthOptions, Session, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { CreateUser, RetrieveUser } from "@/app/actions/userServerActions";
 
-interface ExtendedUser extends User {
-  role?: string;
-}
+// interface ExtendedUser extends User {
+//   role?: string;
+// }
 
 interface ExtendedToken {
   role?: string;
