@@ -79,7 +79,7 @@
 
 
 
-import NextAuth, { AuthOptions, Session, User } from "next-auth";
+import NextAuth, { AuthOptions, Session } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { CreateUser, RetrieveUser } from "@/app/actions/userServerActions";
 
