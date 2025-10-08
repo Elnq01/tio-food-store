@@ -3,7 +3,7 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import navigationStyle from './navigation.module.css';
-import { FaShoppingCart, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import { FaShoppingCart} from "react-icons/fa";
 import {OffWhite, Primary } from '../../../public/colors/colos'
 import Navigationform from './navigationForm';
 import { Badge, Col } from 'react-bootstrap';
@@ -14,7 +14,6 @@ import { redirect, useRouter } from 'next/navigation';
 import { useStore } from '@/app/store/cart';
 import { useSession } from 'next-auth/react';
 import {handleSignOut} from "../../lib/auth";
-import { FaPadlet } from 'react-icons/fa6';
 
 function Navigation() {
   const navigate = useRouter();
