@@ -79,26 +79,11 @@
 
 
 
-import NextAuth, { AuthOptions, Session } from "next-auth";
+
+
+import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { CreateUser, RetrieveUser } from "@/app/actions/userServerActions";
-
-// interface ExtendedUser extends User {
-//   role?: string;
-// }
-
-interface ExtendedToken {
-  role?: string;
-}
-
-interface ExtendedSession extends Session {
-  user: {
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-    role?: string;
-  };
-}
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -110,7 +95,6 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
-    // When a user signs in → ensure exists in DB
     async signIn({ user }) {
       await CreateUser({
         name: user.name || "",
@@ -120,24 +104,20 @@ export const authOptions: AuthOptions = {
       return true;
     },
 
-    // Attach role to JWT
     async jwt({ token, user }) {
       if (user) {
         const dbUser = await RetrieveUser({ email: user.email! });
-        (token as ExtendedToken).role = dbUser?.role || "user";
+        token.role = dbUser?.role || "user";
       }
       return token;
     },
 
-    // Expose role to frontend
     async session({ session, token }) {
-      const extendedSession = session as ExtendedSession;
-      extendedSession.user.role = (token as ExtendedToken).role || "user";
-      return extendedSession;
-    },
+    if (session.user) {
+      session.user.role = token.role as string;
+    }
+    return session;
+  },
   },
 };
-
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
 
