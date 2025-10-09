@@ -1,4 +1,5 @@
-import type { AuthOptions } from "next-auth";
+// 📁 app/api/auth/[...nextauth]/authOptions.ts
+import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { CreateUser, RetrieveUser } from "@/app/actions/userServerActions";
 
@@ -20,7 +21,6 @@ export const authOptions: AuthOptions = {
       });
       return true;
     },
-
     async jwt({ token, user }) {
       if (user?.email) {
         const dbUser = await RetrieveUser({ email: user.email });
@@ -28,10 +28,9 @@ export const authOptions: AuthOptions = {
       }
       return token;
     },
-
     async session({ session, token }) {
       if (session.user) {
-        session.user.role = token.role;
+        session.user.role = token.role as string;
       }
       return session;
     },
