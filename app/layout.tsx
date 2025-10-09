@@ -35,9 +35,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <Navigation />
           {/* <ParticlesBackground /> */}
-          <div style={{height:"100vh"}}>
             {children}
-          </div>
           <Footer />
         </SessionProvider>
       </body>
