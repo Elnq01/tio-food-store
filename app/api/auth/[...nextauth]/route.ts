@@ -31,15 +31,12 @@ export const authOptions: AuthOptions = {
 
     async session({ session, token }) {
       if (session.user) {
-        (session.user as any).role = token.role;
+        session.user.role = token.role; // Now properly typed
       }
       return session;
     },
   },
 };
 
-// Initialize NextAuth with the options
 const handler = NextAuth(authOptions);
-
-// Export route handlers (only GET and POST allowed)
 export { handler as GET, handler as POST };
