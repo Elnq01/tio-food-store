@@ -24,7 +24,8 @@ export default function Navigationform() {
   }
 
   return (
-    <Form className="mx-auto w-50 d-none d-md-flex" onSubmit={onSubmitHandler}>
+    // <Form className="mx-auto w-50 d-none d-md-flex" onSubmit={onSubmitHandler}>
+    <Form style={{width:'100%', padding:'0px 5%'}} className="mx-auto d-flex" onSubmit={onSubmitHandler}>
       <FormControl
         type="search"
         placeholder="Search"

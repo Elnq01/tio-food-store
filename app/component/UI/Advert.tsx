@@ -3,7 +3,7 @@ import { Col } from "react-bootstrap";
 
 export default function Advert(){
     return (
-        <Col m={3} 
+        <Col xs={12} sm={12} md={4} lg={4} xl={4} xxl={4}
             style={{
                 background:Seconadry, 
                 borderRadius:'10px',

@@ -6,7 +6,7 @@ import navigationStyle from './navigation.module.css';
 import { FaShoppingCart} from "react-icons/fa";
 import {OffWhite, Primary } from '../../../public/colors/colos'
 import Navigationform from './navigationForm';
-import { Badge, Col } from 'react-bootstrap';
+import { Badge, Col, Row } from 'react-bootstrap';
 import Image from 'next/image';
 import Avatar from '../../../public/avatar.jpg';
 import Logo from '../UI/logo';
@@ -31,20 +31,14 @@ function Navigation() {
               }} 
         sticky='top' 
         className={`shadow-sm ${navigationStyle.container}`}>
-          <div 
-            style={{
-              display:'flex',
-              flexDirection:'row',
-              width:'100%', 
-              justifyContent:'space-evenly',
-              }}> 
-              <Col md={2} className='d-flex align-items-center gap-3 pl-7'>  
-                <Navbar.Brand href="#"><Logo /></Navbar.Brand>
+          <Row style={{width:"100%"}}> 
+              <Col   xs={2} sm={2} md={2} lg={2} xl={2} xxl={2} className='d-flex align-items-center gap-3 pl-7'>  
+                <Logo />
               </Col>
-              <Col md={8} className='d-flex align-items-center gap-3'>
+              <Col xs={7} sm={7} md={7} lg={7} xl={7} xxl={7} className='d-flex align-items-center justify-content-center gap-3'>
                 <Navigationform />
               </Col>
-              <Col md={2} className=" d-flex align-items-center gap-3" >
+              <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3} className=" d-flex align-items-center gap-3" >
                   <Nav.Link 
                     style={{
                       background:"rgb(214, 243, 216)",
@@ -92,7 +86,7 @@ function Navigation() {
                       SignIn/SignUp
                   </Nav.Link>}
               </Col>
-          </div>
+          </Row>
         <Nav className={`${navigationStyle.navContainer}`}>
             <div  className='ms-auto d-flex align-items-center gap-3'>
               <Nav.Link className={navigationStyle.navLink} onClick={() => navigate.push('/')} href="#home">Home</Nav.Link>

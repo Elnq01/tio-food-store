@@ -22,7 +22,7 @@ const carouselItemSeed = [
 ]
 
 export default function CarouselSection() {
-    return <Col md={6} >
+    return <Col xs={12} sm={6} md={6} lg={4} xl={4} xxl={4} >
     <Carousel interval={undefined}>
       
   {carouselItemSeed.map(item => {

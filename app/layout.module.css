@@ -1,0 +1,11 @@
+.cont{
+    padding:5px 20px;
+    --bs-gutter-x: 0rem;
+}
+
+
+@media (max-width:500px) {
+    .cont{
+        gap: 20px;
+    }
+}

@@ -10,7 +10,7 @@ function CategoryCard({source, admin, category, description}:{source:string, adm
   const navigate = useRouter();
 
   return (
-    <Col className={CategoryCardStyle.container} xs={12} sm={12} md={4} xl={4} xxl={4}>
+    <Col className={CategoryCardStyle.container} xs={12} sm={12} md={6} lg={4} xl={4} xxl={4}>
         <Card style={{borderRadius:'0px', border:'0px'}}>
         <Card.Img src={source} />
         

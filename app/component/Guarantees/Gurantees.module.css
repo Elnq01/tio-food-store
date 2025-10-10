@@ -10,6 +10,7 @@
     /* background-attachment: fixed; */
     /* color: aliceblue; */
     /* color: white; */
+        --bs-gutter-x: 0rem;
 }
 
 .containerIcon{

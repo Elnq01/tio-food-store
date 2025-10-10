@@ -10,6 +10,7 @@ import { Row } from "react-bootstrap";
 import Advert from "./component/UI/Advert";
 import SiderBar from "./component/SideBar/SideBar";
 import CategorySection from "./component/CategorySection/CategorySection";
+import PageCss from "./layout.module.css";
 
 export default async function Home() {
   // const data = await fetch('https://fakestoreapi.com/products/0')
@@ -23,7 +24,7 @@ export default async function Home() {
 
   return (
     <div>
-      <Row style={{padding:'5px 20px'}}>
+      <Row className={PageCss.cont} >
         <SiderBar />
         <CarouselContainer />
         <Advert />

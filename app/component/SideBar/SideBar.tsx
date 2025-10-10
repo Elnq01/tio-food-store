@@ -40,7 +40,7 @@ export default function SideBar() {
     const navigate = useRouter();
 
   return (
-    <Col className={SideBarStyle.container} md={3}>
+    <Col className={SideBarStyle.container} xs={12} sm={6} md={4} lg={4} xl={4} xxl={4}>
         <Nav defaultActiveKey="/home" className="flex-column">
         {SideBarLinks.map(link => <Nav.Link 
         key={link.id} 
