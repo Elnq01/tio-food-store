@@ -21,18 +21,18 @@ const SideBarLinks = [
         id:2,
         link:"Processed Foods"
     },
-    {
-        id:3,
-        link:"Grains"
-    },
-    {
-        id:4,
-        link:"Cooking Oils"
-    },
-    {
-        id:5,
-        link:"Processed Foods"
-    }
+    // {
+    //     id:3,
+    //     link:"Grains"
+    // },
+    // {
+    //     id:4,
+    //     link:"Cooking Oils"
+    // },
+    // {
+    //     id:5,
+    //     link:"Processed Foods"
+    // }
 ]
 
 
@@ -40,22 +40,24 @@ export default function SideBar() {
     const navigate = useRouter();
 
   return (
-    <Col className={SideBarStyle.container} xs={12} sm={6} md={4} lg={4} xl={4} xxl={4}>
-        <Nav defaultActiveKey="/home" className="flex-column">
-        {SideBarLinks.map(link => <Nav.Link 
-        key={link.id} 
-        className={SideBarStyle.containerLink} 
-        onClick={() => navigate.push(`/products/${link.link}`)}
-        eventKey="link-1" >
-            <SideBarIcons type={link.link} />
-            <p>{link.link}</p>
-            <FaAnglesRight
-                style={{
-                    position:'absolute',
-                    right:'0px'
-                    }} size={10} />
-        </Nav.Link>)}
-        </Nav>
+    <Col className={SideBarStyle.container} xs={12} sm={5} md={3} lg={3} xl={3} xxl={3}>
+        <div className={SideBarStyle.cont}>
+            <Nav defaultActiveKey="/home" className="flex-column">
+            {SideBarLinks.map(link => <Nav.Link 
+            key={link.id} 
+            className={SideBarStyle.containerLink} 
+            onClick={() => navigate.push(`/products/${link.link}`)}
+            eventKey="link-1" >
+                <SideBarIcons type={link.link} />
+                <p>{link.link}</p>
+                <FaAnglesRight
+                    style={{
+                        position:'absolute',
+                        right:'0px'
+                        }} size={10} />
+            </Nav.Link>)}
+            </Nav>
+        </div>
     </Col>
   );
 }

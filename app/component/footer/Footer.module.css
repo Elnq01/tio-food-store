@@ -16,3 +16,24 @@
 .containerLower p{
     margin: 0px;
 }
+
+.credit{
+    display:flex; 
+    align-items:center;
+    flex-direction:row;
+    justify-content:flex-end;
+}
+
+.copy{
+    text-align:left;
+}
+
+
+@media (max-width:700px) {
+    .copy{
+        text-align:center;
+    }
+    .credit{
+        justify-content: center;
+    }
+}

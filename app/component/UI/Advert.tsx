@@ -3,8 +3,12 @@ import { Col } from "react-bootstrap";
 
 export default function Advert(){
     return (
-        <Col xs={12} sm={12} md={4} lg={4} xl={4} xxl={4}
+        <Col xs={12} sm={12} md={3} lg={3} xl={3} xxl={3}
             style={{
+                padding:'10px 10px',
+                height:"auto"
+                }}>
+            <div style={{
                 background:Seconadry, 
                 borderRadius:'10px',
                 color:OffWhite,
@@ -12,10 +16,13 @@ export default function Advert(){
                 display:'flex',
                 flexDirection:'column',
                 justifyContent:'center',
-                alignItems:'center'
-                }}>
-            <h3>Tio Food Store Delivery</h3>
-            <h4>Join Us</h4>
+                alignItems:'center',
+                height:"100%"
+
+            }}>
+                <h3>Tio Food Store Delivery</h3>
+                <h4>Join Us</h4>    
+            </div>
         </Col>
     )
 }

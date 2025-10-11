@@ -22,7 +22,7 @@ const carouselItemSeed = [
 ]
 
 export default function CarouselSection() {
-    return <Col xs={12} sm={6} md={6} lg={4} xl={4} xxl={4} >
+    return <Col xs={12} sm={7} md={6} lg={6} xl={6} xxl={6} style={{padding:'10px 0px'}} >
     <Carousel interval={undefined}>
       
   {carouselItemSeed.map(item => {
@@ -40,7 +40,7 @@ export default function CarouselSection() {
               }}>
           <p>{item.desc}</p>
           <h5 style={{color:Primary}}>{item.category}</h5>
-          <p>starting at ${item.price}</p>
+          <p>starting at &#8358;{item.price}</p>
           <CustomButton disable={false} isLoading={false} onClick={() => {alert("hello world!")}}  />
         </Carousel.Caption>
       </Carousel.Item>
