@@ -1,8 +1,8 @@
 "use client";
 
 import { Col, Row } from "react-bootstrap";
-import { FaBus, FaPhone, FaTag, FaCreditCard } from "react-icons/fa";
-import { motion } from "framer-motion";
+// import { FaBus, FaPhone, FaTag, FaCreditCard } from "react-icons/fa";
+// import { motion } from "framer-motion";
 import GuranteesStyle from "./Gurantees.module.css";
 import Image from "next/image";
 import Delivery from '../../../public/delivery-bike.png'
@@ -37,10 +37,10 @@ export default function Guarantees() {
           lg={3}
           className="d-flex justify-content-center align-items-center mb-4"
         >
-          <div className={GuranteesStyle.flipContainer}>
-            
-              <div >
-                {card.icon}
+          <div  className="d-flex justify-content-center align-items-center">
+            {card.icon}
+              <div className="d-flex justify-content-center flex-column align-items-center" >
+                
                 <p className={GuranteesStyle.front}>{card.frontText}</p>
                 <p>{card.backText}</p>
               </div>

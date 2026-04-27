@@ -4,15 +4,17 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
 import { FaSearch } from 'react-icons/fa';
 
-export default function Navigationform({ color }) {
+export default function Navigationform({ color }:{color:string}) {
   const navigate = useRouter();
   const [search, setSearch] = useState('');
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (!search.trim()) return;
-    navigate.push(`/search?item=${search.trim()}`);
-  };
+ const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  if (!search.trim()) return;
+
+  navigate.push(`/search?item=${encodeURIComponent(search.trim())}`);
+};
 
   return (
     <Form className="w-100 d-flex" onSubmit={onSubmitHandler}>

@@ -7,8 +7,8 @@ import { Col, Row, Container } from "react-bootstrap";
 import Navigation from "../navigation/navigation";
 
 export default function GroceryCarousel() {
-  const [index, setIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState(null);
+  const [index, setIndex] = useState<number>(0);
+  const [prevIndex, setPrevIndex] = useState<null|number>(null);
   const mouse = useRef([0, 0]);
 
   // Added 'textColor' property to each slide for direct control

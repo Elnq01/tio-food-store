@@ -27,7 +27,7 @@ export default async function Home() {
   return (
     <div>
       <Row className={PageCss.cont} >
-        {/*<SiderBar />*/}
+        {/* <SiderBar /> */}
         {/*<CarouselContainer />*/}
         {/*<Advert />*/}
         <GroceryCarousel />

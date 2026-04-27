@@ -2,7 +2,7 @@
 import "./globals.css";
 import localFont from "next/font/local";
 import { Metadata } from 'next';
-import Navigation from "./component/navigation/navigation";
+// import Navigation from "./component/navigation/navigation";
 import Footer from './component/footer/footer';
 // import ParticlesBackground from "./../app/component/UI/particle";
 import SessionProvider from "./component/SessionProvider/SessionProvider";

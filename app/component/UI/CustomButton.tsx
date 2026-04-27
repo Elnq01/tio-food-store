@@ -2,7 +2,7 @@
 
 
 import { Spinner} from 'react-bootstrap';
-import { Primary } from '@/public/colors/colos';
+// import { Primary } from '@/public/colors/colos';
 import { PiCaretRight } from 'react-icons/pi';
 import CustomButtomStyle from './CustomButtomStyle.module.css'
 

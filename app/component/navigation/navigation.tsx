@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { FaUserCircle, FaRegUser } from 'react-icons/fa';
 import Navigationform from './navigationForm'; 
 
-export default function Navigation({ color }) {
+export default function Navigation({ color }: {color:string}) {
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   return (
