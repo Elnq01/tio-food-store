@@ -10,6 +10,8 @@ import CustomButton from '../UI/CustomButton';
 import { deleteProduct } from '@/app/actions/actionServer';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { motion } from "framer-motion";
+
 
 type ProductCardType = {
   admin:boolean; 
@@ -44,13 +46,20 @@ function ProductCard({admin, price, productName, productImages, _id, style, onCl
           paddingRight:'2px',
           paddingTop:'2px', 
           border:'0px', 
-          background:"white"
+          background:"whitesmoke"
           }}
-          className='shadow-sm'
+          className={`shadow-md ${ProductCardStyle.effect}`}
           >
         {/* <Card.Img src={ProductImage.src} /> */}
         {/* <Card.Img src={productImages?.[0]?.secure_url} /> */}
       {productImages?.[0]?.secure_url && (
+        <motion.div
+          whileHover={{ scale: 1.08 }}
+          transition={{
+            duration: 0.6,
+            ease: [0.19, 1, 0.22, 1], // smooth luxury curve
+          }}
+        >
           <Image
             width={500}
             height={500}
@@ -58,6 +67,7 @@ function ProductCard({admin, price, productName, productImages, _id, style, onCl
             style={{ width: "100%", height: "auto" }}
             alt="product image"
           />
+        </motion.div>
         )}
           <Card.Body>
               <Card.Text style={{color:Primary}}>
@@ -71,25 +81,16 @@ function ProductCard({admin, price, productName, productImages, _id, style, onCl
                   }}>
                 <p>
                   <strong>Price: </strong>
-                  <span style={{color:Primary}}>₦{price}</span>   
+                  <span style={{color:Primary}}>₦{Number(price).toLocaleString()}</span>   
                    {/* <s className="mb-2 text-muted">₦300</s> */}
                 </p>
               </Card.Subtitle>
-              {admin?null:<Button 
+              {admin?null:<button 
                onClick={onClick}
-                style={{
-                  display:'flex', 
-                  flexDirection:'row', 
-                  alignItems:'center', 
-                  textAlign:'center',
-                  columnGap:'10px',
-                  color:Primary,
-                  background:"rgb(214, 243, 216)",
-                  border:'none'
-                  }}>
+                className={`${ProductCardStyle.contbtn} ${ProductCardStyle.shrinkborder}`}>
                   <FaCartPlus size={20} /> 
                   <p>View Product</p>
-              </Button>}
+              </button>}
               {admin?<CustomButton titled='Update Product' 
                 onClick={() => {navigate.push(`/admin/updateProduct/${_id}`)}}  />
                 :null}

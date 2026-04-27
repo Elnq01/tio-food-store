@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3D Supermarket Scroll</title>
+
+<style>
+
+body{
+margin:0;
+height:300vh; /* needed for scrolling */
+overflow-x:hidden;
+background:black;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+}
+
+</style>
+</head>
+
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
+
+<script>
+
+/* ---------- SCENE ---------- */
+
+const scene = new THREE.Scene()
+
+const camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+)
+
+const renderer = new THREE.WebGLRenderer({antialias:true})
+renderer.setSize(window.innerWidth,window.innerHeight)
+document.body.appendChild(renderer.domElement)
+
+/* ---------- CAMERA START ---------- */
+
+camera.position.set(0,2,4)
+
+/* ---------- LIGHT ---------- */
+
+const light = new THREE.DirectionalLight(0xffffff,1)
+light.position.set(3,5,5)
+scene.add(light)
+
+const ambient = new THREE.AmbientLight(0xffffff,0.6)
+scene.add(ambient)
+
+/* ---------- FLOOR ---------- */
+
+const floorGeo = new THREE.PlaneGeometry(50,50)
+const floorMat = new THREE.MeshStandardMaterial({color:"#444"})
+const floor = new THREE.Mesh(floorGeo,floorMat)
+
+floor.rotation.x = -Math.PI/2
+scene.add(floor)
+
+/* ---------- LOAD SHELF MODEL ---------- */
+
+const loader = new THREE.GLTFLoader()
+
+let shelf1
+let shelf2
+
+loader.load("shelf.glb",(gltf)=>{
+
+shelf1 = gltf.scene
+shelf1.scale.set(3,3,3)
+shelf1.position.set(-2,0,-6)
+shelf1.rotation.y = 0.25
+scene.add(shelf1)
+
+shelf2 = shelf1.clone()
+shelf2.position.set(2,0,-14)
+shelf2.rotation.y = -0.25
+scene.add(shelf2)
+
+})
+
+/* ---------- SCROLL CONTROL ---------- */
+
+let scrollProgress = 0
+
+window.addEventListener("scroll",()=>{
+
+const maxScroll =
+document.body.scrollHeight - window.innerHeight
+
+scrollProgress = window.scrollY / maxScroll
+
+})
+
+/* ---------- ANIMATION ---------- */
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+/* camera walking */
+
+const startZ = 4
+const endZ = -18
+
+camera.position.z =
+startZ + scrollProgress * (endZ - startZ)
+
+/* small natural sway */
+
+camera.position.x =
+Math.sin(Date.now()*0.001)*0.1
+
+renderer.render(scene,camera)
+
+}
+
+animate()
+
+/* ---------- RESIZE ---------- */
+
+window.addEventListener("resize",()=>{
+
+camera.aspect = window.innerWidth/window.innerHeight
+camera.updateProjectionMatrix()
+
+renderer.setSize(window.innerWidth,window.innerHeight)
+
+})
+
+</script>
+
+</body>
+</html>

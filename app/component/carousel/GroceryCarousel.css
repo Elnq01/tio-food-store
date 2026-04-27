@@ -1,0 +1,59 @@
+.main-layout {
+  height: 100vh;
+  background: #000;
+  font-family: 'Arial Black', sans-serif;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  clip-path: circle(0% at 50% 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  transition: z-index 0s;
+}
+
+.photo.active {
+  z-index: 3;
+  animation: reveal 1s ease forwards;
+}
+
+.photo.previous {
+  z-index: 2;
+  clip-path: circle(150% at 50% 50%);
+}
+
+@keyframes reveal {
+  from { clip-path: circle(0% at 50% 50%); }
+  to   { clip-path: circle(150% at 50% 50%); }
+}
+
+.pastel-yellow { background: #fde68a; color: #111; }
+.pastel-red { background: #fca5a5; }
+.pastel-blue { background: #93c5fd; }
+.pastel-green { background: #86efac; }
+
+.button-group {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.custom-btn {
+  border-radius: 50px;
+  padding: 10px 25px;
+  backdrop-filter: blur(10px);
+  font-weight: bold;
+}
+
+.canvas-col {
+  background: radial-gradient(circle at center, #222 0%, #000 100%);
+  z-index: 10;
+}

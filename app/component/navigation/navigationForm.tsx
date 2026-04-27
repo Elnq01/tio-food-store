@@ -1,50 +1,60 @@
-"use client"
-
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { FormControl } from 'react-bootstrap';
-import { Primary, Seconadry } from '@/public/colors/colos';
-import { useState } from 'react';
+"use client";
+import React, { useState } from 'react';
+import { Form, InputGroup } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
+import { FaSearch } from 'react-icons/fa';
 
-export default function Navigationform() {
-  const navigate = useRouter()
+export default function Navigationform({ color }) {
+  const navigate = useRouter();
   const [search, setSearch] = useState('');
 
-  const handleSearch = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
-    // console.log("RESULT: ", e.target.value)
-    setSearch(e.target?.value)
-  }
-
-  const onSubmitHandler = (e:React.FormEvent) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
-    const searchQuery = search.trim();
-    navigate.push(`/search?item=${searchQuery}`)
-
-  }
+    if (!search.trim()) return;
+    navigate.push(`/search?item=${search.trim()}`);
+  };
 
   return (
-    // <Form className="mx-auto w-50 d-none d-md-flex" onSubmit={onSubmitHandler}>
-    <Form style={{width:'100%', padding:'0px 5%'}} className="mx-auto d-flex" onSubmit={onSubmitHandler}>
-      <FormControl
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        className='me-2'
-        value={search}
-        onChange={handleSearch}
-        style={{
-          color:Primary
+    <Form className="w-100 d-flex" onSubmit={onSubmitHandler}>
+      <style jsx>{`
+        /* This targets the placeholder specifically and updates with the prop */
+        .dynamic-search::placeholder {
+          color: ${color};
+          opacity: 0.6; /* Makes it look like a placeholder but in the right hue */
+          transition: color 0.6s ease;
+        }
+      `}</style>
+
+      <InputGroup 
+        style={{ 
+          // If text is dark (#111), we use a dark transparent bg, otherwise light
+          background: color === '#111' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.2)', 
+          borderRadius: '50px', 
+          overflow: 'hidden', 
+          backdropFilter: 'blur(5px)',
+          border: `1px solid ${color}33`, // Added a very faint border for definition
+          transition: 'all 0.6s ease'
+        }}
+      >
+        <InputGroup.Text style={{ background: 'transparent', border: 'none', paddingLeft: '20px' }}>
+          <FaSearch size={14} style={{ color: color, transition: 'color 0.6s ease' }} />
+        </InputGroup.Text>
+        
+        <Form.Control
+          placeholder="Search items..."
+          className="dynamic-search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: color,
+            boxShadow: 'none',
+            fontSize: '0.9rem',
+            transition: 'color 0.6s ease'
           }}
-      />
-      <Button 
-        // onClick={onSubmitHandler}
-        style={{
-          background:Seconadry,
-          border:'0px'
-          }}>
-            Search
-      </Button>
+        />
+      </InputGroup>
     </Form>
   );
 }

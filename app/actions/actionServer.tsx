@@ -137,6 +137,7 @@ export async function retrieveAProduct(id: string) {
 export async function getProduct(params:string){
   try{
     await connect();
+    console.log("Connected to DB");
 
     let ProductItem;
 
@@ -153,6 +154,7 @@ export async function getProduct(params:string){
       ProductItem = await Product.find({}).limit(8).lean<ProductType & { _id: mongoose.Types.ObjectId }[]>();
 
     }
+     console.log("Raw products:", ProductItem);
 
       const ProductItemModify = ProductItem.map(product => {
         return {...product, _id:product._id.toString()}

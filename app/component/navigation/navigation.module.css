@@ -1,20 +1,66 @@
 .navContainer{
     height: 30px;
-    background:#66BB6A; 
+    background:red; 
+    /* background:#66BB6A;  */
     width:100%;
     /* padding: -10px; */
     margin-top: 10px;
+    /* transition: transform 0.3s ease; */
+    transition: width 0.3s ease;
+  overflow: hidden;
+}
+.navLink {
+  position: relative;
+  padding: 14px 28px;
+  color: #fefefc;
+  color: black;
+  text-decoration: none;
+  overflow: hidden;
 }
 
-.navLink{
-    color: #fefefc;
+/* text stays safe */
+.navText {
+  position: relative;
+  z-index: 2;
+}
+/* 
+/* clipped background only 
+.navBack {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 6px;
+  background-color: #ffb74d;
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    80% 100%,
+    0 100%
+  );
+
+  z-index: 1;
+  transition: height 0.3s ease;
 }
 
-.container{
-    background:#fefefc;
-    /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); */
-    display:flex;
-    flex-direction:column;
-    padding-bottom:0px;     
+/* hover expand 
+.navLink:hover .navBack {
+  height: 100%;
 }
+
+.navLink:hover {
+  /* background-color: #beebc1; 
+}
+
+/* text hover effect 
+.navLink:hover {
+  color: rgb(12, 12, 12);
+  transform: translateY(-2px);
+} */
+
+.container {
+  background: transparent !important;
+}
+
 

@@ -11,6 +11,8 @@ import Advert from "./component/UI/Advert";
 import SiderBar from "./component/SideBar/SideBar";
 import CategorySection from "./component/CategorySection/CategorySection";
 import PageCss from "./layout.module.css";
+import GroceryCarousel from "./component/carousel/GroceryCarousel";
+import SupermarketScene from "./component/Supermarket/SupermarketScene";
 
 export default async function Home() {
   // const data = await fetch('https://fakestoreapi.com/products/0')
@@ -25,15 +27,17 @@ export default async function Home() {
   return (
     <div>
       <Row className={PageCss.cont} >
-        <SiderBar />
-        <CarouselContainer />
-        <Advert />
+        {/*<SiderBar />*/}
+        {/*<CarouselContainer />*/}
+        {/*<Advert />*/}
+        <GroceryCarousel />
       </Row>
-      <ProductSection title="Hot's Product" />
-      <ProductSection title="New Product" />
-      <CategorySection title="Categories" />
+      {/* <SupermarketScene /> */}
+      <ProductSection title="HOT'S PRODUCT" />
+      <ProductSection title="NEW PRODUCT" />
+      <CategorySection title="CATEGORIES" />
       <Guarantees />
-      <AboutUs />
+      {/* <AboutUs /> */}
       <ReachUs />
 
       {/* <p>{Product.description}</p> */}

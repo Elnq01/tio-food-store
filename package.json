@@ -12,12 +12,17 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.1.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "@tsparticles/all": "^3.8.1",
     "@tsparticles/engine": "^3.8.1",
     "@tsparticles/react": "^3.0.0",
+    "@types/three": "^0.183.1",
     "bootstrap": "^5.3.6",
     "cloudinary": "^2.6.1",
+    "gsap": "^3.14.2",
     "mongoose": "^8.15.1",
+    "motion": "^12.23.26",
     "next": "15.3.1",
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.16.0",
@@ -28,6 +33,7 @@
     "react-icons": "^5.5.0",
     "shipbubble": "^1.0.5",
     "swiper": "^11.2.8",
+    "three": "^0.183.2",
     "zod": "^3.24.3",
     "zustand": "^5.0.5"
   },
@@ -44,13 +50,14 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
     "strict": true,
-    "types": ["next-auth"]
+    "types": [
+      "next-auth"
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -58,7 +65,7 @@
     "**/*.tsx",
     "types/**/*.d.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
-
-

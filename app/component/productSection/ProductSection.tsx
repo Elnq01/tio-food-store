@@ -88,7 +88,7 @@ export default function CardCarousel({title}:{title:string}) {
       {productFetched.map(item => <SwiperSlide key={item._id}>
               <ProductCard {...item}
                 admin={false} 
-                style={{width:'100%'}}
+                style={{width:'100%', padding:'10px'}}
                 onClick={() => {navigate.push(`/products/single/${item._id}`)}} 
               />
         </SwiperSlide>)}

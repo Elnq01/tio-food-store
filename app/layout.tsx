@@ -33,7 +33,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={myFont.className}>
         <SessionProvider session={session}>
-          <Navigation />
+          {/* <Navigation /> */}
           {/* <ParticlesBackground /> */}
             {children}
           <Footer />

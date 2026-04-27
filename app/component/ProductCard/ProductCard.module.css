@@ -7,4 +7,139 @@
     margin-bottom:10px;
     /* width: 100%; */
     /* box-shadow: rgba(79, 95, 120, 0.1); */
+    overflow: hidden;
 }
+
+/* 
+.card {
+  position: relative;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #1e293b, #020617);
+  color: white;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* subtle lift 
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* shine layer 
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    /* red, 
+    /* rgba(255, 255, 255, 0.35), 
+    /* rgba(200, 200, 200, 0.25), 
+    rgba(180, 180, 180, 0.18),
+
+    transparent
+  );
+  transform: skewX(-25deg);
+}
+
+/* move shine on hover 
+.card:hover::before {
+  animation: shine 0.8s ease forwards;
+}
+
+@keyframes shine {
+  from {
+    left: -75%;
+  }
+  to {
+    left: 125%;
+  }
+} */
+
+
+
+.contbtn{
+    display:flex; 
+    flex-direction:row; 
+    align-items:center; 
+    text-align:center;
+    column-gap:10px;
+    background:rgb(214, 243, 216);
+    border:none;
+    position: relative;
+    border: none;
+    font-size: 18px;
+    transition: color 0.5s, transform 0.2s, background-color 0.2s;
+    outline: none;
+    border-radius: 3px;
+    /* margin: 0 10px;
+    padding: 23px 33px; */
+    border: 3px solid transparent;
+    /* border: 3px solid #66BB6A; */
+}
+
+
+
+  
+.contbtn:active{
+    transform: translateY(3px);
+}
+
+.contbtn::after, .contbtn::before{
+    border-radius: 3px;
+}
+  
+.shrinkborder{
+  /* background-color: transparent; */
+    color:#66BB6A;
+}
+
+.shrinkborder:hover{
+    background-color: transparent;
+    box-shadow: none;
+    color: black;
+    border: 3px solid black;
+}
+  
+.shrinkborder::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* border: 3px solid rgb(50,50,60); */
+    transition: opacity 0.3s, border 0.3s;
+}
+
+
+.shrinkborder:hover::before{
+    opacity: 0;
+}
+  
+.shrinkborder::after{
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: transparent;
+   border: 3px solid smokewhite;
+   opacity: 0;
+   z-index: -1;
+   transform: scaleX(1.1) scaleY(1.3);
+   transition: transform 0.3s, opacity 0.3s;
+}
+
+.shrinkborder:hover::after{
+    opacity: 1;
+    transform: scaleX(1) scaleY(1);
+}
+ 
+ 

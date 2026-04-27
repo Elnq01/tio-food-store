@@ -125,7 +125,7 @@ export default function SingleProduct() {
 
         </Row> 
         <div style={{padding:'20px', marginTop:'30px', background:WarmCream}}>
-            <TabbedNav description={singleProductDetails.description} />
+            <TabbedNav description={singleProductDetails.description} productId={params.id as string} />
         </div>
         <div style={{padding:'20px', marginTop:'30px', background:WarmCream}}>
             {/* <h4>Related Products</h4>

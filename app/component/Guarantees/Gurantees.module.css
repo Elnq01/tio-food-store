@@ -1,44 +1,103 @@
-.container{
-    margin-top: 100px;
-    min-height:400px;
-    /* text-align:center; */
-    background-image: url('../../../public/images\ \(2\).jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    /* background-attachment: fixed; */
-    /* color: aliceblue; */
-    /* color: white; */
-        --bs-gutter-x: 0rem;
+.container {
+  margin-top: 100px;
+  min-height: 400px;
+  /* background-image: url('../../../public/images (2).jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
+  position: relative;
+  --bs-gutter-x: 0rem;
+  padding: 40px 0;
 }
 
-.containerIcon{
-    display:flex; 
-    flex-direction:row;  
-    column-gap:10px;
-    padding: 20px 15px;
-    border-radius: 10px;
-    z-index: 10;
-    background-color: #ffb74d;
-    /* background-color:#66BB6A; */
-    /* color:rgb(184, 184, 43); */
+.heading{
+    display:flex;
+    flex-direction:row ;
+    justify-content:space-between;
+    align-items: center;
+    /* padding: 5px; */
+    /* margin-top: 60px; */
+    padding-left: 40px;
+    padding-right: 40px;
+
 }
 
-.overlay{
-    width:100%;
-    height: 100%;
-    /* background-color: rgba(102, 187,106, 0.3); */
-    background-image: url('../../../public/food.png');
-    position: absolute;
-    z-index: 2;
+.headingH1{
+    font-weight: 900;
+
 }
 
-.overlayColor{
-    width:100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    /* background-color: rgba(102, 187,106, 0.4); */
-    /* background-image: url('../../../public/food.png'); */
-    position: absolute;
+/* OVERLAYS */
+/* .overlay {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../public/food.png');
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+} */
+
+/* .overlayColor {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+} */
+
+/* FLIP CONTAINER */
+.flipContainer {
+  perspective: 1200px;
+  z-index: 3;
 }
+
+/* CARD */
+/* .containerIcon {
+  position: relative;
+  width: 220px;
+  height: 140px;
+  border-radius: 10px;
+  background-color: #ffb74d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  transform-style: preserve-3d;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: box-shadow 0.3s ease;
+} */
+
+.containerIcon:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+/* FRONT + BACK */
+.front, .frontText {
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; */
+  font-weight: 700;
+  font-size: large;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* BACK */
+.back, .backText {
+  font-weight: 500;
+} 

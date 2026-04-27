@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>3D Grocery Carousel – Custom Model</title>
+
+<style>
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  font-family: 'Arial Black', sans-serif;
+}
+
+.main-layout {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* ---------- SLIDES ---------- */
+.photo {
+  position: absolute;
+  inset: 0;
+  clip-path: circle(0% at 50% 50%);
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  padding-left: 10%;
+
+  font-size: clamp(4rem, 10vw, 10rem);
+  font-weight: 900;
+  letter-spacing: -5px;
+  text-transform: uppercase;
+
+  color: #fff;
+}
+
+.photo.active {
+  z-index: 3;
+  animation: reveal 1s ease forwards;
+  background-image:
+    radial-gradient(circle at 80% 50%,
+    rgba(255,255,255,0.6),
+    rgba(255,255,255,0.15) 30%,
+    transparent 70%);
+}
+
+.photo.previous {
+  z-index: 2;
+  clip-path: circle(150% at 50% 50%);
+}
+
+@keyframes reveal {
+  from { clip-path: circle(0% at 50% 50%); }
+  to   { clip-path: circle(150% at 50% 50%); }
+}
+
+/* ---------- PASTEL COLORS ---------- */
+.pastel-yellow { --base: #fde68a; background: var(--base); color: #111; }
+.pastel-red { --base: #fca5a5; background: var(--base); }
+.pastel-blue { --base: #93c5fd; background: var(--base); }
+.pastel-green { --base: #86efac; background: var(--base); }
+
+/* ---------- BUTTONS ---------- */
+button {
+  position: absolute;
+  bottom: 40px;
+  padding: 14px 30px;
+  background: rgba(255,255,255,0.12);
+  border: 2px solid white;
+  color: white;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  transition: 0.3s;
+}
+button:hover { background: white; color: black; }
+.prev { left: 40px; }
+.next { right: 40px; }
+
+#canvas-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+</style>
+</head>
+
+<body>
+
+<div class="main-layout">
+  <div class="container">
+    <div class="photo active pastel-yellow">Fruit</div>
+    <div class="photo pastel-red">Apple</div>
+    <div class="photo pastel-blue">Water</div>
+    <div class="photo pastel-green">Veggie</div>
+
+    <button class="prev">PREVIOUS</button>
+    <button class="next">NEXT</button>
+  </div>
+
+  <div id="canvas-container"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+<script>
+/* -------- CAROUSEL LOGIC -------- */
+const photos = document.querySelectorAll('.photo');
+let index = 0;
+let timer;
+
+function show(i) {
+  const active = document.querySelector('.photo.active');
+  photos.forEach(p => p.classList.remove('previous'));
+  if (active) {
+    active.classList.remove('active');
+    active.classList.add('previous');
+  }
+  photos[i].classList.add('active');
+  index = i;
+}
+
+function next() { show((index + 1) % photos.length); }
+function prev() { show((index - 1 + photos.length) % photos.length); }
+
+function start() { timer = setInterval(next, 4000); }
+function reset() { clearInterval(timer); start(); }
+
+document.querySelector('.next').onclick = () => { next(); reset(); };
+document.querySelector('.prev').onclick = () => { prev(); reset(); };
+start();
+
+/* -------- THREE.JS SETUP -------- */
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 1000);
+camera.position.z = 60;
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+const group = new THREE.Group();
+group.position.x = 25;
+scene.add(group);
+
+/* CUSTOM MODEL LOADING */
+let customModel;
+const baseScale = 30; // Global scale control
+const loader = new THREE.GLTFLoader();
+
+loader.load(
+  '../../../public/groceries.glb', 
+  function (gltf) {
+    customModel = gltf.scene;
+    customModel.scale.set(baseScale, baseScale, baseScale);
+    
+    // Ensure the model interacts with the light setup
+    customModel.traverse((node) => {
+      if (node.isMesh) {
+        node.material.metalness = 0.2;
+        node.material.roughness = 0.5;
+      }
+    });
+
+    group.add(customModel);
+  },
+  undefined,
+  (error) => console.error('Error loading model:', error)
+);
+
+/* FAKE SHADOW */
+const shadowGeo = new THREE.PlaneGeometry(36, 36);
+const shadowMat = new THREE.MeshBasicMaterial({
+  transparent: true,
+  opacity: 0.25,
+  alphaMap: new THREE.CanvasTexture(makeShadow())
+});
+const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+shadow.rotation.x = -Math.PI / 2;
+shadow.position.y = -20;
+group.add(shadow);
+
+function makeShadow() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(64,64,0,64,64,64);
+  g.addColorStop(0,'black');
+  g.addColorStop(1,'transparent');
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,128,128);
+  return c;
+}
+
+/* LIGHTING */
+scene.add(new THREE.AmbientLight(0xffffff, 0.4)); // Soft overall light
+
+const rim = new THREE.DirectionalLight(0xffffff, 2.5);
+rim.position.set(1,1,-1);
+scene.add(rim);
+
+const key = new THREE.DirectionalLight(0xffffff, 1.2);
+key.position.set(1.5,2,3);
+scene.add(key);
+
+const fill = new THREE.DirectionalLight(0xffffff, 0.35);
+fill.position.set(-2,0.5,1);
+scene.add(fill);
+
+/* INTERACTION */
+let mx = 0, my = 0;
+window.addEventListener('mousemove', e => {
+  mx = (e.clientX / innerWidth) * 2 - 1;
+  my = -(e.clientY / innerHeight) * 2 + 1;
+});
+
+/* ANIMATION LOOP */
+function animate() {
+  requestAnimationFrame(animate);
+
+  const t = Date.now() * 0.002;
+
+  if (customModel) {
+    customModel.rotation.y += 0.01;
+    customModel.position.y = Math.sin(t) * 1.5;
+
+    const s = 1 + Math.sin(t) * 0.05;
+    customModel.scale.set(baseScale * s, baseScale * s, baseScale * s);
+    shadow.scale.set(s, s, s);
+  }
+
+  // Smooth mouse follow
+  group.position.x += (25 + mx * 8 - group.position.x) * 0.05;
+  group.position.y += (my * 4 - group.position.y) * 0.05;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+// Handle Window Resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
+</body>
+</html>
