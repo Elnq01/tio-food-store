@@ -1,57 +1,83 @@
-"use server"
+"use server";
 
-
-// models/Review.ts
-import { Schema, model, models } from "mongoose";
+import { Schema, model, models, Types } from "mongoose";
 import { connect } from "../db/db";
 
-import { Types } from "mongoose";
-
-export interface ReviewType {
+// ✅ Input type (from client)
+export type ReviewInput = {
   name: string;
-  time: string;
+  time?: string;
   rating: number;
   review: string;
-  productId?: Types.ObjectId; // <-- correct type for Mongoose ObjectId
-}
+  productId: string; // comes as string
+};
 
+// ✅ Schema
+const reviewSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    time: { type: String },
+    rating: { type: Number, required: true },
+    review: { type: String, required: true },
+    productId: {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+      required: true,
+    },
+  },
+  { timestamps: true } // ⭐ optional but useful
+);
 
-const reviewSchema = new Schema({
-  name: { type: String, required: true },
-  time: { type: String },
-  rating: { type: Number, required: true },
-  review: { type: String, required: true },
-  productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true }
-});
+// ✅ Prevent model overwrite (Next.js hot reload fix)
+const Review = models.Review || model("Review", reviewSchema);
 
-const Review = models.Review || model('Review', reviewSchema);
-
-
-
-export async function CreateReview(review: ReviewType) {
+// ==============================
+// ✅ CREATE REVIEW
+// ==============================
+export async function CreateReview(review: ReviewInput) {
   try {
     await connect();
-    const existingReview = await Review.create(review);
-    console.log("Review to be saved: ", existingReview)
 
+    // ✅ Validate ObjectId
+    if (!Types.ObjectId.isValid(review.productId)) {
+      throw new Error("Invalid productId");
+    }
+
+    const reviewToSave = {
+      ...review,
+      productId: new Types.ObjectId(review.productId),
+    };
+
+    const savedReview = await Review.create(reviewToSave);
+
+    console.log("Review saved:", savedReview);
+
+    return JSON.parse(JSON.stringify(savedReview)); // ✅ serialize for client
   } catch (err) {
-    console.log("Creation Review! ", err);
+    console.error("Create Review Error:", err);
+    throw err; // ✅ let client handle it
   }
 }
 
+// ==============================
+// ✅ RETRIEVE REVIEW
+// ==============================
+export async function RetrieveReview({ _id }: { _id: string }) {
+  try {
+    await connect();
 
-
-
-export async function RetrieveReview({_id}:{_id:string}) {
-    try{
-        await connect();
-        const dbReview = await Review.findOne({ _id:_id });
-        
-        console.log("Retrieve a Review: ", dbReview)
-        return dbReview;
-
-    }catch(err){
-        console.log("retrieve Review Error! ", err);
+    // ✅ Validate ID
+    if (!Types.ObjectId.isValid(_id)) {
+      throw new Error("Invalid review ID");
     }
-    
-} 
+
+    const dbReview = await Review.findById(_id).lean();
+
+    console.log("Retrieved Review:", dbReview);
+
+    return dbReview; // already serializable because of .lean()
+  } catch (err) {
+    console.error("Retrieve Review Error:", err);
+    throw err;
+  }
+}

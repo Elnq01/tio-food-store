@@ -34,7 +34,7 @@ export default function GroceryCarousel() {
   useEffect(() => {
     const timer = setInterval(handleNext, 4000);
     return () => clearInterval(timer);
-  }, [index]);
+  }, [index, handleNext]);
 
   return (
     <div className="main-layout" onMouseMove={(e) => {

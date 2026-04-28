@@ -1,93 +1,132 @@
-import { OffWhite, Primary } from '@/public/colors/colos';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import { FaPenClip } from 'react-icons/fa6';
-import Rating from '@mui/material/Rating';
-import { useState } from 'react';
-import { CreateReview } from '@/app/actions/reviewActionServer';
+"use client";
 
+import { useState } from "react";
+import { OffWhite, Primary } from "@/public/colors/colos";
+// import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import { FaPenClip } from "react-icons/fa6";
+import Rating from "@mui/material/Rating";
+import { CreateReview } from "@/app/actions/reviewActionServer";
 
+type WriteReviewModalProps = {
+  handleClose: () => void;
+  handleShow: () => void;
+  show: boolean;
+  productId: string; // change to number if needed
+};
 
-function WriteReviewModal({handleClose, show, handleShow, productId}) {
+function WriteReviewModal({
+  handleClose,
+  show,
+  handleShow,
+  productId,
+}: WriteReviewModalProps) {
+  const [review, setReview] = useState<number | null>(0);
+  const [comment, setComment] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-    const [review, setReview] = useState(0);
-    const [comment, setComment] = useState("");
+  // ✅ Correct MUI Rating handler
+  const reviewHandler = (
+    event: React.SyntheticEvent,
+    value: number | null
+  ) => {
+    setReview(value);
+  };
 
-    const reviewHandler = (e) => {
-        // console.log(e.target.value)
-        setReview(e.target.value)
+  // ✅ Proper typing
+  const commentHandler = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setComment(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    if (!review || !comment.trim()) return;
+
+    const reviewTobeSubmitted = {
+      name: "Dami",
+      time: "2 hours",
+      rating: review,
+      review: comment.trim(),
+      productId,
+    };
+
+    try {
+      setLoading(true);
+
+      await CreateReview(reviewTobeSubmitted);
+
+      // reset form
+      setComment("");
+      setReview(0);
+
+      handleClose();
+    } catch (error) {
+      console.error("Failed to submit review:", error);
+    } finally {
+      setLoading(false);
     }
-
-    const commentHandler = (e) => {
-        // console.log(e.target.value)
-        setComment(e.target.value) 
-    }
-
-    const handleSubmit = async () => {
-        const reviewTobeSubmitted = {
-            name:"Dami",
-            time:"2 hours",
-            rating:review,
-            review: comment,
-            productId:productId
-        }
-        const submitted = await CreateReview(reviewTobeSubmitted) 
-        setComment("")
-        setReview(0)
-    }
+  };
 
   return (
     <>
-      <Button 
-        // disabled={disable}
+      <button
         onClick={handleShow}
         style={{
-            display:'flex', 
-            flexDirection:'row', 
-            alignItems:'center', 
-            textAlign:'center',
-            columnGap:'12px',
-            color:OffWhite,
-            background:Primary,
-            marginTop:'20px',
-            marginBottom:'20px',
-            border:'none'
-            }}>
-            <>
-            <FaPenClip size={15} />
-            <p>write a review</p>
-            </>
-        </Button>
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          columnGap: "12px",
+          color: OffWhite,
+          background: Primary,
+          marginTop: "20px",
+          marginBottom: "20px",
+          border: "none",
+        }}
+      >
+        <FaPenClip size={15} />
+        <p style={{ margin: 0 }}>write a review</p>
+      </button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Write a Review</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Rating onChange={reviewHandler} value={review} />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>comment</Form.Label>
-              <Form.Control as="textarea" value={comment} onChange={commentHandler} rows={3} />
+
+            <Form.Group className="mb-3">
+              <Form.Label>Comment</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={comment}
+                onChange={commentHandler}
+                placeholder="Write your review..."
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
+
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <button 
+          // variant="secondary" 
+          onClick={handleClose} disabled={loading}>
             Close
-          </Button>
-          <Button variant="primary" onClick={() => {
-            handleSubmit()
-            handleClose()
-          }}>
-            Save Changes
-          </Button>
+          </button>
+
+          <button
+            // variant="primary"
+            onClick={handleSubmit}
+            disabled={loading || !review || !comment.trim()}
+          >
+            {loading ? "Submitting..." : "Save Changes"}
+          </button>
         </Modal.Footer>
       </Modal>
     </>

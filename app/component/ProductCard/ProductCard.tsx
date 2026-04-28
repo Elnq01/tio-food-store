@@ -2,7 +2,7 @@
 
 import Card from 'react-bootstrap/Card';
 import ProductImage from '../../../public/king-500x500.jpg';
-import { Button, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import ProductCardStyle from './ProductCard.module.css';
 import { FaCartPlus } from 'react-icons/fa';
 import { Primary} from '@/public/colors/colos';
