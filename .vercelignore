@@ -1,0 +1,20 @@
+# dev-only code
+notes/
+playground/
+scripts/dev-only/
+
+# tests
+__tests__/
+*.test.ts
+*.spec.ts
+
+# docs (optional)
+README.md
+docs/
+
+# large raw assets
+raw-assets/
+design-files/
+
+# logs
+*.log
