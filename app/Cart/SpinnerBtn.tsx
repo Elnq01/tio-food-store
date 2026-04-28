@@ -1,7 +1,7 @@
 "use client"
 
 import { Seconadry } from "@/public/colors/colos";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { useStore } from "../store/cart";
 
 export default function SpinnerBtn({id, quantity}:{id:string, quantity:number}){
@@ -13,22 +13,22 @@ export default function SpinnerBtn({id, quantity}:{id:string, quantity:number}){
     return <div style={{
         display:'flex', flexDirection:'row', 
         columnGap:'10px', justifyContent:'center', alignItems:'center'}}>
-    <Button 
+    <button 
         style={{background:"#313133", width:'35px', 
             height:'35px', borderRadius:'50%', border:'0px'}}
         onClick={() => {
             decreasProductQty(id)
         }}
         disabled={quantity == 0}
-        >-</Button>
+        >-</button>
     <span>{quantity}</span>
-    <Button 
+    <button 
         style={{background:Seconadry, width:'35px', 
             height:'35px', borderRadius:'50%', border:'0px'}}
         onClick={() => {
             increasProductQty(id)
         }}
         // disabled={value == 0}
-        >+</Button>
+        >+</button>
     </div>
 }
