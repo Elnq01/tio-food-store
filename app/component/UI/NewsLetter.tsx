@@ -1,7 +1,7 @@
 "use client"
 
 import { Seconadry } from '@/public/colors/colos';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 export default function NewsLetter() {
@@ -11,9 +11,9 @@ export default function NewsLetter() {
         {/* <Form.Label>Password</Form.Label> */}
         <Form.Control type="email" placeholder="Enter your email" />
       </Form.Group>
-      <Button style={{background:Seconadry, border:'0px'}} type="submit">
+      <button style={{background:Seconadry, border:'0px'}} type="submit">
         Subscribe
-      </Button>
+      </button>
     </Form>
   );
 }
